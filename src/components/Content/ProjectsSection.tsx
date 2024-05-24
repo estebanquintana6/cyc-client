@@ -11,11 +11,7 @@ const ProjectSection = () => {
             <div className="h-1 ml-auto duration-300 origin-left transform bg-deep-purple-accent-400 scale-x-30 group-hover:scale-x-100" />
           </h2>
           <p className="text-gray-700 lg:text-sm lg:max-w-md">
-            "Class is dead", says Foucault; however, according to Reicher, it is
-            not so much class that is dead, but rather the absurdity, and some
-            would say the paradigm, of class. However, the subject is interpolated
-            into a postpatriarchialist dialectic theory that includes
-            consciousness as a totality.
+            Esta es una descripcion ejemplo de esta seccion
           </p>
         </div>
         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
