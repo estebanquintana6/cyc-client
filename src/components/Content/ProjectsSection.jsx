@@ -6,7 +6,7 @@ const ProjectSection = () => {
   const isVisible = useIsVisible(ref);
 
   return (
-    <div ref={ref} className={`px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 min-h-screen transition-opacity ease-in duration-900 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+    <div ref={ref} className={`px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 min-h-screen transition-opacity ease-in duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
       <div className="flex flex-col mb-6">
         <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-end md:mb-6">Nuestros proyectos</h1>
         <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-end">
