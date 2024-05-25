@@ -51,7 +51,7 @@ const Nav = () => {
             <rect x="14" y="11" width="7" height="12" />
           </svg>
           <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase mr-auto">
-            CYC
+            Connieyepiz
           </span>
         </a>
         <ul className="flex items-center hidden space-x-8 lg:flex">
