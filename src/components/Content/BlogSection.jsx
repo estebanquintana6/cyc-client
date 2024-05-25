@@ -2,15 +2,18 @@ import React from "react";
 
 const BlogSection = () => {
   return (
-    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <div className="flex flex-col mb-6 lg:justify-between lg:flex-row md:mb-8">
-        <h2 className="max-w-lg mb-5 font-sans text-3xl font-bold tracking-tight text-left text-gray-900 sm:text-4xl sm:leading-none md:mb-6 group ml-auto">
-          <span className="inline-block mb-1 sm:mb-4">
-            Mantente actualizado en
-            <span className="block">nuestro blog</span>
-          </span>
-          <div className="h-1 ml-auto duration-300 origin-left transform bg-deep-purple-accent-400 scale-x-30 group-hover:scale-x-100" />
-        </h2>
+    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 min-h-screen">
+      <div className="flex flex-col mb-6">
+        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Mantente al día con nuestro blog</h1>
+        <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+          Nos enorgullece ser pioneros en Occidente en aplicar a gran escala técnicas clásicas para el manejo, canalización y aprovechamiento de las frecuencias de energía del entorno (Qi). <br /> Te compartimos un poco de nuestro trabajo a través de nuestro blog.
+        </p>
+        <a href="#" className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center mx-auto">
+          Conoce más
+          <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+          </svg>
+        </a>
       </div>
       <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
         <div className="overflow-hidden transition-shadow duration-300 bg-white rounded">
