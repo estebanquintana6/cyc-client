@@ -154,7 +154,7 @@ const Nav = () => {
                         title="Our product"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Product
+                        Acerca de nosotros
                       </a>
                     </li>
                     <li>
@@ -164,7 +164,7 @@ const Nav = () => {
                         title="Our product"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Features
+                        Nuestros proyectos
                       </a>
                     </li>
                     <li>
@@ -174,7 +174,7 @@ const Nav = () => {
                         title="Product pricing"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Pricing
+                        Blog
                       </a>
                     </li>
                     <li>
@@ -184,17 +184,7 @@ const Nav = () => {
                         title="About us"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        About us
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/"
-                        aria-label="Sign in"
-                        title="Sign in"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                      >
-                        Sign in
+                        Contacto
                       </a>
                     </li>
                     <li>
