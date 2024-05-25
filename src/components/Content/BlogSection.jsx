@@ -1,3 +1,5 @@
+import React from "react";
+
 const BlogSection = () => {
   return (
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
@@ -5,8 +7,7 @@ const BlogSection = () => {
         <h2 className="max-w-lg mb-5 font-sans text-3xl font-bold tracking-tight text-left text-gray-900 sm:text-4xl sm:leading-none md:mb-6 group ml-auto">
           <span className="inline-block mb-1 sm:mb-4">
             Mantente actualizado en
-            <br className="hidden md:block" />
-            nuestro blog
+            <span className="block">nuestro blog</span>
           </span>
           <div className="h-1 ml-auto duration-300 origin-left transform bg-deep-purple-accent-400 scale-x-30 group-hover:scale-x-100" />
         </h2>

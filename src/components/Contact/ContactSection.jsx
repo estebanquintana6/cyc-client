@@ -1,4 +1,6 @@
-const Contact = () => {
+import React from "react";
+
+const ContactSection = () => {
   return (
     <div className="relative bg-deep-purple-accent-400">
       <div className="absolute inset-x-0 bottom-0">
@@ -51,4 +53,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactSection;
