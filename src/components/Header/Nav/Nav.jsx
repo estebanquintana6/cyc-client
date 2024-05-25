@@ -11,21 +11,11 @@ const Nav = () => {
           <li>
             <a
               href="/"
-              aria-label="Our product"
-              title="Our product"
+              aria-label="Acerca de nosotros"
+              title="Acerca de nosotros"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              Product
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-              aria-label="Our product"
-              title="Our product"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              Features
+              Acerca de nosotros
             </a>
           </li>
           <li>
@@ -35,7 +25,7 @@ const Nav = () => {
               title="Product pricing"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              Pricing
+              Nuestros proyectos
             </a>
           </li>
         </ul>
@@ -46,7 +36,7 @@ const Nav = () => {
           className="inline-flex items-center"
         >
           <svg
-            className="w-8 text-deep-purple-accent-400"
+            className="w-8 text-deep-purple-accent-400 mr-auto"
             viewBox="0 0 24 24"
             strokeLinejoin="round"
             strokeWidth="2"
@@ -60,7 +50,7 @@ const Nav = () => {
             <rect x="14" y="1" width="7" height="6" />
             <rect x="14" y="11" width="7" height="12" />
           </svg>
-          <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
+          <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase mr-auto">
             CYC
           </span>
         </a>
@@ -68,31 +58,21 @@ const Nav = () => {
           <li>
             <a
               href="/"
-              aria-label="About us"
-              title="About us"
+              aria-label="Blog"
+              title="Blog"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              About us
+              Visita nuestro blog
             </a>
           </li>
           <li>
             <a
               href="/"
-              aria-label="Sign in"
-              title="Sign in"
+              aria-label="Contacto"
+              title="Contacto"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              Sign in
-            </a>
-          </li>
-          <li>
-            <a
-              href="/"
-              aria-label="Sign up"
-              title="Sign up"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              Sign up
+              Contacto
             </a>
           </li>
         </ul>
