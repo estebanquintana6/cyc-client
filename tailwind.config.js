@@ -11,6 +11,12 @@ const config = {
     },
     extend: {
       colors: {
+        primary: {
+          '50': '#e96e89',
+          '100': '#9d1f3a',
+          '150': '#62061a',
+        },
+        secondary: '#be8a18',
         red: {
           '50': '#ffebee',
           '100': '#ffcdd2',

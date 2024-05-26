@@ -2,7 +2,7 @@ import React from "react";
 
 const ContactSection = () => {
   return (
-    <div className="relative bg-deep-purple-accent-400">
+    <div className="relative bg-primary-100">
       <div className="absolute inset-x-0 bottom-0">
         <svg
           viewBox="0 0 224 12"
@@ -22,8 +22,8 @@ const ContactSection = () => {
 
             Dejanos tus datos y nosotros te contactaremos para ayudarte a darle forma a tu
             <span className="relative inline-block px-2">
-              <div className="absolute inset-0 transform -skew-x-12 bg-teal-accent-400" />
-              <span className="relative text-teal-900">proyecto</span>
+              <div className="absolute inset-0 transform -skew-x-12 bg-secondary" />
+              <span className="relative text-white">proyecto</span>
             </span>
           </p>
           <form className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
@@ -31,11 +31,11 @@ const ContactSection = () => {
               placeholder="Email"
               required
               type="text"
-              className="flex-grow w-full h-12 px-4 mb-3 text-white transition duration-200 border-2 border-transparent rounded appearance-none md:mr-2 md:mb-0 bg-deep-purple-900 focus:border-teal-accent-700 focus:outline-none focus:shadow-outline"
+              className="flex-grow w-full h-12 px-4 mb-3 text-white transition duration-200 border-2 border-transparent rounded appearance-none md:mr-2 md:mb-0 bg-primary-50 focus:border-primary-150 focus:outline-none focus:shadow-outline"
             />
             <a
               href="/"
-              className="inline-flex items-center justify-center w-full h-12 px-6 font-semibold tracking-wide text-teal-900 transition duration-200 rounded shadow-md md:w-auto hover:text-deep-purple-900 bg-teal-accent-400 hover:bg-teal-accent-700 focus:shadow-outline focus:outline-none"
+              className="inline-flex items-center justify-center w-full h-12 px-6 font-semibold tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-primary-150 hover:bg-secondary focus:shadow-outline focus:outline-none"
             >
               Contáctame
             </a>

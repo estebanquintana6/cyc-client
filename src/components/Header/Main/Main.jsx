@@ -18,7 +18,7 @@ const Main = () => {
                             <h2 className="max-w-lg mb-6 font-sans xs:text-5xl sm:text-6xl font-bold leading-none tracking-tight text-white uppercase md:mx-auto">
                                 Connieyepiz
                             </h2>
-                            <p className="text-2xl text-white">
+                            <p className="xs:text-lg sm:text-2xl text-white">
                                 Cada experiencia se encuentra conectada a los espacios en que suceden
                             </p>
                         </div>
