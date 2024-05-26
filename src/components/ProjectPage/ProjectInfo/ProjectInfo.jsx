@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import PhotoCarousel from "./PhotoCarousel";
+import RecommendationBar from "./RecommendationBar";
 
 const ProjectInfo = () => {
   const { id } = useParams();
@@ -71,11 +72,12 @@ const ProjectInfo = () => {
           </div>
           <div className="xs:order-1 sm:order-2">
             <PhotoCarousel photos={photos} />
-            { /*<img
-              className="object-cover w-full h-56 rounded shadow-lg sm:h-96"
-              src="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
-              alt=""
-                /> */ }
+          </div>
+          <div className="xs:order-3 col-span-2 mx-auto">
+            <h2 className="max-w-lg mb-6 font-sans text-xl font-bold tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
+              Otros proyectos que podrían interesarte
+            </h2>
+            <RecommendationBar projects={[1, 2, 3, 4]} />
           </div>
         </div>
       </div>
