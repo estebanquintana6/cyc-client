@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +10,7 @@ const Nav = () => {
         <ul className="flex items-center hidden space-x-8 lg:flex">
           <li>
             <a
-              href="/"
+              href="#about"
               aria-label="Acerca de nosotros"
               title="Acerca de nosotros"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -20,7 +20,7 @@ const Nav = () => {
           </li>
           <li>
             <a
-              href="/"
+              href="#proyectos"
               aria-label="Product pricing"
               title="Product pricing"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -29,8 +29,8 @@ const Nav = () => {
             </a>
           </li>
         </ul>
-        <a
-          href="/"
+        <Link
+          to="/"
           aria-label="CYC"
           title="CYC"
           className="inline-flex items-center"
@@ -39,11 +39,11 @@ const Nav = () => {
           <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase mr-auto">
             Connieyepiz
           </span>
-        </a>
+        </Link>
         <ul className="flex items-center hidden space-x-8 lg:flex">
           <li>
             <a
-              href="/"
+              href="#blog"
               aria-label="Blog"
               title="Blog"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -53,7 +53,7 @@ const Nav = () => {
           </li>
           <li>
             <a
-              href="/"
+              href="#contacto"
               aria-label="Contacto"
               title="Contacto"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -66,7 +66,7 @@ const Nav = () => {
           <button
             aria-label="Open Menu"
             title="Open Menu"
-            className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
+            className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-primary-10 focus:bg-primary-50"
             onClick={() => setIsMenuOpen(true)}
           >
             <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
@@ -131,7 +131,7 @@ const Nav = () => {
                     </li>
                     <li>
                       <a
-                        href="/"
+                        href="#proyectos"
                         aria-label="Our product"
                         title="Our product"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"

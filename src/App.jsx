@@ -1,20 +1,29 @@
 import React from "react";
 import "./index.css";
 
-import MainHeader from "./components/Header/MainHeader";
-import About from "./components/Content/About";
-import ProjectSection from "./components/Content/ProjectsSection";
-import BlogSection from "./components/Content/BlogSection";
-import ContactSection from "./components/Contact/ContactSection";
+import LandingPage from "./routes/landingPage";
+import ProjectPage from "./routes/projectPage";
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
+  {
+    path: "/proyectos/:id",
+    element: <ProjectPage />
+  }
+]);
 
 function App() {
   return (
     <main>
-      <MainHeader />
-      <About />
-      <ProjectSection />
-      <BlogSection />
-      <ContactSection />
+      <RouterProvider router={router} />
     </main>
   );
 }
