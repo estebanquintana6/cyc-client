@@ -9,7 +9,7 @@ const BlogSection = () => {
 
   return (
     <section
-      className="flex min-h-screen px-4 pb-16 md:px-24 lg:px-8 lg:py-20 md:max-w-full lg:max-w-screen-xl sm:max-w-xl"
+      className="flex w-full min-h-screen pb-16 xs:p-4 sm:p-8 md:p-16 lg:p-32"
       id="blog"
     >
       <div ref={ref} className={`mx-auto my-auto transition-opacity ease-in duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>

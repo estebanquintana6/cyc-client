@@ -22,7 +22,7 @@ const ContactSection = () => {
 
             Dejanos tus datos y nosotros te contactaremos para ayudarte a darle forma a tu
             <span className="relative inline-block px-2">
-              <div className="absolute inset-0 transform -skew-x-12 bg-secondary" />
+              <span className="absolute inset-0 transform -skew-x-12 bg-secondary" />
               <span className="relative text-white">proyecto</span>
             </span>
           </p>

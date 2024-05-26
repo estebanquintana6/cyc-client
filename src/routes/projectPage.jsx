@@ -1,9 +1,13 @@
-import Nav from "../components/LandingPage/Header/Nav/Nav"
+import Nav from "../components/ProjectPage/Nav/Nav";
+import ProjectInfo from "../components/ProjectPage/ProjectInfo/ProjectInfo";
 
 const ProjectPage = () => {
-    return (
-        <Nav />
-    )
-}
+  return (
+    <>
+      <Nav />
+      <ProjectInfo />
+    </>
+  );
+};
 
 export default ProjectPage;

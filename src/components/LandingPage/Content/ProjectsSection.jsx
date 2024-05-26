@@ -7,7 +7,7 @@ const ProjectSection = () => {
 
   return (
     <section
-      className="flex px-4 py-16 min-h-screen sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+      className="flex w-full min-h-screen xs:p-4 sm:p-8 md:p-16 lg:p-32"
       id="proyectos"
     >
       <div

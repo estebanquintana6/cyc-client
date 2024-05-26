@@ -6,7 +6,7 @@ const About = () => {
   const isVisible = useIsVisible(ref);
 
   return (
-    <section className="flex bg-white min-h-screen max-w-screen-xl" id="about">
+    <section className="flex bg-white min-h-screen w-full xs:p-4 sm:p-16" id="about">
       <div
         ref={ref}
         className={`gap-16 items-center py-8 px-4 mx-auto lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 transition-opacity ease-in duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}
@@ -17,7 +17,7 @@ const About = () => {
           </h1>
           <p className="mb-4">
             <span className="relative inline-block px-2 mr-1">
-              <div className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
+              <span className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
               <span className="relative text-white">Somos</span>
             </span>
             una empresa que suma conocimiento clásico, ciencia de última
@@ -25,7 +25,7 @@ const About = () => {
           </p>
           <p className="mb-4">
             <span className="relative inline-block px-2 mr-1">
-              <div className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
+              <span className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
               <span className="relative text-white">Colaboramos</span>
             </span>
             con otras empresas en la creación de estrategias únicas para
@@ -34,7 +34,7 @@ const About = () => {
           </p>
           <p>
             <span className="relative inline-block px-2 mr-1">
-              <div className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
+              <span className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
               <span className="relative text-white">Creemos</span>
             </span>
             en la responsabilidad, disciplina, autoconsciencia y alto goce como
