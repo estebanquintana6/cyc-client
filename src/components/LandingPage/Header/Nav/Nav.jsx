@@ -121,7 +121,7 @@ const Nav = () => {
                   <ul className="space-y-4">
                     <li>
                       <a
-                        href="/"
+                        href="#about"
                         aria-label="Our product"
                         title="Our product"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -132,8 +132,8 @@ const Nav = () => {
                     <li>
                       <a
                         href="#proyectos"
-                        aria-label="Our product"
-                        title="Our product"
+                        aria-label="Proyectos"
+                        title="Proyectos"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Nuestros proyectos
@@ -141,9 +141,9 @@ const Nav = () => {
                     </li>
                     <li>
                       <a
-                        href="/"
-                        aria-label="Product pricing"
-                        title="Product pricing"
+                        href="#blog"
+                        aria-label="Blog"
+                        title="Blog"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Blog
@@ -151,9 +151,9 @@ const Nav = () => {
                     </li>
                     <li>
                       <a
-                        href="/"
-                        aria-label="About us"
-                        title="About us"
+                        href="#contacto"
+                        aria-label="Contacto"
+                        title="Contacto"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Contacto
