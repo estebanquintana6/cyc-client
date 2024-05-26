@@ -13,26 +13,26 @@ const About = () => {
             ¿Qué es CYC?
           </h1>
           <p className="mb-4">
-            <span className="relative inline-block px-1">
-              <div className="absolute inset-0 transform -skew-x-12 bg-teal-accent-400" />
-              <span className="relative text-teal-900">Somos</span>
+            <span className="relative inline-block px-2 mr-1">
+              <div className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
+              <span className="relative text-white">Somos</span>
             </span>
             una empresa que suma conocimiento clásico, ciencia de última
             generación y una visión integradora del ser humano.
           </p>
           <p className="mb-4">
-            <span className="relative inline-block px-1">
-              <div className="absolute inset-0 transform -skew-x-12 bg-teal-accent-400" />
-              <span className="relative text-teal-900">Colaboramos</span>
+            <span className="relative inline-block px-2 mr-1">
+              <div className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
+              <span className="relative text-white">Colaboramos</span>
             </span>
             con otras empresas en la creación de estrategias únicas para
             facilitar y acelerar el camino al éxito de los proyectos. Fomentamos
             el bienestar y una actitud ganar-ganar en todas nuestras relaciones.
           </p>
           <p>
-            <span className="relative inline-block px-1">
-              <div className="absolute inset-0 transform -skew-x-12 bg-teal-accent-400" />
-              <span className="relative text-teal-900">Creemos</span>
+            <span className="relative inline-block px-2 mr-1">
+              <div className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
+              <span className="relative text-white">Creemos</span>
             </span>
             en la responsabilidad, disciplina, autoconsciencia y alto goce como
             partes fundamentales del continuo presente.
