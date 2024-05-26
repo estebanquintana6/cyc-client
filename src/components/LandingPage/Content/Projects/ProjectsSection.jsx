@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useIsVisible } from "../../../hooks/useIsVisible";
+import { useIsVisible } from "../../../../hooks/useIsVisible";
 
 import ProjectItem from "./ProjectItem";
 

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import BlogItem from "./BlogItem";
 
-import { useIsVisible } from "../../../hooks/useIsVisible";
+import { useIsVisible } from "../../../../hooks/useIsVisible";
 
 const BlogSection = () => {
   const ref = useRef();
