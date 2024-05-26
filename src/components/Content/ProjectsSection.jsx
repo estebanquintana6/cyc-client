@@ -92,7 +92,7 @@ const ProjectSection = () => {
         <a
           href="/"
           aria-label=""
-          className="inline-flex items-center font-semibold transition-colors duration-200 bg-violet-500 p-4 rounded-lg text-deep-purple-50 hover:text-deep-purple-800"
+          className="inline-flex items-center font-semibold transition-colors duration-200 bg-primary-100 p-4 rounded-lg text-white hover:text-secondary"
         >
           Ver proyectos
           <svg
