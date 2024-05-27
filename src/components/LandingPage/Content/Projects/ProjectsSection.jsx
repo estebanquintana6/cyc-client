@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
+
 import { useIsVisible } from "../../../../hooks/useIsVisible";
 
 import ProjectItem from "./ProjectItem";
@@ -34,8 +36,8 @@ const ProjectSection = () => {
           <ProjectItem title={"The Harvesters"} imgUrl={"https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"} href={"/proyectos/1"} />
         </div>
         <div className="text-center">
-          <a
-            href="/"
+          <Link
+            to="/proyectos"
             aria-label=""
             className="inline-flex items-center font-semibold transition-colors duration-200 bg-primary-100 p-4 rounded-lg text-white hover:text-secondary"
           >
@@ -47,7 +49,7 @@ const ProjectSection = () => {
             >
               <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

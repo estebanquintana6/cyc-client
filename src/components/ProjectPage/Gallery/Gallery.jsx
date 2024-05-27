@@ -1,0 +1,97 @@
+import GalleryItem from "./GalleryItem";
+
+const Gallery = ({ items }) => {
+  items = [
+    {
+      id: "1",
+      title: "Ejemplo 1",
+      imgUrl: "https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg",
+    },
+    {
+      id: "2",
+      title: "Ejemplo 2",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+    },
+    {
+      id: "3",
+
+      title: "Ejemplo 3",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg",
+    },
+    {
+      id: "4",
+
+      title: "Ejemplo 4",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg",
+    },
+    {
+      id: "5",
+
+      title: "Ejemplo 5",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
+    },
+    {
+      id: "6",
+
+      title: "Ejemplo 6",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg",
+    },
+    {
+      id: "7",
+
+      title: "Ejemplo 7",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-6.jpg",
+    },
+    {
+      id: "8",
+
+      title: "Ejemplo 8",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-7.jpg",
+    },
+    {
+      id: "9",
+      title: "Ejemplo 9",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-8.jpg",
+    },
+    {
+      id: "10",
+      title: "Ejemplo 10",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg",
+    },
+    {
+      id: "11",
+      title: "Ejemplo 11",
+      imgUrl:
+        "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg",
+    },
+  ];
+
+  return (
+    <section
+      className="flex flex-col min-h-screen px-4 py-32 sm:px-16 sm:max-w-full"
+      id="project-info"
+    >
+      <div className="flex flex-col mb-8">
+        <h1 className="text-left text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+          Nuestro trabajo
+        </h1>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        {items.map(({ id, title, imgUrl }) => (
+          <GalleryItem id={id} title={title} imgUrl={imgUrl} key={id} />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Gallery;
