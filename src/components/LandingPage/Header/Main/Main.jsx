@@ -1,7 +1,5 @@
 import React from "react";
 
-// url('../public/img/c_web_slider_connie.jpeg')
-
 const Main = () => {
     return (
         <div className="bg-cover h-screen flex"
