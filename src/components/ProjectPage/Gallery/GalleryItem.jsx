@@ -5,7 +5,7 @@ const GalleryItem = ({ id, title, imgUrl }) => {
         <div className="relative cursor-pointer">
             <Link to={`/proyectos/${id}`}>
             <img
-                class="h-auto max-w-full rounded-lg"
+                className="h-auto max-w-full rounded-lg"
                 src={imgUrl}
                 alt=""
             />

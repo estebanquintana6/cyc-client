@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <div className="fixed w-full px-4 py-6 mx-auto lg:py-8 md:px-24 lg:px-8 z-10 bg-white">
       <div className="relative flex items-center justify-between lg:justify-center lg:space-x-16">
