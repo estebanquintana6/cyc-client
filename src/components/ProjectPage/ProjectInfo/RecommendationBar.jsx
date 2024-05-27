@@ -4,7 +4,7 @@ const RecommendationBar = ({ projects = [] }) => {
       {projects.map((project) => (
           <div className="col-span-1 flex flex-col text-center bg-white">
             <div className="xs:h-48 xs:w-48 sm:h-64 sm:w-64">
-              <img className="h-full w-full object-cover object-center" src="https://flowbite-react.com/images/blog/image-4.jpg" />
+              <img className="h-full w-full object-cover object-center" src="https://flowbite-react.com/images/blog/image-4.jpg" alt="project" />
             </div>
         </div>
       ))}

@@ -73,7 +73,7 @@ const ProjectInfo = () => {
           <div className="xs:order-1 sm:order-2">
             <PhotoCarousel photos={photos} />
           </div>
-          <div className="xs:order-3 col-span-2 mx-auto">
+          <div className="order-3 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-2 mx-auto">
             <h2 className="max-w-lg mb-6 font-sans text-xl font-bold tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
               Otros proyectos que podrían interesarte
             </h2>

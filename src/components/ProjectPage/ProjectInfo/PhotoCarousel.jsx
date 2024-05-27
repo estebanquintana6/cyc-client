@@ -5,7 +5,7 @@ const PhotoCarousel = ({ photos = [] }) => {
     <div className="h-56 xs:h-96 sm:h-full">
         <Carousel slide={true}>
         {photos.map((url) => (
-            <img src={url} alt="image 1" key={url} />
+            <img src={url} alt="proyecto recomendado" key={url} />
         ))}
         </Carousel>
     </div>

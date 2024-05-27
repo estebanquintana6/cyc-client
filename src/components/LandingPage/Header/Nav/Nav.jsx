@@ -35,7 +35,7 @@ const Nav = () => {
           title="CYC"
           className="inline-flex items-center"
         >
-          <img src="/img/logo.png" className="w-12" />
+          <img src="/img/logo.png" className="w-12" alt="logo" />
           <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase mr-auto">
             Connieyepiz
           </span>
@@ -95,7 +95,7 @@ const Nav = () => {
                       title="Company"
                       className="inline-flex items-center"
                     >
-                      <img src="/img/logo.png" className="w-7" />
+                      <img src="/img/logo.png" className="w-7" alt="logo" />
                       <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                         CONNIEYEPIZ
                       </span>
