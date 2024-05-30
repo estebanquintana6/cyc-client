@@ -7,15 +7,15 @@ import { useGalleryFilter } from "../../contexts/GalleryFilterContext";
 import { mockGalleryItems } from "../../../utils/mocks";
 
 const Gallery = () => {
-const [projects, setProjects] = useState(mockGalleryItems);
+  const [projects, setProjects] = useState(mockGalleryItems);
 
-const { filter } = useGalleryFilter();
+  const { filter } = useGalleryFilter();
 
-useEffect(() => {
+  useEffect(() => {
     // TODO: Fetch different items
     console.log("fetching different projects");
     setProjects(mockGalleryItems);
-}, [filter]);
+  }, [filter]);
 
   return (
     <section

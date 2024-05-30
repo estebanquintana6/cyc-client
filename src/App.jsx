@@ -1,14 +1,17 @@
 import React from "react";
 import "./index.css";
 
-import LandingPage from "./routes/landingPage";
-import ProjectGalleryPage from "./routes/projectGalleryPage";
-import ProjectPage from "./routes/projectPage";
-
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
+import LandingPage from "./routes/landingPage";
+import ProjectGalleryPage from "./routes/projectGalleryPage";
+import ProjectPage from "./routes/projectPage";
+import AdminPanelPage from "./routes/admin/adminPanelPage";
+
+import ProjectDashboard from "./components/Admin/Projects/Main";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,14 @@ const router = createBrowserRouter([
   {
     path: "/proyectos/:id",
     element: <ProjectPage />
+  },
+  {
+    path: "/admin",
+    element: <AdminPanelPage />,
+    children: [{
+      path: "proyectos",
+      element: <ProjectDashboard />
+    }]
   }
 ]);
 
