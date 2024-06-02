@@ -13,6 +13,7 @@ const createAdmin = async (username: string) => {
     const newAdmin = new User({
         username,
         password: hashedPassword,
+        name: "Esteban Quintana",
     });
 
     const response = await newAdmin.save();

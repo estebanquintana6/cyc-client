@@ -15,6 +15,7 @@ import AdminPanelPage from "./routes/admin/adminPanelPage";
 import LoginPage from "./routes/loginPage";
 
 import ProjectDashboard from "./components/Admin/Projects/Main";
+import UserDashboard from "./components/Admin/Users/UserDashboard";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,9 @@ const router = createBrowserRouter([
     children: [{
       path: "proyectos",
       element: <ProjectDashboard />
+    }, {
+      path: "usuarios",
+      element: <UserDashboard />
     }]
   }
 ]);

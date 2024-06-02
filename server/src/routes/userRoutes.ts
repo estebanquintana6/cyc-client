@@ -32,19 +32,26 @@ router.get("/", isAuthMiddleware, async (req: Request, res: Response) => {
  * @route POST /users/register
  * @desc Registers user
  * @params name, last_name, email, telephone, password, code (Campus Code), role (Role name)
- * @access Public
+ * @access Private
  */
 router.post(
   "/create",
   isAuthMiddleware,
   async (req: Request, res: Response) => {
-    const { username, password } = req.body;
+    const { username, password, name } = req.body;
+
+    if (!username || !password || !name) {
+      res.status(400).json({
+        error: "Datos faltantes o incorrectos",
+      });
+      return;
+    }
 
     const validPassword = validatePassword(password);
 
     if (!validPassword) {
       res.status(400).json({
-        error: "Datos faltantes o incorrectos",
+        error: "La contraseña debe tener al menos 6 cáracteres",
       });
       return;
     }
@@ -61,6 +68,7 @@ router.post(
     try {
       const hashedPassword = await hashPassword(password);
       const user = new User({
+        name,
         username,
         password: hashedPassword,
       });
@@ -131,6 +139,50 @@ router.post("/login", async (req: Request, res: Response) => {
     return;
   } else {
     res.status(400).json({ error: "Datos incorrectos" });
+    return;
+  }
+});
+
+
+/**
+ * @route DELETE /users/delete
+ * @desc Deletes a user
+ * @params username
+ * @access Private
+ */
+router.delete("/delete", isAuthMiddleware, async (req: Request, res: Response) => {
+  const { username } = req.body;
+
+  console.log(username);
+
+  if (!username) {
+    res.status(400).json({
+      error: "Datos faltantes",
+    });
+    return;
+  }
+
+  const user = await User.findOne({ username });
+
+
+  if (!user) {
+    res.status(400).json({
+      error: "El usuario no existe",
+    });
+    return;
+  }
+
+  const result = await User.findOneAndDelete({ username });
+
+  if (result) {
+    res.status(200).json({
+      mensage: "Usuario eliminado",
+    });
+    return;
+  } else {
+    res.status(500).json({
+      error: "Hubo un error al eliminar al usuario",
+    });
     return;
   }
 });
