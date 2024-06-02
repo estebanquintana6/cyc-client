@@ -19,11 +19,15 @@ const isAdmin = (req: Request, res: Response, next: () => void) => {
         if (validToken) {
             return next();
         } else {
-            res.status(401).send("Acceso denegado");
+            res.status(401).json({
+                error: "Acceso denegado"
+            });
             return;
         }
     } catch(err) {
-        res.status(500).send("Fallo en servidor. Intentar más tarde.");
+        res.status(500).json({
+            error: "Fallo en servidor. Intentar más tarde."
+        });
         return;
     }
 }
