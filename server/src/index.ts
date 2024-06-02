@@ -7,6 +7,9 @@ import dotenv from "dotenv";
 
 import { initDb } from "./utils/seed";
 
+import users from './routes/userRoutes';
+import auth from './routes/authRoutes';
+
 dotenv.config()
 
 const { MONGO_URI } = process.env;
@@ -47,3 +50,12 @@ db.once("open", async () => {
 
 // Passport middleware
 app.use(passport.initialize());
+
+app.use('/users', users);
+app.use('/auth', auth);
+
+const port = process.env.PORT || 4000;
+
+app.listen(port, () => console.log(`Server up and running on port ${port} !`));
+
+module.exports = app; // For testing

@@ -10,7 +10,10 @@ const router = Router();
  * @access Public
  */
 router.get("/", isAuthMiddleware, (req: Request, res: Response) => {
-    res.status(200).send("Usuario admitido");
+    res.status(200).json({
+        message: "Usuario admitido",
+        success: true,
+    });
 });
 
 export default router;

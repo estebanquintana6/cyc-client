@@ -1,8 +1,6 @@
 import { Router, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-import { secretKey } from "../config/config";
-
 import isAuthMiddleware from "../middlewares/isAuthMiddleware";
 
 import { validatePassword } from "../utils/validators";
@@ -86,6 +84,15 @@ router.post(
 router.post("/login", async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
+  const { JWT_SECRET: secretKey } = process.env;
+
+  if (!secretKey) {
+    res.status(500).json({
+      error: "Presentamos errores en el servidor, favor de comunicarse con el desarrollador.",
+    });
+    return;
+  }
+
   const user = await User.findOne({ username });
 
   if (!user) {
@@ -108,8 +115,9 @@ router.post("/login", async (req: Request, res: Response) => {
       },
       (error, encoded) => {
         if (error) {
+          console.log(error);
           res.status(401).json({
-            message: "Usuario no autorizado.",
+            error: "Usuario no autorizado.",
           });
           return;
         }

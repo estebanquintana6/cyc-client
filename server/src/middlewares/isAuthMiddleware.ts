@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 
 import jwt from "jsonwebtoken";
 
-import { secretKey } from '../config/config';
-
 const isAdmin = (req: Request, res: Response, next: () => void) => {
     const { headers } = req;
     const { authorization } = headers;
+
+    const { JWT_SECRET: secretKey } = process.env;
 
     if(!authorization || !secretKey) {
         res.status(401).send("Acceso denegado");

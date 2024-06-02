@@ -6,10 +6,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import { AuthProvider } from "./components/contexts/AuthContext";
+
 import LandingPage from "./routes/landingPage";
 import ProjectGalleryPage from "./routes/projectGalleryPage";
 import ProjectPage from "./routes/projectPage";
 import AdminPanelPage from "./routes/admin/adminPanelPage";
+import LoginPage from "./routes/loginPage";
 
 import ProjectDashboard from "./components/Admin/Projects/Main";
 
@@ -27,6 +30,10 @@ const router = createBrowserRouter([
     element: <ProjectPage />
   },
   {
+    path: "/login",
+    element: <LoginPage />
+  },
+  {
     path: "/admin",
     element: <AdminPanelPage />,
     children: [{
@@ -38,9 +45,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <main>
-      <RouterProvider router={router} />
-    </main>
+    <AuthProvider>
+      <main>
+        <RouterProvider router={router} />
+      </main>
+    </AuthProvider>
   );
 }
 
