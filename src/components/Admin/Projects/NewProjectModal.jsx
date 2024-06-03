@@ -17,8 +17,6 @@ import { errorModal } from "../../../utils/errorModal";
 import { useAuthContext } from "../../contexts/AuthContext";
 import useClickOutside from "../../../hooks/useClickOutside";
 
-
-
 const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
   const { token } = useAuthContext();
   const modalRef = useRef();
@@ -222,7 +220,7 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
                     />
                     <button
                       type="button"
-                      class="w-9 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-2.5 mt-2 mx-auto"
+                      className="w-9 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-2.5 mt-2 mx-auto"
                       onClick={() => handleImageDelete(originalName)}
                     >
                       <svg
