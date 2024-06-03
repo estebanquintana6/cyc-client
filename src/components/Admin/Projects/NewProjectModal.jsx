@@ -114,6 +114,14 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
     setImages(newArr);
   };
 
+  const isValidForm = 
+    name?.length > 0 &&
+    description?.length > 0 &&
+    designer?.length > 0 &&
+    surface?.length > 0 &&
+    projectType?.length > 0 &&
+    images?.length > 0;
+
   return (
     <>
       <Modal show={isOpen} onClose={onClose} ref={modalRef}>
@@ -239,7 +247,7 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
           </form>
         </Modal.Body>
         <Modal.Footer className="justify-end">
-          <Button onClick={() => onSave()}>Guardar</Button>
+          <Button disabled={!isValidForm} onClick={() => onSave()}>Guardar</Button>
         </Modal.Footer>
       </Modal>
     </>
