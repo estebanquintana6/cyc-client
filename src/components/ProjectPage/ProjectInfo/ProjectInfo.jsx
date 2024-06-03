@@ -1,21 +1,9 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 
 import PhotoCarousel from "./PhotoCarousel";
 import RecommendationBar from "./RecommendationBar";
 
-const ProjectInfo = () => {
-  const { id } = useParams();
-
-  const photos = [
-    "https://flowbite.com/docs/images/carousel/carousel-1.svg",
-    "https://flowbite.com/docs/images/carousel/carousel-2.svg",
-    "https://flowbite.com/docs/images/carousel/carousel-3.svg",
-  ];
-
-  useEffect(() => {
-    console.log("fetching resource with id:", id);
-  }, [id]);
+const ProjectInfo = ({ name, description, designer, photos: photosMetadata, surface}) => {
+  const photos = photosMetadata?.map(({url}) => `http://localhost:4000/${url}`);
 
   return (
     <section
@@ -25,7 +13,7 @@ const ProjectInfo = () => {
       <div className="m-auto flex flex-col">
         <div className="flex flex-col mb-8">
           <h1 className="text-left text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-            Maderas Residencial Celaya
+            { name }
           </h1>
         </div>
 
@@ -37,35 +25,19 @@ const ProjectInfo = () => {
                 <span className="relative px-1 ml-2">
                   <div className="absolute inset-x-0 bottom-0 h-3 transform -skew-x-12 bg-secondary" />
                   <span className="relative inline-block text-2xl text-primary-100 sm:text-3xl">
-                    Grupo Pro Habitación GP
+                    { designer }
                   </span>
                 </span>
               </h2>
               <p className="text-base text-gray-700 md:text-lg">
-                Atendiendo a la topografía específica de este desarrollo y sobre
-                todo del entorno en el que se encuentra localizado (nombre
-                oficial Del desarrollo) fue planeado a partir de aprovechar al
-                máximo el tipo de energía disponible naturalmente en el entorno,
-                y potenciarla a partir de la estratégica localización y
-                dirección de elementos claves tales como cuerpos de agua,
-                trazado de las calles, arcos de entrada, entre otros. El
-                resultado se verá reflejado en el bienestar Y generación de
-                oportunidades para quienes en este espacio habiten.
+                { description }
               </p>
             </div>
             <div className="grid gap-5 row-gap-8 sm:grid-cols-2">
               <div className="bg-white border-l-4 shadow-sm border-primary-100">
                 <div className="h-full p-5 border border-l-0 rounded-r">
-                  <h6 className="mb-2 font-semibold leading-5">
-                    Fecha de completado
-                  </h6>
-                  <p className="text-sm text-gray-900">Enero 2014</p>
-                </div>
-              </div>
-              <div className="bg-white border-l-4 shadow-sm border-primary-100">
-                <div className="h-full p-5 border border-l-0 rounded-r">
                   <h6 className="mb-2 font-semibold leading-5">Superficie</h6>
-                  <p className="text-sm text-gray-900">11 hectáreas</p>
+                  <p className="text-sm text-gray-900">{ surface }</p>
                 </div>
               </div>
             </div>

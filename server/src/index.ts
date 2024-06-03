@@ -9,6 +9,7 @@ import { initDb } from "./utils/seed";
 
 import users from './routes/userRoutes';
 import auth from './routes/authRoutes';
+import projects from "./routes/projectRoutes";
 
 dotenv.config()
 
@@ -27,7 +28,7 @@ app.use(cors());
 
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 // Function to connect to the database
 const conn = () => {
@@ -53,6 +54,7 @@ app.use(passport.initialize());
 
 app.use('/users', users);
 app.use('/auth', auth);
+app.use('/projects', projects);
 
 const port = process.env.PORT || 4000;
 

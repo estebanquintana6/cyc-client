@@ -7,16 +7,32 @@ import GalleryFilters from "../../ProjectPage/Gallery/GalleryFilters";
 import ActionBar from "./ActionBar";
 
 import { mockGalleryItems } from "../../../utils/mocks";
+import authFetch from "../../../utils/authFetch";
+import { useAuthContext } from "../../contexts/AuthContext";
+
+import { errorModal } from "../../../utils/errorModal";
 
 const Dashboard = () => {
+  const { token } = useAuthContext();
+  
   const [projects, setProjects] = useState([]);
   const { filter } = useGalleryFilter();
 
+  const fetchProjects = async () => {
+    try {
+      const { status, data } = await authFetch("http://localhost:4000/projects/", "GET", token);
+      if (status === 200) {
+        setProjects(data);
+      } 
+    } catch(err) {
+      const { response: { data: { error } } } = err;
+      errorModal(error);
+    }
+  }
+
   useEffect(() => {
-    // TODO: Fetch different items
-    console.log("fetching different projects");
-    setProjects(mockGalleryItems);
-  }, [filter]);
+    fetchProjects();
+  }, []);
 
   return (
     <section
@@ -28,15 +44,14 @@ const Dashboard = () => {
           Administrar proyectos
         </h1>
       </div>
-
-      <ActionBar />
-
+      <ActionBar fetchProjects={fetchProjects} />
       <GalleryFilters />
-
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        {projects.map(({ id, title, imgUrl }) => (
-          <GalleryItem id={id} title={title} imgUrl={imgUrl} key={id} />
-        ))}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:mt-4">
+        {projects.map(({ _id, name, photos }) => {
+          const imgUrl = photos.length > 0 ? `http://localhost:4000/${photos[0]?.url}` : '';
+          return (
+          <GalleryItem id={_id} title={name} imgUrl={imgUrl} key={_id} />
+        )})}
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 
 import NewProjectModal from "./NewProjectModal";
 
-const ActionBar = () => {
+const ActionBar = ({ fetchProjects }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -16,7 +16,7 @@ const ActionBar = () => {
                     </svg>
                 </button>
             </div>
-            <NewProjectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <NewProjectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} fetchProjects={fetchProjects} />
         </Fragment>
     )
 }
