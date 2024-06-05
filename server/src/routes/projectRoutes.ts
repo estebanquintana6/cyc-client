@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { unlink } from 'node:fs';
+import { unlink } from "node:fs";
 import multer from "multer";
 
 import isAuthMiddleware from "../middlewares/isAuthMiddleware";
@@ -161,45 +161,64 @@ router.delete(
   async (req: Request, res: Response) => {
     const { id } = req.body;
 
-
     if (!id) {
-        res.status(400).json({
-          error: "Datos faltantes o incompletos",
-        });
-        return;
-      }
-  
+      res.status(400).json({
+        error: "Datos faltantes o incompletos",
+      });
+      return;
+    }
 
     const project = await Project.findById(id);
 
     if (!project) {
-        res.status(200).json({
-            message: "El proyecto ya no existe",
-          });
-          return;
+      res.status(200).json({
+        message: "El proyecto ya no existe",
+      });
+      return;
     }
 
     const { photos } = project;
 
     photos.map(({ url }) => {
-        unlink(`./public/${url}`, () => {
-            console.log("DELETED FILE: ", url);
-        });
+      unlink(`./public/${url}`, () => {
+        console.log("DELETED FILE: ", url);
+      });
     });
 
     try {
-        await project.delete();
-        res.status(200).json({
-            success: true,
-          });
-          return;
+      await project.delete();
+      res.status(200).json({
+        success: true,
+      });
+      return;
     } catch {
-        res.status(500).json({
-            error: "Error en servicio. Intentar más tarde.",
-        });
-        return;
+      res.status(500).json({
+        error: "Error en servicio. Intentar más tarde.",
+      });
+      return;
     }
   },
 );
+
+/**
+ * @route GET /projects/recommendations
+ * @desc Get recommendations for a project
+ * @params project_id
+ * @access Public
+ */
+router.get("/recommendations/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const projects = await Project.find({ _id: { $nin: id } }).limit(4);
+    res.status(200).json(projects);
+    return;
+  } catch {
+    res.status(500).json({
+      error: "Error en servicio. Intentar más tarde.",
+    });
+    return;
+  }
+});
 
 export default router;

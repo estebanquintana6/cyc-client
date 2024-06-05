@@ -14,4 +14,17 @@ const authFetch = async (url, method, token, params = undefined, contentType = "
   return response;
 };
 
+export const fetch = async (url, method, params = undefined, contentType = "application/json") => {
+  const response = await axios({
+    url,
+    method,
+    headers: {
+      "Content-Type": contentType
+    },
+    data: params
+  });
+
+  return response;
+};
+
 export default authFetch;

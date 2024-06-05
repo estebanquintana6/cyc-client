@@ -1,8 +1,26 @@
 
+import { useEffect, useState } from "react";
+
 import PhotoCarousel from "./PhotoCarousel";
 import RecommendationBar from "./RecommendationBar";
 
-const ProjectInfo = ({ name, description, designer, photos: photosMetadata, surface}) => {
+import { useAuthContext } from "../../contexts/AuthContext";
+
+import { fetch } from "../../../utils/authFetch";
+
+const ProjectInfo = ({ id, name, description, designer, photos: photosMetadata, surface}) => {
+  const { token } = useAuthContext();
+  const [recommendations, setRecommendations] = useState([]);
+
+  useEffect(() => {
+    const fetchRecommendations = async () => {
+      const { response, data } = await fetch(`${process.env.REACT_APP_SERVER_URL}/projects/recommendations/${id}`, 'GET');
+      console.log(response);
+      console.log(data);
+    }
+    fetchRecommendations();
+  }, []);
+
   const photos = photosMetadata?.map(({url}) => `${process.env.REACT_APP_SERVER_URL}/${url}`);
 
   return (

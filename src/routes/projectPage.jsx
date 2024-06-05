@@ -33,7 +33,7 @@ const ProjectPage = () => {
   return (
     <>
       <Nav />
-      <ProjectInfo {...project}/>
+      <ProjectInfo {...project} id={id}/>
     </>
   );
 };
