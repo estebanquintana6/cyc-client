@@ -1,7 +1,9 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import passport from "passport";
 import cors from "cors";
+import path from "path";
+
 
 import dotenv from "dotenv";
 
@@ -30,6 +32,7 @@ app.options('*', cors());
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(express.static(path.resolve('./public')));
 
 // Function to connect to the database
 const conn = () => {

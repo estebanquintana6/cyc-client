@@ -15,7 +15,7 @@ import FILTERS from "../../ProjectPage/Gallery/filters";
 
 const Dashboard = () => {
   const { token } = useAuthContext();
-  
+
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [displayFiltered, setDisplayFiltered] = useState(false);
@@ -23,18 +23,24 @@ const Dashboard = () => {
   const { filter } = useGalleryFilter();
 
   const fetchProjects = async () => {
-    console.log(process.env);
-    console.log(process.env.SERVER_URL);
     try {
-      const { status, data } = await authFetch(`${process.env.REACT_APP_SERVER_URL}/projects/`, "GET", token);
+      const { status, data } = await authFetch(
+        `${process.env.REACT_APP_SERVER_URL}/projects/`,
+        "GET",
+        token,
+      );
       if (status === 200) {
         setProjects(data);
-      } 
-    } catch(err) {
-      const { response: { data: { error } } } = err;
+      }
+    } catch (err) {
+      const {
+        response: {
+          data: { error },
+        },
+      } = err;
       errorModal(error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchProjects();
@@ -45,14 +51,18 @@ const Dashboard = () => {
       setFilteredProjects([]);
       setDisplayFiltered(false);
     }
-    if ( filter === FILTERS.CIUDADES ) {
+    if (filter === FILTERS.CIUDADES) {
       console.log(projects);
-      const filter = projects.filter(({ projectType }) => projectType === "Ciudades");
+      const filter = projects.filter(
+        ({ projectType }) => projectType === "Ciudades",
+      );
       setFilteredProjects(filter);
       setDisplayFiltered(true);
     }
-    if ( filter === FILTERS.DESARROLLOS ) {
-      const filter = projects.filter(({ projectType }) => projectType === "Desarrollo");
+    if (filter === FILTERS.DESARROLLOS) {
+      const filter = projects.filter(
+        ({ projectType }) => projectType === "Desarrollo",
+      );
       setFilteredProjects(filter);
       setDisplayFiltered(true);
     }
@@ -71,11 +81,23 @@ const Dashboard = () => {
       <ActionBar fetchProjects={fetchProjects} />
       <GalleryFilters />
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-4">
-        {(displayFiltered ? filteredProjects : projects).map(({ _id, name, photos }) => {
-          const imgUrl = photos.length > 0 ? `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}` : '';
-          return (
-          <GalleryItem id={_id} title={name} imgUrl={imgUrl} key={_id} />
-        )})}
+        {(displayFiltered ? filteredProjects : projects).map(
+          ({ _id, name, photos }) => {
+            const imgUrl =
+              photos.length > 0
+                ? `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`
+                : "";
+            return (
+              <GalleryItem
+                id={_id}
+                title={name}
+                imgUrl={imgUrl}
+                key={_id}
+                fetchProjects={fetchProjects}
+              />
+            );
+          },
+        )}
       </div>
     </section>
   );
