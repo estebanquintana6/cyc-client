@@ -56,9 +56,9 @@ router.get("/", async (req: Request, res: Response) => {
  * @route GET /projects/:id
  * @desc Fetch a project by id
  * @params id
- * @access Private
+ * @access Public
  */
-router.get("/get/:id", isAuthMiddleware, async (req: Request, res: Response) => {
+router.get("/get/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
       const project = await Project.findById(id);
