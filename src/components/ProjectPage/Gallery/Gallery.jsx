@@ -66,7 +66,7 @@ const Gallery = () => {
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       {(filter === FILTERS.ALL ? projects: filteredProjects).map(({ name, photos, _id}) => {
-        const photoUrl = photos[0]?.url;  
+        const photoUrl = `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`;  
         return (<GalleryItem id={_id} title={name} imgUrl={photoUrl} key={_id} />)
       })}
       </div>

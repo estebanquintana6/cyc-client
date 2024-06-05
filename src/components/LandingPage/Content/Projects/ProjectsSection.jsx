@@ -31,10 +31,10 @@ const ProjectSection = ({ projects }) => {
         </div>
         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
           {projects.map(({ name, photos, _id}) => {
-            const photoUrl = photos[0]?.url;  
+            const photoUrl = `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`;  
             return (
-              <ProjectItem title={name} imgUrl={photoUrl} href={`/proyectos/${_id}`} />
-            );
+                <ProjectItem title={name} imgUrl={photoUrl} href={`/proyectos/${_id}`} />
+              );
           })}
         </div>
         <div className="text-center">
