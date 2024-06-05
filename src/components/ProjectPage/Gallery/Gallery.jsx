@@ -4,18 +4,46 @@ import GalleryItem from "./GalleryItem";
 import GalleryFilters from "./GalleryFilters";
 
 import { useGalleryFilter } from "../../contexts/GalleryFilterContext";
-import { mockGalleryItems } from "../../../utils/mocks";
+import { useAuthContext } from "../../contexts/AuthContext";
+
+import FILTERS from "./filters";
+import authFetch from "../../../utils/authFetch";
 
 const Gallery = () => {
-  const [projects, setProjects] = useState(mockGalleryItems);
+  const [projects, setProjects] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
 
   const { filter } = useGalleryFilter();
+  const { token } = useAuthContext();
+
 
   useEffect(() => {
-    // TODO: Fetch different items
-    console.log("fetching different projects");
-    setProjects(mockGalleryItems);
+    if (filter === FILTERS.ALL) {
+      setFilteredProjects([]);
+    }
+    if ( filter === FILTERS.CIUDADES ) {
+      console.log(projects);
+      const filter = projects.filter(({ projectType }) => projectType === "Ciudades");
+      setFilteredProjects(filter);
+    }
+    if ( filter === FILTERS.DESARROLLOS ) {
+      const filter = projects.filter(({ projectType }) => projectType === "Desarrollo");
+      setFilteredProjects(filter);
+    }
   }, [filter]);
+
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const { status, data } = await authFetch(`${process.env.REACT_APP_SERVER_URL}/projects/`, 'GET', token);
+      if (status === 200) {
+        setProjects(data);
+      } else {
+          console.error("Error en el servidor al hacer fetch de los proyectos");
+      }
+    }
+    fetchProjects();
+  }, []);
 
   return (
     <section
@@ -34,13 +62,13 @@ const Gallery = () => {
         </p>
       </div>
       <div className="flex flex-col mb-8">
-        <h4>Filtros</h4>
         <GalleryFilters />
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {projects.map(({ id, title, imgUrl }) => (
-          <GalleryItem id={id} title={title} imgUrl={imgUrl} key={id} />
-        ))}
+      {(filter === FILTERS.ALL ? projects: filteredProjects).map(({ name, photos, _id}) => {
+        const photoUrl = photos[0]?.url;  
+        return (<GalleryItem id={_id} title={name} imgUrl={photoUrl} key={_id} />)
+      })}
       </div>
     </section>
   );

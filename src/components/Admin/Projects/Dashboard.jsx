@@ -6,7 +6,6 @@ import GalleryItem from "./GalleryItem";
 import GalleryFilters from "../../ProjectPage/Gallery/GalleryFilters";
 import ActionBar from "./ActionBar";
 
-import { mockGalleryItems } from "../../../utils/mocks";
 import authFetch from "../../../utils/authFetch";
 import { useAuthContext } from "../../contexts/AuthContext";
 
