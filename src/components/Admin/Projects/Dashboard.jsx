@@ -27,7 +27,7 @@ const Dashboard = () => {
     console.log(process.env);
     console.log(process.env.SERVER_URL);
     try {
-      const { status, data } = await authFetch(`/projects/`, "GET", token);
+      const { status, data } = await authFetch(`${process.env.REACT_APP_SERVER_URL}/projects/`, "GET", token);
       if (status === 200) {
         setProjects(data);
       } 

@@ -49,7 +49,7 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
 
     try {
       const { status } = await authFetch(
-        `/projects/register`,
+        `${process.env.REACT_APP_SERVER_URL}/projects/register`,
         "POST",
         token,
         formData,
