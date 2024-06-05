@@ -49,7 +49,7 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
 
     try {
       const { status } = await authFetch(
-        "http://localhost:4000/projects/register",
+        `/projects/register`,
         "POST",
         token,
         formData,

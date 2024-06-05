@@ -43,7 +43,7 @@ const UserDashboard = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { status } = await authFetch(`${process.env.REACT_APP_SERVER_URL}/users/delete`, "DELETE", token, { username });
+          const { status } = await authFetch(`/users/delete`, "DELETE", token, { username });
 
           if (status === 200) {
             Swal.fire({

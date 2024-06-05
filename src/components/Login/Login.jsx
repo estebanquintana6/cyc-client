@@ -30,7 +30,7 @@ const Login = () => {
     };
 
     const request = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/users/login`,
+      `/users/login`,
       requestOptions,
     );
 
