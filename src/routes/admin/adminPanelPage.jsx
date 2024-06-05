@@ -18,7 +18,7 @@ const AdminPanelPage = () => {
     const validateAuth = async () => {
       try {
         const { status } = await authFetch(
-          "http://localhost:4000/auth",
+          `${process.env.REACT_APP_SERVER_URL}/auth`,
           "GET",
           token,
         );

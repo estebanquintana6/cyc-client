@@ -44,7 +44,7 @@ const NewUserModal = ({ isOpen, onClose, fetchUsers }) => {
   const onSave = async () => {
     if (!validForm) return;
     try {
-        const { status } = await authFetch("http://localhost:4000/users/create", "POST", token, {
+        const { status } = await authFetch(`${process.env.REACT_APP_SERVER_URL}/users/create`, "POST", token, {
             name,
             username,
             password

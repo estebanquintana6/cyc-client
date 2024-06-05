@@ -3,7 +3,7 @@ import PhotoCarousel from "./PhotoCarousel";
 import RecommendationBar from "./RecommendationBar";
 
 const ProjectInfo = ({ name, description, designer, photos: photosMetadata, surface}) => {
-  const photos = photosMetadata?.map(({url}) => `http://localhost:4000/${url}`);
+  const photos = photosMetadata?.map(({url}) => `${process.env.REACT_APP_SERVER_URL}/${url}`);
 
   return (
     <section

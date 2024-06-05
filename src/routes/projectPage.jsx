@@ -16,7 +16,7 @@ const ProjectPage = () => {
 
   const fetchProject = async () => {
     try {
-      const { status, data } = await authFetch(`http://localhost:4000/projects/get/${id}`, "GET", token);
+      const { status, data } = await authFetch(`${process.env.REACT_APP_SERVER_URL}/projects/get/${id}`, "GET", token);
 
       if (status === 200) setProject(data);
 

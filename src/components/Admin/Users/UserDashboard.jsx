@@ -13,7 +13,7 @@ const UserDashboard = () => {
   const { token } = useAuthContext();
 
   const fetchUsers = async () => {
-    const { status, data } = await authFetch('http://localhost:4000/users', 'GET', token);
+    const { status, data } = await authFetch(`${process.env.REACT_APP_SERVER_URL}/users`, 'GET', token);
     if (status === 200) {
         setAdmins(data);
     } else {
@@ -43,7 +43,7 @@ const UserDashboard = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { status } = await authFetch("http://localhost:4000/users/delete", "DELETE", token, { username });
+          const { status } = await authFetch(`${process.env.REACT_APP_SERVER_URL}/users/delete`, "DELETE", token, { username });
 
           if (status === 200) {
             Swal.fire({

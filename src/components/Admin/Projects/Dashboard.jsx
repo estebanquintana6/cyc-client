@@ -24,8 +24,10 @@ const Dashboard = () => {
   const { filter } = useGalleryFilter();
 
   const fetchProjects = async () => {
+    console.log(process.env);
+    console.log(process.env.SERVER_URL);
     try {
-      const { status, data } = await authFetch("http://localhost:4000/projects/", "GET", token);
+      const { status, data } = await authFetch(`${process.env.REACT_APP_SERVER_URL}/projects/`, "GET", token);
       if (status === 200) {
         setProjects(data);
       } 
@@ -71,7 +73,7 @@ const Dashboard = () => {
       <GalleryFilters />
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-4">
         {(displayFiltered ? filteredProjects : projects).map(({ _id, name, photos }) => {
-          const imgUrl = photos.length > 0 ? `http://localhost:4000/${photos[0]?.url}` : '';
+          const imgUrl = photos.length > 0 ? `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}` : '';
           return (
           <GalleryItem id={_id} title={name} imgUrl={imgUrl} key={_id} />
         )})}
