@@ -1,27 +1,42 @@
-
 import { useEffect, useState } from "react";
 
 import PhotoCarousel from "./PhotoCarousel";
 import RecommendationBar from "./RecommendationBar";
 
-import { useAuthContext } from "../../contexts/AuthContext";
-
 import { fetch } from "../../../utils/authFetch";
 
-const ProjectInfo = ({ id, name, description, designer, photos: photosMetadata, surface}) => {
-  const { token } = useAuthContext();
+const ProjectInfo = ({
+  id,
+  name,
+  description,
+  designer,
+  photos: photosMetadata,
+  surface,
+}) => {
   const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
     const fetchRecommendations = async () => {
-      const { response, data } = await fetch(`${process.env.REACT_APP_SERVER_URL}/projects/recommendations/${id}`, 'GET');
-      console.log(response);
-      console.log(data);
-    }
-    fetchRecommendations();
-  }, []);
+      try {
+        const { status, data } = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/projects/recommendations/${id}`,
+          "GET",
+        );
 
-  const photos = photosMetadata?.map(({url}) => `${process.env.REACT_APP_SERVER_URL}/${url}`);
+        if (status === 200) {
+          console.log(data);
+          setRecommendations(data);
+        }
+      } catch (error) {
+        console.error("Error al recuperar recomendaciones");
+      }
+    };
+    fetchRecommendations();
+  }, [id]);
+
+  const photos = photosMetadata?.map(
+    ({ url }) => `${process.env.REACT_APP_SERVER_URL}/${url}`,
+  );
 
   return (
     <section
@@ -31,7 +46,7 @@ const ProjectInfo = ({ id, name, description, designer, photos: photosMetadata, 
       <div className="m-auto flex flex-col">
         <div className="flex flex-col mb-8">
           <h1 className="text-left text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-            { name }
+            {name}
           </h1>
         </div>
 
@@ -43,19 +58,19 @@ const ProjectInfo = ({ id, name, description, designer, photos: photosMetadata, 
                 <span className="relative px-1 ml-2">
                   <div className="absolute inset-x-0 bottom-0 h-3 transform -skew-x-12 bg-secondary" />
                   <span className="relative inline-block text-2xl text-primary-100 sm:text-3xl">
-                    { designer }
+                    {designer}
                   </span>
                 </span>
               </h2>
               <p className="text-base text-gray-700 md:text-lg">
-                { description }
+                {description}
               </p>
             </div>
             <div className="grid gap-5 row-gap-8 sm:grid-cols-2">
               <div className="bg-white border-l-4 shadow-sm border-primary-100">
                 <div className="h-full p-5 border border-l-0 rounded-r">
                   <h6 className="mb-2 font-semibold leading-5">Superficie</h6>
-                  <p className="text-sm text-gray-900">{ surface }</p>
+                  <p className="text-sm text-gray-900">{surface}</p>
                 </div>
               </div>
             </div>
@@ -67,7 +82,7 @@ const ProjectInfo = ({ id, name, description, designer, photos: photosMetadata, 
             <h2 className="max-w-lg mb-6 font-sans text-xl font-bold tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
               Otros proyectos que podrían interesarte
             </h2>
-            <RecommendationBar projects={[1, 2, 3, 4]} />
+            <RecommendationBar projects={recommendations} />
           </div>
         </div>
       </div>

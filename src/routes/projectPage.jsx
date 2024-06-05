@@ -27,6 +27,7 @@ const ProjectPage = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchProject();
   }, [id]);
 
