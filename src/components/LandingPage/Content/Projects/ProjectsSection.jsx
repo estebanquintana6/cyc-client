@@ -5,7 +5,7 @@ import { useIsVisible } from "../../../../hooks/useIsVisible";
 
 import ProjectItem from "./ProjectItem";
 
-const ProjectSection = () => {
+const ProjectSection = ({ projects }) => {
   const ref = useRef();
   const isVisible = useIsVisible(ref);
 
@@ -30,10 +30,12 @@ const ProjectSection = () => {
           </p>
         </div>
         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
-          <ProjectItem title={"Mona Lisa"} imgUrl={"https://images.pexels.com/photos/3184311/pexels-photo-3184311.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500"} href={"/proyectos/1"} />
-          <ProjectItem title={"The Starry Night"} imgUrl={"https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"} href={"/proyectos/1"} />
-          <ProjectItem title={"The Kiss"} imgUrl={"https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"} href={"/proyectos/1"} />
-          <ProjectItem title={"The Harvesters"} imgUrl={"https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"} href={"/proyectos/1"} />
+          {projects.map(({ name, photos, _id}) => {
+            const photoUrl = photos[0]?.url;  
+            return (
+              <ProjectItem title={name} imgUrl={photoUrl} href={`/proyectos/${_id}`} />
+            );
+          })}
         </div>
         <div className="text-center">
           <Link

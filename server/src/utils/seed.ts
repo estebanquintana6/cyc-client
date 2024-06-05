@@ -14,6 +14,7 @@ const createAdmin = async (username: string) => {
         username,
         password: hashedPassword,
         name: "Esteban Quintana",
+        role: "SUPERADMIN"
     });
 
     const response = await newAdmin.save();

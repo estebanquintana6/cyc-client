@@ -153,8 +153,6 @@ router.post("/login", async (req: Request, res: Response) => {
 router.delete("/delete", isAuthMiddleware, async (req: Request, res: Response) => {
   const { username } = req.body;
 
-  console.log(username);
-
   if (!username) {
     res.status(400).json({
       error: "Datos faltantes",
@@ -168,6 +166,13 @@ router.delete("/delete", isAuthMiddleware, async (req: Request, res: Response) =
   if (!user) {
     res.status(400).json({
       error: "El usuario no existe",
+    });
+    return;
+  }
+
+  if (user.role === "SUPERADMIN") {
+    res.status(400).json({
+      error: "El usuario tiene rol de SUPERADMIN, no se puede eliminar",
     });
     return;
   }

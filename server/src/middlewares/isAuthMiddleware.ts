@@ -4,7 +4,7 @@ import User from "../models/User";
 
 import jwt from "jsonwebtoken";
 
-const isAdmin = async (req: Request, res: Response, next: () => void) => {
+const isAuthMiddleware = async (req: Request, res: Response, next: () => void) => {
     const { headers } = req;
     const { authorization } = headers;
 
@@ -47,4 +47,4 @@ const isAdmin = async (req: Request, res: Response, next: () => void) => {
     }
 }
 
-export default isAdmin;
+export default isAuthMiddleware;

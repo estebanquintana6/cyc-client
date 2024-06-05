@@ -20,12 +20,27 @@ const upload = multer({
 });
 
 /**
+ * @route GET /fetch
+ * @desc Fetch last 4 projects
+ * @params none
+ * @access Public
+ */
+router.get('/fetch', async (req: Request, res: Response) => {
+    try {
+        const projects = await Project.find({}, {}, { sort: { 'created_at' : -1 } }).limit(4);
+        res.status(200).send(projects);
+    } catch {
+        res.status(200).send([]);
+    }
+})
+
+/**
  * @route GET /
  * @desc Fetch all projects
  * @params none
  * @access Private
  */
-router.get("/", isAuthMiddleware, async (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const projects = await Project.find({});
     res.status(200).send(projects);
@@ -114,7 +129,6 @@ router.post("/register", upload.array("photos", 5), isAuthMiddleware, async (req
             error: err
         });
     });
-
 });
 
 export default router;
