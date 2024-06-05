@@ -25,6 +25,7 @@ const app = express();
 const mongoUri = MONGO_URI;
 // Cors
 app.use(cors());
+app.options('*', cors());
 
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
