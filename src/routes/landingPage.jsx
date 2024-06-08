@@ -5,6 +5,7 @@ import About from "../components/LandingPage/Content/About";
 import ProjectSection from "../components/LandingPage/Content/Projects/ProjectsSection";
 import BlogSection from "../components/LandingPage/Content/Blog/BlogSection";
 import ContactSection from "../components/LandingPage/Contact/ContactSection";
+import EducationalMap from "../components/LandingPage/Map/EducationalMap";
 
 import { useAuthContext } from "../components/contexts/AuthContext";
 
@@ -33,6 +34,7 @@ const LandingPage = () => {
       <MainHeader />
       <About />
       <ProjectSection projects={projects} />
+      <EducationalMap />
       <BlogSection />
       <ContactSection />
     </>

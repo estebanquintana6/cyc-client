@@ -14,8 +14,8 @@ const BlogSection = () => {
     >
       <div ref={ref} className={`mx-auto my-auto transition-opacity ease-in duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
         <div className="flex flex-col mb-6">
-          <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-            Mantente al día con nuestro blog
+          <h1 className="mb-4 text-4xl font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">
+            Sumérgete en nuestro mundo de contenidos a través de nuestro Blog
           </h1>
           <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
             Nos enorgullece ser pioneros en Occidente en aplicar a gran escala

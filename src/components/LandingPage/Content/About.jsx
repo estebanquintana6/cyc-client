@@ -6,7 +6,10 @@ const About = () => {
   const isVisible = useIsVisible(ref);
 
   return (
-    <section className="flex bg-white min-h-screen w-full xs:p-4 sm:p-16" id="about">
+    <section
+      className="flex bg-white min-h-screen w-full xs:p-4 sm:p-16"
+      id="about"
+    >
       <div
         ref={ref}
         className={`gap-16 items-center py-8 px-4 mx-auto lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 transition-opacity ease-in duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}
@@ -16,29 +19,32 @@ const About = () => {
             ¿Qué es CYC?
           </h1>
           <p className="mb-4">
-            <span className="relative inline-block px-2 mr-1">
+            En
+            <span className="relative inline-block px-2 mx-2">
               <span className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
-              <span className="relative text-white">Somos</span>
+              <span className="relative text-white">
+                Connie Yepiz Consulting
+              </span>
             </span>
-            una empresa que suma conocimiento clásico, ciencia de última
-            generación y una visión integradora del ser humano.
+            nos dedicamos a transformar entornos y crear comunidades que
+            impulsan al ser humano a prosperar y a tener una mejor calidad de
+            vida.
           </p>
           <p className="mb-4">
-            <span className="relative inline-block px-2 mr-1">
-              <span className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
-              <span className="relative text-white">Colaboramos</span>
-            </span>
-            con otras empresas en la creación de estrategias únicas para
-            facilitar y acelerar el camino al éxito de los proyectos. Fomentamos
-            el bienestar y una actitud ganar-ganar en todas nuestras relaciones.
+            Nuestro enfoque combina una amplia gama de herramientas, que van
+            desde el conocimiento clásico oriental hasta tecnología de última
+            generación en el campo de la biofísica aplicada. Utilizamos estas
+            herramientas para analizar el macro entorno, la tierra y la
+            geografía, y a partir de ahí, llevar a cabo la planificación urbana
+            de ciudades y proyectos habitacionales.
           </p>
           <p>
-            <span className="relative inline-block px-2 mr-1">
-              <span className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
-              <span className="relative text-white">Creemos</span>
-            </span>
-            en la responsabilidad, disciplina, autoconsciencia y alto goce como
-            partes fundamentales del continuo presente.
+            Creemos en la importancia de comprender la energía del entorno para
+            canalizarla y así promover el bienestar de quienes lo habitan,
+            creando así comunidades que facilitan el florecimiento humano y una
+            vida plena. Nuestro equipo experto trabaja con pasión y dedicación
+            para garantizar que cada desarrollo refleje nuestros valores de
+            respeto hacia la naturaleza y compromiso con el bienestar humano.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4 mt-8">
@@ -49,7 +55,7 @@ const About = () => {
           />
           <img
             className="mt-4 w-full lg:mt-10 rounded-lg"
-            src="/img/about-5.jpeg"
+            src="/img/about-2.jpeg"
             alt="about content 2"
           />
         </div>
