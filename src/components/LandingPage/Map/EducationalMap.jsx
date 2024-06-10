@@ -64,6 +64,8 @@ const EducationalMap = () => {
             center={center}
             options={{
               mapTypeId: 'satellite',
+              draggableCursor: 'arrow',
+              draggingCursor: 'arrow',
             }}
           >
             <Marker position={center} icon={{ url: '/img/pin.png' }}/>
