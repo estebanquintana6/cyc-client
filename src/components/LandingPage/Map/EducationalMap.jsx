@@ -3,7 +3,11 @@ import {
   GoogleMap,
   LoadScript,
   MarkerF as Marker,
+  GoogleMapProps,
+  
 } from "@react-google-maps/api";
+
+import useIsMobile from "../../../hooks/useIsMobile";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -36,6 +40,9 @@ const CustomMarker = ({ location, url }) => {
 };
 
 const EducationalMap = () => {
+
+  const isMobile = useIsMobile();
+
   return (
     <section
       className="flex w-full min-h-screen xs:py-14 lg:py-32"
@@ -53,10 +60,13 @@ const EducationalMap = () => {
         >
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
-            zoom={3}
+            zoom={isMobile ? 2 : 3}
             center={center}
+            options={{
+              mapTypeId: 'satellite',
+            }}
           >
-            <Marker position={center}/>
+            <Marker position={center} icon={{ url: '/img/pin.png' }}/>
           </GoogleMap>
         </LoadScript>
       </div>
