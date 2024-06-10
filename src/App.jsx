@@ -16,6 +16,7 @@ import LoginPage from "./routes/loginPage";
 
 import ProjectDashboard from "./components/Admin/Projects/Main";
 import UserDashboard from "./components/Admin/Users/UserDashboard";
+import PinDashboard from "./components/Admin/Pins/PinDashboard";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,9 @@ const router = createBrowserRouter([
     }, {
       path: "usuarios",
       element: <UserDashboard />
+    }, {
+      path: "pins",
+      element: <PinDashboard />
     }]
   }
 ]);

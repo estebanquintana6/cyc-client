@@ -12,6 +12,7 @@ import { initDb } from "./utils/seed";
 import users from './routes/userRoutes';
 import auth from './routes/authRoutes';
 import projects from "./routes/projectRoutes";
+import pins from "./routes/pinRoutes";
 
 dotenv.config()
 
@@ -59,6 +60,7 @@ app.use(passport.initialize());
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/projects', projects);
+app.use('/pins', pins);
 
 const port = process.env.PORT || 4000;
 

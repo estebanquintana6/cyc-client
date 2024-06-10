@@ -8,11 +8,11 @@ const PinSchema = new Schema({
     required: true,
   },
   lat: {
-    type: String,
+    type: Number,
     required: true,
   },
   lng: {
-    type: String,
+    type: Number,
     required: true
   },
   link: {

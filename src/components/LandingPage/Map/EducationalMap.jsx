@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   GoogleMap,
   LoadScript,
   MarkerF as Marker,
-  GoogleMapProps,
-  
 } from "@react-google-maps/api";
 
 import useIsMobile from "../../../hooks/useIsMobile";
+
+import { fetch } from "../../../utils/authFetch";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -15,33 +15,37 @@ const mapContainerStyle = {
 };
 
 const center = {
-  lat: -3.745,
-  lng: -38.523,
-};
-
-const CustomMarker = ({ location, url }) => {
-  return (
-    <Marker
-      position={location}
-      icon={{
-        url: `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <clipPath id="circleClip">
-            <circle cx="100" cy="100" r="100" />
-          </clipPath>
-        </defs>
-        <image href="${url}" x="0" y="0" width="200" height="200" clip-path="url(#circleClip)" />
-        <circle cx="100" cy="100" r="100" fill="none" stroke="black" />
-      </svg>`,
-      size: [40, 40]
-      }}
-    />
-  );
+  lat: 0,
+  lng: 0,
 };
 
 const EducationalMap = () => {
-
   const isMobile = useIsMobile();
+  const [pins, setPins] = useState([]);
+
+  const fetchPins = async () => {
+    try {
+      const { status, data } = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/pins`,
+        "GET",
+      );
+
+      if (status === 200) {
+        setPins(data);
+      }
+    } catch (err) {
+      const {
+        response: {
+          data: { error },
+        },
+      } = err;
+      console.err(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPins();
+  }, [])
 
   return (
     <section
@@ -51,7 +55,7 @@ const EducationalMap = () => {
       <div className="mx-auto">
         <div className="flex flex-col mb-6 xs:px-4 sm:px-8 md:px-16 lg:px-32">
           <h1 className="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-            Nuestra formación
+            Nuestra formación internacional
           </h1>
         </div>
 
@@ -68,7 +72,12 @@ const EducationalMap = () => {
               draggingCursor: 'arrow',
             }}
           >
-            <Marker position={center} icon={{ url: '/img/pin.png' }}/>
+            {pins.map(({ lat, lng}) => {
+              return (
+                <Marker position={{ lat: parseFloat(lat), lng: parseFloat(lng) }} icon={{ url: '/img/pin.png' }}/>
+              );
+            })}
+            
           </GoogleMap>
         </LoadScript>
       </div>
