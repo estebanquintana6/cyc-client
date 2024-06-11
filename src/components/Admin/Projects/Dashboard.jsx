@@ -5,6 +5,7 @@ import { useGalleryFilter } from "../../contexts/GalleryFilterContext";
 import GalleryItem from "./GalleryItem";
 import GalleryFilters from "../../ProjectPage/Gallery/GalleryFilters";
 import ActionBar from "./ActionBar";
+import EditProjectModal from "./EditProjectModal";
 
 import authFetch from "../../../utils/authFetch";
 import { useAuthContext } from "../../contexts/AuthContext";
@@ -16,6 +17,8 @@ import FILTERS from "../../ProjectPage/Gallery/filters";
 const Dashboard = () => {
   const { token } = useAuthContext();
 
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState();
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [displayFiltered, setDisplayFiltered] = useState(false);
@@ -94,11 +97,19 @@ const Dashboard = () => {
                 imgUrl={imgUrl}
                 key={_id}
                 fetchProjects={fetchProjects}
+                setSelectedProjectId={setSelectedProjectId}
+                openEditModal={() => setEditModalOpen(true)}
               />
             );
           },
         )}
       </div>
+      <EditProjectModal
+        isOpen={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        id={selectedProjectId}
+        fetchProjects={fetchProjects}
+      />
     </section>
   );
 };

@@ -8,7 +8,14 @@ import authFetch from "../../../utils/authFetch";
 
 import { useAuthContext } from "../../contexts/AuthContext";
 
-const GalleryItem = ({ id, title, imgUrl, fetchProjects }) => {
+const GalleryItem = ({
+  id,
+  title,
+  imgUrl,
+  fetchProjects,
+  setSelectedProjectId,
+  openEditModal,
+}) => {
   const { token } = useAuthContext();
   const navigate = useNavigate();
 
@@ -90,7 +97,13 @@ const GalleryItem = ({ id, title, imgUrl, fetchProjects }) => {
             />
           </svg>
         </Button>
-        <Button className="mx-2 w-12 h-12 mt-2">
+        <Button
+          className="mx-2 w-12 h-12 mt-2"
+          onClick={() => {
+            setSelectedProjectId(id);
+            openEditModal();
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

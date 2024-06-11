@@ -221,4 +221,48 @@ router.get("/recommendations/:id", async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @route POST /projects/update
+ * @desc Update a project
+ * @params name, designer, description, surface, projectType, images
+ * @access Private
+ */
+router.post("/update", upload.array("photos", 5), async (req: Request, res: Response) => {
+  const {
+    id,
+    name,
+    description,
+    designer,
+    projectType,
+    surface,
+  } = req.body;
+
+  try {
+    const project = await Project.findByIdAndUpdate(id, {
+      name,
+      description,
+      designer,
+      projectType,
+      surface,
+    });
+
+    if (!project) {
+      res.status(404).json({
+        error: "El proyecto no existe",
+      });
+      return;
+    } else {
+      res.status(200).json({
+        mensaje: "Proyecto actualizado",
+      });
+      return;
+    }
+  } catch (error) {
+    res.status(500).json({
+      error: error,
+    });
+    return;
+  }
+});
+
 export default router;
