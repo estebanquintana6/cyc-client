@@ -55,9 +55,8 @@ const Dashboard = () => {
       setDisplayFiltered(false);
     }
     if (filter === FILTERS.CIUDADES) {
-      console.log(projects);
       const filter = projects.filter(
-        ({ projectType }) => projectType === "Ciudades",
+        ({ projectType }) => projectType === "Ciudad",
       );
       setFilteredProjects(filter);
       setDisplayFiltered(true);
@@ -104,12 +103,14 @@ const Dashboard = () => {
           },
         )}
       </div>
-      <EditProjectModal
-        isOpen={editModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        id={selectedProjectId}
-        fetchProjects={fetchProjects}
-      />
+      {editModalOpen && (
+        <EditProjectModal
+          isOpen={editModalOpen}
+          onClose={() => setEditModalOpen(false)}
+          id={selectedProjectId}
+          fetchProjects={fetchProjects}
+        />
+      )}
     </section>
   );
 };

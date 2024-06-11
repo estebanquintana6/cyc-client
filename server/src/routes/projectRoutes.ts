@@ -235,6 +235,7 @@ router.post("/update", upload.array("photos", 5), async (req: Request, res: Resp
     designer,
     projectType,
     surface,
+    toDeletePhotos,
   } = req.body;
 
   try {
@@ -245,6 +246,33 @@ router.post("/update", upload.array("photos", 5), async (req: Request, res: Resp
       projectType,
       surface,
     });
+
+    const photosToDelete = JSON.parse(toDeletePhotos);
+
+    if (photosToDelete.length > 0) {
+      const { photos } = project;
+
+      const filesUrlsToDelete = photos.filter(({ _id }) => photosToDelete.includes(_id.toString()));
+
+      filesUrlsToDelete.map(({ url }) => {
+        unlink(`./public/${url}`, () => {
+          console.log("DELETED FILE: ", url);
+        });
+      });
+
+      const newPhotos = photos.filter(({ _id }) => !photosToDelete.includes(_id.toString()));
+
+      try {
+        await project.updateOne({
+          photos: newPhotos
+        });
+      } catch {
+        res.status(500).json({
+          error: "Error al actualizar las fotos",
+        });
+        return;
+      }
+    }
 
     if (!project) {
       res.status(404).json({
