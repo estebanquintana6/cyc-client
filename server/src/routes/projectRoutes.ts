@@ -115,7 +115,6 @@ router.post(
       const imageDesc = parsedDescriptions.find(
         ({ originalName }) => originalName === file.originalname,
       );
-      console.log(file);
       photos.push({
         url: file.filename,
         description: imageDesc?.description || "",
@@ -227,70 +226,101 @@ router.get("/recommendations/:id", async (req: Request, res: Response) => {
  * @params name, designer, description, surface, projectType, images
  * @access Private
  */
-router.post("/update", upload.array("photos", 5), async (req: Request, res: Response) => {
-  const {
-    id,
-    name,
-    description,
-    designer,
-    projectType,
-    surface,
-    toDeletePhotos,
-  } = req.body;
-
-  try {
-    const project = await Project.findByIdAndUpdate(id, {
+router.post(
+  "/update",
+  upload.array("newPhotos", 5),
+  async (req: Request, res: Response) => {
+    const {
+      id,
       name,
       description,
       designer,
       projectType,
       surface,
-    });
+      toDeletePhotos,
+      imageDescriptions,
+      photos,
+    } = req.body;
 
-    const photosToDelete = JSON.parse(toDeletePhotos);
+    const files = req.files as Express.Multer.File[];
 
-    if (photosToDelete.length > 0) {
-      const { photos } = project;
+    const parsedDescriptions: Array<{
+      url: string;
+      originalName: string;
+      description: string;
+    }> = JSON.parse(imageDescriptions);
 
-      const filesUrlsToDelete = photos.filter(({ _id }) => photosToDelete.includes(_id.toString()));
+    const newPhotos: Array<{ url: string; description: string }> = [];
 
-      filesUrlsToDelete.map(({ url }) => {
-        unlink(`./public/${url}`, () => {
-          console.log("DELETED FILE: ", url);
-        });
+    for (const file of files) {
+      const imageDesc = parsedDescriptions.find(
+        ({ originalName }) => originalName === file.originalname,
+      );
+      newPhotos.push({
+        url: file.filename,
+        description: imageDesc?.description || "",
+      });
+    }
+
+    try {
+      const project = await Project.findByIdAndUpdate(id, {
+        name,
+        description,
+        designer,
+        projectType,
+        surface,
+        photos: [...JSON.parse(photos), ...newPhotos],
       });
 
-      const newPhotos = photos.filter(({ _id }) => !photosToDelete.includes(_id.toString()));
+      const photosToDelete = JSON.parse(toDeletePhotos);
 
-      try {
-        await project.updateOne({
-          photos: newPhotos
+      if (photosToDelete.length > 0) {
+        const { photos } = project;
+
+        const filesUrlsToDelete = photos.filter(({ _id }) =>
+          photosToDelete.includes(_id.toString()),
+        );
+
+        filesUrlsToDelete.map(({ url }) => {
+          unlink(`./public/${url}`, () => {
+            console.log("DELETED FILE: ", url);
+          });
         });
-      } catch {
-        res.status(500).json({
-          error: "Error al actualizar las fotos",
+
+        const newPhotos = photos.filter(
+          ({ _id }) => !photosToDelete.includes(_id.toString()),
+        );
+
+        try {
+          await project.updateOne({
+            photos: newPhotos,
+          });
+        } catch {
+          res.status(500).json({
+            error: "Error al actualizar las fotos",
+          });
+          return;
+        }
+      }
+
+      if (!project) {
+        res.status(404).json({
+          error: "El proyecto no existe",
+        });
+        return;
+      } else {
+        res.status(200).json({
+          mensaje: "Proyecto actualizado",
         });
         return;
       }
-    }
-
-    if (!project) {
-      res.status(404).json({
-        error: "El proyecto no existe",
-      });
-      return;
-    } else {
-      res.status(200).json({
-        mensaje: "Proyecto actualizado",
+    } catch (error) {
+      res.status(500).json({
+        error: error,
       });
       return;
     }
-  } catch (error) {
-    res.status(500).json({
-      error: error,
-    });
-    return;
-  }
-});
+  },
+);
 
 export default router;
