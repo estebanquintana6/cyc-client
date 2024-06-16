@@ -12,7 +12,7 @@ const multerStorage = multer.diskStorage({
     cb(null, "public");
   },
   filename: (req, file, cb) => {
-    cb(null, `projects/${Date.now()}_${file.originalname}`);
+    cb(null, `pins/${Date.now()}_${file.originalname}`);
   },
 });
 
@@ -33,29 +33,55 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 // Create a new pin
-router.post("/create", isAuthMiddleware, async (req: Request, res: Response) => {
-  const { title, lat, lng, link } = req.body;
+router.post(
+  "/create",
+  upload.array("photos", 5),
+  isAuthMiddleware,
+  async (req: Request, res: Response) => {
+    const { title, lat, lng, link, imageDescriptions } = req.body;
 
-  const newPin = new Pin({
-    title,
-    lat,
-    lng,
-    link,
-  });
-  
-  try {
-    const savedPin = await newPin.save();
-    res.status(200).json(savedPin);
-  } catch (error) {
-    res.status(400).json({
-      error: error,
+    const files = req.files as Express.Multer.File[];
+
+    const parsedDescriptions: Array<{
+      url: string;
+      originalName: string;
+      description: string;
+    }> = JSON.parse(imageDescriptions);
+
+    const photos: Array<{ url: string; description: string }> = [];
+
+    for (const file of files) {
+      const imageDesc = parsedDescriptions.find(
+        ({ originalName }) => originalName === file.originalname,
+      );
+      photos.push({
+        url: file.filename,
+        description: imageDesc?.description || "",
+      });
+    }
+
+    const newPin = new Pin({
+      title,
+      lat,
+      lng,
+      link,
+      photos,
     });
-  }
-});
+
+    try {
+      const savedPin = await newPin.save();
+      res.status(200).json(savedPin);
+    } catch (error) {
+      res.status(400).json({
+        error: error,
+      });
+    }
+  },
+);
 
 // Delete a pin by ID
 router.delete(
-  "/pins/:id",
+  "/delete/:id",
   isAuthMiddleware,
   async (req: Request, res: Response) => {
     try {

@@ -7,6 +7,8 @@ import {
 
 import useIsMobile from "../../../hooks/useIsMobile";
 
+import MapModal from "./MapModal";
+
 import { fetch } from "../../../utils/authFetch";
 
 const mapContainerStyle = {
@@ -21,7 +23,9 @@ const center = {
 
 const EducationalMap = () => {
   const isMobile = useIsMobile();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [pins, setPins] = useState([]);
+  const [selectedPin, setSelectedPin] = useState();
 
   const fetchPins = async () => {
     try {
@@ -45,7 +49,16 @@ const EducationalMap = () => {
 
   useEffect(() => {
     fetchPins();
-  }, [])
+  }, []);
+
+  const onPinClick = (pin) => {
+    setIsModalOpen(true);
+    setSelectedPin(pin);
+  }
+
+  const onModalClose = () => {
+    setIsModalOpen(false);
+  }
 
   return (
     <section
@@ -55,7 +68,7 @@ const EducationalMap = () => {
       <div className="mx-auto">
         <div className="flex flex-col mb-6 xs:px-4 sm:px-8 md:px-16 lg:px-32">
           <h1 className="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-            Experiencia Internacional 
+            Experiencia Internacional
           </h1>
         </div>
 
@@ -67,20 +80,24 @@ const EducationalMap = () => {
             zoom={isMobile ? 2 : 3}
             center={center}
             options={{
-              mapTypeId: 'satellite',
-              draggableCursor: 'arrow',
-              draggingCursor: 'arrow',
+              mapTypeId: "satellite",
+              draggableCursor: "arrow",
+              draggingCursor: "arrow",
             }}
           >
-            {pins.map(({ lat, lng}) => {
+            {pins.map((pin) => {
               return (
-                <Marker position={{ lat: parseFloat(lat), lng: parseFloat(lng) }} icon={{ url: '/img/pin.png' }}/>
+                <Marker
+                  onClick={() => onPinClick(pin)}
+                  position={{ lat: parseFloat(pin.lat), lng: parseFloat(pin.lng) }}
+                  icon={{ url: "/img/pin.png" }}
+                />
               );
             })}
-            
           </GoogleMap>
         </LoadScript>
       </div>
+      {isModalOpen && <MapModal onClose={onModalClose} pin={selectedPin} />}
     </section>
   );
 };
