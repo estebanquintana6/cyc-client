@@ -36,6 +36,11 @@ const ProjectSchema = new Schema({
       },
     }),
   ],
+  favorite: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   created_at: {
     type: Date,
     default: Date.now,

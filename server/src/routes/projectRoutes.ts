@@ -29,7 +29,7 @@ const upload = multer({
 router.get("/fetch", async (req: Request, res: Response) => {
   try {
     const projects = await Project.find(
-      {},
+      { favorite: true },
       {},
       { sort: { created_at: -1 } },
     ).limit(4);
@@ -219,6 +219,34 @@ router.get("/recommendations/:id", async (req: Request, res: Response) => {
     return;
   }
 });
+
+/**
+ * @route POST /projects/favorite
+ * @desc toggle the favorite value of a project
+ * @params project_id, favorite
+ * @access Private
+ */
+router.post("/favorite", isAuthMiddleware, async (req: Request, res: Response) => {
+  const {
+    id,
+    favorite
+  } = req.body;
+
+  const project = await Project.findByIdAndUpdate(id, { favorite });
+
+  if (project._id) {
+    res.status(200).json({
+      mensaje: "Proyecto actualizado",
+    });
+  } else {
+    res.status(500).json({
+      error: "Error al actualizar el proyecto",
+    });
+  }
+});
+
+
+
 
 /**
  * @route POST /projects/update

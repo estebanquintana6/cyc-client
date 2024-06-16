@@ -84,7 +84,7 @@ const Dashboard = () => {
       <GalleryFilters />
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-4">
         {(displayFiltered ? filteredProjects : projects).map(
-          ({ _id, name, photos }) => {
+          ({ _id, name, photos, favorite }) => {
             const imgUrl =
               photos.length > 0
                 ? `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`
@@ -97,6 +97,7 @@ const Dashboard = () => {
                 key={_id}
                 fetchProjects={fetchProjects}
                 setSelectedProjectId={setSelectedProjectId}
+                favorite={favorite}
                 openEditModal={() => setEditModalOpen(true)}
               />
             );
