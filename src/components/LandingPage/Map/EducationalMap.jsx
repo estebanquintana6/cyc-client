@@ -55,7 +55,7 @@ const EducationalMap = () => {
       <div className="mx-auto">
         <div className="flex flex-col mb-6 xs:px-4 sm:px-8 md:px-16 lg:px-32">
           <h1 className="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-            Nuestra formación internacional
+            Experiencia Internacional 
           </h1>
         </div>
 
