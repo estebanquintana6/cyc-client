@@ -18,7 +18,7 @@ const MapModal = ({ onClose, pin }) => {
         <div className="flex h-56 grid-cols-2 gap-4 sm:h-64 xl:h-80 2xl:h-96">
           <Carousel className="mx-auto">
             {photos.map(({ url, description }) => (
-              <img src={url} alt={description} />
+              <img src={`${process.env.REACT_APP_SERVER_URL}/${url}`} alt={description} />
             ))}
           </Carousel>
         </div>
