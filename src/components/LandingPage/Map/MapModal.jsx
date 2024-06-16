@@ -9,8 +9,6 @@ const MapModal = ({ onClose, pin }) => {
 
   const { title, photos } = pin;
 
-  console.log(photos);
-
   return (
     <Modal show={true} onClose={onClose} ref={modalRef}>
       <Modal.Header>{title}</Modal.Header>
