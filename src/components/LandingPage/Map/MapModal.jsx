@@ -10,13 +10,25 @@ const MapModal = ({ onClose, pin }) => {
   const { title, photos } = pin;
 
   return (
-    <Modal show={true} onClose={onClose} ref={modalRef}>
+    <Modal
+      show={true}
+      onClose={onClose}
+      ref={modalRef}
+      position={"center"}
+      theme={{ content: { base: "relative h-auto w-full p-4" } }}
+    >
       <Modal.Header>{title}</Modal.Header>
       <Modal.Body>
-        <div className="flex h-56 grid-cols-2 gap-4 sm:h-64 xl:h-80 2xl:h-96">
+        <div className="flex h-96 grid-cols-2 gap-4 2xl:h-96">
           <Carousel className="mx-auto">
             {photos.map(({ url, description }) => (
-              <img src={`${process.env.REACT_APP_SERVER_URL}/${url}`} alt={description} />
+              <div className="flex flex-col">
+                <img
+                  src={`${process.env.REACT_APP_SERVER_URL}/${url}`}
+                  alt={description}
+                />
+                <h2>{description}</h2>
+              </div>
             ))}
           </Carousel>
         </div>
