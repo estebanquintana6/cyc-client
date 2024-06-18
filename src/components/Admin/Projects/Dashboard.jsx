@@ -82,7 +82,7 @@ const Dashboard = () => {
       </div>
       <ActionBar fetchProjects={fetchProjects} />
       <GalleryFilters />
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-4">
+      <div className="grid grid-cols-2 xs:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-4">
         {(displayFiltered ? filteredProjects : projects).map(
           ({ _id, name, photos, favorite }) => {
             const imgUrl =

@@ -86,9 +86,9 @@ const GalleryItem = ({
   };
 
   return (
-    <div className="relative flex">
-      <Link to={`/proyectos/${id}`}>
-        <img className="h-full max-w-full rounded-lg" src={imgUrl} alt="" />
+    <div className="relative flex max-h-64">
+      <Link to={`/proyectos/${id}`} className="w-full">
+        <img className="h-full w-full rounded-lg object-contain" src={imgUrl} alt="" />
         <div className="absolute rounded-lg top-0 flex w-full h-full bg-slate-600 bg-opacity-50">
           <span className="m-auto text-center inline-block xs:text-md xl:text-2xl text-white sm:text-3xl">
             {title}
