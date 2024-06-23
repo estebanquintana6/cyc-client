@@ -4,19 +4,25 @@ import GalleryItem from "./GalleryItem";
 
 import { fetch } from "../../../utils/authFetch";
 
-
 const Gallery = () => {
   const [blogEntries, setBlogEntries] = useState([]);
 
   useEffect(() => {
     const fetchBlogEntries = async () => {
-      const { status, data } = await fetch(`${process.env.REACT_APP_SERVER_URL}/blogs`, 'GET');
-      if (status === 200) {
-        setBlogEntries(data);
-      } else {
-          console.error("Error en el servidor al hacer fetch de las entradas del blog");
+      try {
+        const { status, data } = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/blogs`,
+          "GET",
+        );
+        if (status === 200) {
+          setBlogEntries(data);
+        }
+      } catch {
+        console.error(
+          "Error en el servidor al hacer fetch de las entradas del blog",
+        );
       }
-    }
+    };
     fetchBlogEntries();
   }, []);
 

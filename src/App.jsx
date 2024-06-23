@@ -19,6 +19,7 @@ import BlogEntryPage from "./routes/blogEntryPage";
 import ProjectDashboard from "./components/Admin/Projects/Main";
 import UserDashboard from "./components/Admin/Users/UserDashboard";
 import PinDashboard from "./components/Admin/Pins/PinDashboard";
+import BlogDashboard from "./components/Admin/Blogs/BlogDashboard";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,9 @@ const router = createBrowserRouter([
     }, {
       path: "pins",
       element: <PinDashboard />
+    }, {
+      path: "blog",
+      element: <BlogDashboard />
     }]
   }
 ]);
