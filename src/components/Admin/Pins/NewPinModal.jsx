@@ -4,7 +4,6 @@ import {
   GoogleMap,
   LoadScript,
   MarkerF as Marker,
-  GoogleMapProps,
 } from "@react-google-maps/api";
 
 import authFetch from "../../../utils/authFetch";

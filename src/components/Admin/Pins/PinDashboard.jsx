@@ -7,6 +7,7 @@ import PinActionBar from "./PinActionBar";
 import authFetch, { fetch } from "../../../utils/authFetch";
 import genericErrorModal, { errorModal } from "../../../utils/errorModal";
 import { useAuthContext } from "../../contexts/AuthContext";
+import EditPinModal from "./EditPinModal";
 
 const dateOptions = {
   year: "numeric",
@@ -17,6 +18,8 @@ const dateOptions = {
 const PinDashboard = () => {
   const { token } = useAuthContext();
   const [pins, setPins] = useState([]);
+  const [isEditModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPin, setSelectedPin] = useState(false);
 
   const fetchPins = async () => {
     try {
@@ -38,6 +41,15 @@ const PinDashboard = () => {
       } = err;
       errorModal(error);
     }
+  };
+
+  const onEditModalClose = async () => {
+    setIsModalOpen(false);
+  };
+
+  const onPinEdit = (id) => {
+    setIsModalOpen(true);
+    setSelectedPin(id);
   };
 
   useEffect(() => {
@@ -90,46 +102,61 @@ const PinDashboard = () => {
         </h1>
       </div>
       <PinActionBar fetchPins={fetchPins} />
-      <div className="overflow-x-scroll">
+      <div className="overflow-x-scroll max-w-full">
         <Table>
           <Table.Head>
             <Table.HeadCell>Ubicación</Table.HeadCell>
             <Table.HeadCell>Titulo</Table.HeadCell>
-            <Table.HeadCell>Link</Table.HeadCell>
+            <Table.HeadCell className="max-w-48">Link</Table.HeadCell>
             <Table.HeadCell>Fecha de creación</Table.HeadCell>
             <Table.HeadCell></Table.HeadCell>
             <Table.HeadCell></Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {pins.map(({ _id, title, link, lat, lng, created_at }) => (
-              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <Table.Cell>{`[${lat} , ${lng}]`}</Table.Cell>
-                <Table.Cell>{title}</Table.Cell>
-                <Table.Cell>{link}</Table.Cell>
-                <Table.Cell>
-                  {new Date(created_at).toLocaleDateString(
-                    "es-MX",
-                    dateOptions,
-                  )}
-                </Table.Cell>
-                <Table.Cell>
-                  <button className="font-medium hover:underline text-cyan-500">
-                    Editar
-                  </button>
-                </Table.Cell>
-                <Table.Cell>
-                  <button
-                    className="font-medium text-primary-150 hover:underline"
-                    onClick={() => deletePinHandler(_id, title)}
-                  >
-                    Eliminar
-                  </button>
-                </Table.Cell>
-              </Table.Row>
-            ))}
+            {pins.map((pin) => {
+              const { _id, title, link, lat, lng, created_at } = pin;
+              return (
+                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={_id}>
+                  <Table.Cell>{`[${lat} , ${lng}]`}</Table.Cell>
+                  <Table.Cell>{title}</Table.Cell>
+                  <Table.Cell className="max-w-48 overflow-clip">
+                    {link}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {new Date(created_at).toLocaleDateString(
+                      "es-MX",
+                      dateOptions,
+                    )}
+                  </Table.Cell>
+                  <Table.Cell>
+                    <button
+                      className="font-medium hover:underline text-cyan-500"
+                      onClick={() => onPinEdit(_id)}
+                    >
+                      Editar
+                    </button>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <button
+                      className="font-medium text-primary-150 hover:underline"
+                      onClick={() => deletePinHandler(_id, title)}
+                    >
+                      Eliminar
+                    </button>
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })}
           </Table.Body>
         </Table>
       </div>
+      {isEditModalOpen && (
+        <EditPinModal
+          id={selectedPin}
+          onClose={onEditModalClose}
+          fetchPins={fetchPins}
+        />
+      )}
     </section>
   );
 };

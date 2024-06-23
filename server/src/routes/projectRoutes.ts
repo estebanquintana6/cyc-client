@@ -226,27 +226,25 @@ router.get("/recommendations/:id", async (req: Request, res: Response) => {
  * @params project_id, favorite
  * @access Private
  */
-router.post("/favorite", isAuthMiddleware, async (req: Request, res: Response) => {
-  const {
-    id,
-    favorite
-  } = req.body;
+router.post(
+  "/favorite",
+  isAuthMiddleware,
+  async (req: Request, res: Response) => {
+    const { id, favorite } = req.body;
 
-  const project = await Project.findByIdAndUpdate(id, { favorite });
+    const project = await Project.findByIdAndUpdate(id, { favorite });
 
-  if (project._id) {
-    res.status(200).json({
-      mensaje: "Proyecto actualizado",
-    });
-  } else {
-    res.status(500).json({
-      error: "Error al actualizar el proyecto",
-    });
-  }
-});
-
-
-
+    if (project._id) {
+      res.status(200).json({
+        mensaje: "Proyecto actualizado",
+      });
+    } else {
+      res.status(500).json({
+        error: "Error al actualizar el proyecto",
+      });
+    }
+  },
+);
 
 /**
  * @route POST /projects/update
