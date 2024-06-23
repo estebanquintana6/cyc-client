@@ -56,37 +56,19 @@ router.get("/get/:id", async (req: Request, res: Response) => {
 // Create a new pin
 router.post(
     "/create",
-    upload.array("photos", 5),
+    upload.single("photo"),
     isAuthMiddleware,
     async (req: Request, res: Response) => {
-      const { title, subtitle, text, author, imageDescriptions } = req.body;
+      const { title, subtitle, text, author } = req.body;
   
-      const files = req.files as Express.Multer.File[];
-  
-      const parsedDescriptions: Array<{
-        url: string;
-        originalName: string;
-        description: string;
-      }> = JSON.parse(imageDescriptions);
-  
-      const photos: Array<{ url: string; description: string }> = [];
-  
-      for (const file of files) {
-        const imageDesc = parsedDescriptions.find(
-          ({ originalName }) => originalName === file.originalname,
-        );
-        photos.push({
-          url: file.filename,
-          description: imageDesc?.description || "",
-        });
-      }
+      const file = req.file;
   
       const newBlogEntry = new Blog({
         title,
         subtitle,
         text,
         author,
-        photos,
+        photo: file.filename,
       });
   
       try {
@@ -108,14 +90,12 @@ router.delete(
       try {
         const blogEntry = await Blog.findByIdAndDelete(req.params.id);
   
-        const { photos } = blogEntry;
+        const { photo } = blogEntry;
   
-        photos.map(({url}) => {
-          unlink(`./public/${url}`, () => {
-            console.log("DELETED FILE: ", url);
-          });
+        unlink(`./public/${photo}`, () => {
+          console.log("DELETED FILE: ", photo);
         });
-  
+
         if (!blogEntry) {
           res.status(404).json({
             error: "La entrada de blog no existe",

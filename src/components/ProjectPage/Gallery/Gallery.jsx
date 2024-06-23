@@ -22,7 +22,6 @@ const Gallery = () => {
       setFilteredProjects([]);
     }
     if ( filter === FILTERS.CIUDADES ) {
-      console.log(projects);
       const filter = projects.filter(({ projectType }) => projectType === "Ciudades");
       setFilteredProjects(filter);
     }
