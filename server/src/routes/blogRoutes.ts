@@ -71,7 +71,7 @@ router.post(
     upload.single("photo"),
     isAuthMiddleware,
     async (req: Request, res: Response) => {
-      const { title, subtitle, text, author } = req.body;
+      const { title, subtitle, text, author, photoDescription } = req.body;
   
       const file = req.file;
   
@@ -81,6 +81,7 @@ router.post(
         text,
         author,
         photo: file.filename,
+        photoDescription
       });
   
       try {

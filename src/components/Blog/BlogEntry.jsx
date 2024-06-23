@@ -4,7 +4,7 @@ const dateOptions = {
   day: 'numeric',
 };
 
-const BlogEntry = ({ title, subtitle, author, text, created_at, photo }) => {
+const BlogEntry = ({ title, subtitle, author, text, created_at, photo, photoDescription }) => {
   return (
     <>
       <main className="pt-32 pb-16 lg:pt-32 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
@@ -40,7 +40,7 @@ const BlogEntry = ({ title, subtitle, author, text, created_at, photo }) => {
                 src={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
                 alt=""
               />
-              <figcaption>Digital art by Anonymous</figcaption>
+              <figcaption>{ photoDescription || "" }</figcaption>
             </figure>
             <h1>{ title }</h1>
             <blockquote>

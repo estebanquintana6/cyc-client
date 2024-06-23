@@ -23,6 +23,10 @@ const BlogSchema = new Schema({
     type: String,
     required: false,
   },
+  photoDescription: {
+    type: String,
+    required: false,
+  },
   created_at: {
     type: Date,
     default: Date.now

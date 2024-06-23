@@ -27,11 +27,11 @@ const AdminPanelPage = () => {
           setIsLoading(false);
         } else {
           unsetToken();
-          navigate("/");
+          navigate("/login");
         }
       } catch {
         unsetToken();
-        navigate("/");
+        navigate("/login");
       }
     };
     validateAuth();

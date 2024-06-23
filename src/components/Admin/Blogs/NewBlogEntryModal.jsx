@@ -21,6 +21,7 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
     subtitle: "",
     author: "",
     text: "",
+    photoDescription: "",
   });
 
   const [photo, setPhoto] = useState();
@@ -50,6 +51,7 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
       formData.append("subtitle", blogEntry.subtitle);
       formData.append("author", blogEntry.author);
       formData.append("text", blogEntry.text);
+      formData.append("photoDescription", blogEntry.photoDescription);
 
       const { status } = await authFetch(
         `${process.env.REACT_APP_SERVER_URL}/blogs/create`,
@@ -92,7 +94,23 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
             </div>
             <div className="mb-2 block">
               {photo && (
-                <img alt="preview" className="w-full" src={photo.url} />
+                <>
+                  <img alt="preview" className="w-full" src={photo.url} />
+                  <div className="mt-2 block">
+                    <Label htmlFor="title" value="Descripción de foto" />
+                  </div>
+                  <TextInput
+                    className="w-full"
+                    id="photo-description"
+                    type="text"
+                    placeholder="Descripción de foto"
+                    value={blogEntry.photoDescription}
+                    onChange={(e) =>
+                      setBlogEntry({ ...blogEntry, photoDescription: e.target.value })
+                    }
+                    required={false}
+                  />
+                </>
               )}
             </div>
             <div>
