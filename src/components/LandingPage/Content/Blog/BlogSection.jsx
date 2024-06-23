@@ -50,7 +50,7 @@ const BlogSection = () => {
             imgSrc={
               "https://images.pexels.com/photos/932638/pexels-photo-932638.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
             }
-            link={"/"}
+            link={"/blog/1"}
           />
           <BlogItem
             title={"Ejemplo"}
@@ -61,7 +61,7 @@ const BlogSection = () => {
             imgSrc={
               "https://images.pexels.com/photos/1576937/pexels-photo-1576937.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500"
             }
-            link={"/"}
+            link={"/blog/1"}
           />
           <BlogItem
             title={"Explore the beautiful"}
@@ -72,7 +72,7 @@ const BlogSection = () => {
             imgSrc={
               "https://images.pexels.com/photos/2123755/pexels-photo-2123755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
             }
-            link={"/"}
+            link={"/blog/1"}
           />
         </div>
       </div>

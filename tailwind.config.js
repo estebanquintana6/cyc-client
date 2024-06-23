@@ -331,6 +331,9 @@ const config = {
       },
     },
   },
-  plugins: [flowbite.plugin()],
+  plugins: [
+    flowbite.plugin(),
+    require('flowbite-typography'),
+  ],
 };
 export default config;

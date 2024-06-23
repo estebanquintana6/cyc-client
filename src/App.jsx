@@ -13,6 +13,7 @@ import ProjectGalleryPage from "./routes/projectGalleryPage";
 import ProjectPage from "./routes/projectPage";
 import AdminPanelPage from "./routes/admin/adminPanelPage";
 import LoginPage from "./routes/loginPage";
+import BlogPage from "./routes/blogPage";
 
 import ProjectDashboard from "./components/Admin/Projects/Main";
 import UserDashboard from "./components/Admin/Users/UserDashboard";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/proyectos/:id",
     element: <ProjectPage />
+  },
+  {
+    path: "/blog/:id",
+    element: <BlogPage />
   },
   {
     path: "/login",
