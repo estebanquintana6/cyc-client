@@ -13,14 +13,11 @@ import users from './routes/userRoutes';
 import auth from './routes/authRoutes';
 import projects from "./routes/projectRoutes";
 import pins from "./routes/pinRoutes";
+import blogs from "./routes/blogRoutes";
 
 dotenv.config()
 
 const { MONGO_URI } = process.env;
-
-console.log(process.env);
-
-console.log(MONGO_URI);
 
 // Setting up modules and dependencies
 const app = express();
@@ -61,6 +58,7 @@ app.use('/users', users);
 app.use('/auth', auth);
 app.use('/projects', projects);
 app.use('/pins', pins);
+app.use('/blogs', blogs);
 
 const port = process.env.PORT || 4000;
 
