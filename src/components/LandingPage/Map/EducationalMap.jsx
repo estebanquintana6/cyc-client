@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   GoogleMap,
   LoadScript,
+  useLoadScript,
   MarkerF as Marker,
 } from "@react-google-maps/api";
 
@@ -26,6 +27,11 @@ const EducationalMap = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pins, setPins] = useState([]);
   const [selectedPin, setSelectedPin] = useState();
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    loading: "async",
+  });
 
   const fetchPins = async () => {
     try {
@@ -54,11 +60,11 @@ const EducationalMap = () => {
   const onPinClick = (pin) => {
     setIsModalOpen(true);
     setSelectedPin(pin);
-  }
+  };
 
   const onModalClose = () => {
     setIsModalOpen(false);
-  }
+  };
 
   return (
     <section
@@ -71,10 +77,7 @@ const EducationalMap = () => {
             Experiencia Internacional
           </h1>
         </div>
-
-        <LoadScript
-          googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-        >
+        {isLoaded && (
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={isMobile ? 2 : 3}
@@ -89,13 +92,16 @@ const EducationalMap = () => {
               return (
                 <Marker
                   onClick={() => onPinClick(pin)}
-                  position={{ lat: parseFloat(pin.lat), lng: parseFloat(pin.lng) }}
+                  position={{
+                    lat: parseFloat(pin.lat),
+                    lng: parseFloat(pin.lng),
+                  }}
                   icon={{ url: "/img/pin.png" }}
                 />
               );
             })}
           </GoogleMap>
-        </LoadScript>
+        )}
       </div>
       {isModalOpen && <MapModal onClose={onModalClose} pin={selectedPin} />}
     </section>

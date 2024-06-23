@@ -1,15 +1,15 @@
-import BlogGallery from "../components/Blog/Gallery/BlogGallery";
+import BlogEntry from "../components/Blog/BlogEntry";
 import ContactSection from "../components/LandingPage/Contact/ContactSection";
 import Nav from "../components/ProjectPage/Nav/Nav";
 
-const BlogPage = () => {
+const BlogEntryPage = () => {
     return (
         <>
             <Nav />
-            <BlogGallery />
+            <BlogEntry />
             <ContactSection />
         </>
     )
 }
 
-export default BlogPage;
+export default BlogEntryPage;
