@@ -1,3 +1,9 @@
+const dateOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+
 const BlogEntry = ({ title, subtitle, author, text, created_at, photo }) => {
   return (
     <>
@@ -8,8 +14,8 @@ const BlogEntry = ({ title, subtitle, author, text, created_at, photo }) => {
               <address className="flex items-center mb-6 not-italic">
                 <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                   <img
-                    className="mr-4 w-16 h-16 rounded-full"
-                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                    className="mr-4 w-12 h-12 rounded-full"
+                    src="/img/logo.png"
                     alt="Jese Leos"
                   />
                   <div>
@@ -22,7 +28,7 @@ const BlogEntry = ({ title, subtitle, author, text, created_at, photo }) => {
                     </a>
                     <p className="text-base text-gray-500 dark:text-gray-400">
                       <time pubdate title={created_at}>
-                        {created_at}
+                        {new Date(created_at).toLocaleDateString('es-MX', dateOptions)}
                       </time>
                     </p>
                   </div>

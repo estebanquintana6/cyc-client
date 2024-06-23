@@ -1,13 +1,42 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import BlogItem from "./BlogItem";
 
 import { useIsVisible } from "../../../../hooks/useIsVisible";
+import { fetch } from "../../../../utils/authFetch";
+
+const dateOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+
 
 const BlogSection = () => {
   const ref = useRef();
   const isVisible = useIsVisible(ref);
+
+  const [blogEntries, setBlogEntries] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogEntries = async () => {
+      try {
+        const { status, data } = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/blogs/recent`,
+          "GET",
+        );
+        if (status === 200) {
+          setBlogEntries(data);
+        }
+      } catch {
+        console.error(
+          "Error en el servidor al hacer fetch de las entradas del blog",
+        );
+      }
+    };
+    fetchBlogEntries();
+  }, []);
 
   return (
     <section
@@ -43,39 +72,15 @@ const BlogSection = () => {
           </div>
         </div>
         <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
-          <BlogItem
-            title={"Conquer the World"}
-            date={"13 Jul 2020"}
-            description={
-              "Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem doloremque."
-            }
-            imgSrc={
-              "https://images.pexels.com/photos/932638/pexels-photo-932638.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
-            }
-            link={"/blog/1"}
-          />
-          <BlogItem
-            title={"Ejemplo"}
-            date={"4 Nov 2020"}
-            description={
-              "Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem doloremque."
-            }
-            imgSrc={
-              "https://images.pexels.com/photos/1576937/pexels-photo-1576937.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500"
-            }
-            link={"/blog/1"}
-          />
-          <BlogItem
-            title={"Explore the beautiful"}
-            date={"28 Dec 2020"}
-            description={
-              "Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem doloremque."
-            }
-            imgSrc={
-              "https://images.pexels.com/photos/2123755/pexels-photo-2123755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            }
-            link={"/blog/1"}
-          />
+          {blogEntries.map(({ _id, title, created_at, text, photo}) => (
+            <BlogItem
+              title={title}
+              date={new Date(created_at).toLocaleDateString('es-MX', dateOptions)}
+              description={text}
+              imgSrc={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
+              link={`/blog/${_id}`}
+            />
+          ))}
         </div>
       </div>
     </section>

@@ -34,6 +34,18 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 
+// Fetch 4 recent entries
+router.get("/recent", async (req: Request, res: Response) => {
+  try {
+    const blogEntries = await Blog.find({}).sort({ created_at: -1 }).limit(4);
+    res.json(blogEntries);
+  } catch (error) {
+    res.status(500).json({
+      error: "Hubo un error en el servidor. Intentalo mas tarde.",
+    });
+  }
+});
+
 // Fetch by id
 router.get("/get/:id", async (req: Request, res: Response) => {
     try {
