@@ -13,7 +13,7 @@ const GalleryItem = ({ _id, title, created_at, text, photo }) => {
       <Card
         className="max-w-sm"
         imgAlt="Meaningful alt text for an image that is not purely decorative"
-        imgSrc={photo}
+        imgSrc={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
       >
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {title}

@@ -7,7 +7,7 @@ import Nav from "../components/ProjectPage/Nav/Nav";
 const BlogPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
-      }, []);
+    }, []);
     
     return (
         <>

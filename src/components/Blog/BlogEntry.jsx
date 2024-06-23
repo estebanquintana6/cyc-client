@@ -1,4 +1,4 @@
-const BlogEntry = () => {
+const BlogEntry = ({ title, subtitle, author, text, created_at, photo }) => {
   return (
     <>
       <main className="pt-32 pb-16 lg:pt-32 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
@@ -18,18 +18,11 @@ const BlogEntry = () => {
                       rel="author"
                       className="text-xl font-bold text-gray-900 dark:text-white"
                     >
-                      Jese Leos
+                      {author}
                     </a>
                     <p className="text-base text-gray-500 dark:text-gray-400">
-                      Graphic Designer, educator & CEO Flowbite
-                    </p>
-                    <p className="text-base text-gray-500 dark:text-gray-400">
-                      <time
-                        pubdate
-                        datetime="2022-02-08"
-                        title="February 8th, 2022"
-                      >
-                        Feb. 8, 2022
+                      <time pubdate title={created_at}>
+                        {created_at}
                       </time>
                     </p>
                   </div>
@@ -38,43 +31,19 @@ const BlogEntry = () => {
             </header>
             <figure>
               <img
-                src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png"
+                src={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
                 alt=""
               />
               <figcaption>Digital art by Anonymous</figcaption>
             </figure>
-            <h1>Getting started with Flowbite</h1>
+            <h1>{ title }</h1>
             <blockquote>
               <p>
-                Flowbite is just awesome. It contains tons of predesigned
-                components and pages starting from login screen to complex
-                dashboard. Perfect choice for your next SaaS application.
+                { subtitle }
               </p>
             </blockquote>
-            <p>
-              First of all you need to understand how Flowbite works. This
-              library is not another framework. Rather, it is a set of
-              components based on Tailwind CSS that you can just copy-paste from
-              the documentation.
-            </p>
-            <p>
-              It also includes a JavaScript file that enables interactive
-              components, such as modals, dropdowns, and datepickers which you
-              can optionally include into your project via CDN or NPM.
-            </p>
-            <p>
-              You can check out the
-              to explore the elements by including the CDN files into your
-              project. But if you want to build a project with Flowbite I
-              recommend you to follow the build tools steps so that you can
-              purge and minify the generated CSS.
-            </p>
-            <p>
-              You'll also receive a lot of useful application UI, marketing UI,
-              and e-commerce pages that can help you get started with your
-              projects even faster. You can check out this{" "}
-              to better understand the differences between the open-source and
-              pro version of Flowbite.
+            <p className="whitespace-pre text-wrap">
+              { text }
             </p>
           </article>
         </div>
