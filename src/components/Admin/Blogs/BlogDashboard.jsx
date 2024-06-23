@@ -6,6 +6,7 @@ import authFetch, { fetch } from "../../../utils/authFetch";
 import { errorModal } from "../../../utils/errorModal";
 import { useAuthContext } from "../../contexts/AuthContext";
 import BlogActionBar from "./BlogActionBar";
+import EditBlogEntryModal from "./EditBlogEntryModal";
 
 const dateOptions = {
   year: "numeric",
@@ -16,7 +17,7 @@ const dateOptions = {
 const BlogDashboard = () => {
   const { token } = useAuthContext();
   const [blogEntries, setBlogEntries] = useState([]);
-  const [isEditModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedEntry, setSelectedEntry] = useState(false);
 
   const fetchBlogEntries = async () => {
@@ -36,11 +37,11 @@ const BlogDashboard = () => {
   };
 
   const onEditModalClose = async () => {
-    setIsModalOpen(false);
+    setIsEditModalOpen(false);
   };
 
   const onEntryEdit = (id) => {
-    setIsModalOpen(true);
+    setIsEditModalOpen(true);
     setSelectedEntry(id);
   };
 
@@ -107,9 +108,14 @@ const BlogDashboard = () => {
             {blogEntries.map((entry) => {
               const { _id, title, author, created_at } = entry;
               return (
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" key={_id}>
+                <Table.Row
+                  className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                  key={_id}
+                >
                   <Table.Cell>{title}</Table.Cell>
-                  <Table.Cell className="max-w-48 overflow-clip">{author}</Table.Cell>
+                  <Table.Cell className="max-w-48 overflow-clip">
+                    {author}
+                  </Table.Cell>
                   <Table.Cell>
                     {new Date(created_at).toLocaleDateString(
                       "es-MX",
@@ -138,6 +144,13 @@ const BlogDashboard = () => {
           </Table.Body>
         </Table>
       </div>
+      {isEditModalOpen && (
+        <EditBlogEntryModal
+          id={selectedEntry}
+          onClose={onEditModalClose}
+          fetchBlogEntries={fetchBlogEntries}
+        />
+      )}
     </section>
   );
 };

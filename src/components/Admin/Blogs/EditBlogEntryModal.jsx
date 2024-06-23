@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Button,
   Modal,
@@ -9,11 +9,11 @@ import {
 } from "flowbite-react";
 
 import { useAuthContext } from "../../contexts/AuthContext";
-import authFetch from "../../../utils/authFetch";
+import authFetch, { fetch } from "../../../utils/authFetch";
 import { errorModal } from "../../../utils/errorModal";
 import successModal from "../../../utils/sucessModal";
 
-const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
+const EditBlogEntryModal = ({ id, onClose, fetchBlogEntries }) => {
   const { token } = useAuthContext();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -23,22 +23,43 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
     subtitle: "",
     author: "",
     text: "",
+    photo: "",
     photoDescription: "",
   });
 
-  const [photo, setPhoto] = useState();
+  const [newPhoto, setNewPhoto] = useState();
 
   const photoRef = useRef();
+
+
+  useEffect(() => {
+    const fetchBlogEntry = async () => {
+      if (!id) return;
+      try {
+        const { status, data } = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/blogs/get/${id}`,
+          "GET",
+        );
+        if (status === 200) {
+          setBlogEntry(data);
+        }
+      } catch (err) {
+        console.log(err);
+        setBlogEntry({});
+      }
+    };
+    fetchBlogEntry();
+  }, []);
 
   const onImageChange = () => {
     let file = photoRef.current?.files[0];
     if (file) {
-      setPhoto({
+      setNewPhoto({
         url: URL.createObjectURL(file),
         originalName: file.name,
       });
     } else {
-      setPhoto(undefined);
+      setNewPhoto(undefined);
     }
   };
 
@@ -49,8 +70,9 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
       let formData = new FormData();
 
       let file = photoRef.current?.files[0];
-      if (file) formData.append("photo", file);
+      if (file) formData.append("newPhoto", file);
 
+      formData.append("id", blogEntry._id);
       formData.append("title", blogEntry.title);
       formData.append("subtitle", blogEntry.subtitle);
       formData.append("author", blogEntry.author);
@@ -58,7 +80,7 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
       formData.append("photoDescription", blogEntry.photoDescription);
 
       const { status } = await authFetch(
-        `${process.env.REACT_APP_SERVER_URL}/blogs/create`,
+        `${process.env.REACT_APP_SERVER_URL}/blogs/update`,
         "POST",
         token,
         formData,
@@ -79,10 +101,11 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
         },
       } = err;
       errorModal(error);
+      setIsLoading(false);
     }
   };
 
-  const { title, subtitle, author, text } = blogEntry;
+  const { title, subtitle, author, text, photo } = blogEntry;
 
   const btnEnabled =
     !isLoading &&
@@ -93,8 +116,8 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
 
   return (
     <>
-      <Modal show={isOpen} onClose={onClose}>
-        <Modal.Header>Crear nueva entrada de blog</Modal.Header>
+      <Modal show={true} onClose={onClose}>
+        <Modal.Header>Modificar entrada de blog</Modal.Header>
         <Modal.Body>
           <form className="flex flex-col gap-4">
             <div className="mb-2 block">
@@ -110,7 +133,7 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
             <div className="mb-2 block">
               {photo && (
                 <>
-                  <img alt="preview" className="w-full" src={photo.url} />
+                  <img alt="preview" className="w-full" src={newPhoto ? newPhoto.url : `${process.env.REACT_APP_SERVER_URL}/${photo}`} />
                   <div className="mt-2 block">
                     <Label htmlFor="title" value="Descripción de foto" />
                   </div>
@@ -201,4 +224,4 @@ const NewBlogEntryModal = ({ isOpen, onClose, fetchBlogEntries }) => {
   );
 };
 
-export default NewBlogEntryModal;
+export default EditBlogEntryModal;
