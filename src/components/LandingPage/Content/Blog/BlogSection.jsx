@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
+
 import BlogItem from "./BlogItem";
 
 import { useIsVisible } from "../../../../hooks/useIsVisible";
@@ -24,8 +26,8 @@ const BlogSection = () => {
             un poco de nuestro trabajo a través de nuestro blog.
           </p>
           <div className="flex justify-center">
-            <a
-              href="/"
+            <Link
+              to="/blog"
               aria-label=""
               className="inline-flex items-center font-semibold transition-colors duration-200 bg-primary-100 p-4 rounded-lg text-white hover:text-secondary"
             >
@@ -37,7 +39,7 @@ const BlogSection = () => {
               >
                 <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
