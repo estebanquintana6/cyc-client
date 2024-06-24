@@ -13,12 +13,17 @@ const RecommendationBar = ({ projects }) => {
         const photoUrl = `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`;
         return (
           <div className="col-span-1 flex flex-col text-center bg-white cursor-pointer" onClick={() => handleRecommendationClick(_id)}>
-            <div className="xs:h-40 xs:w-40 sm:h-64 sm:w-64">
+            <div className="relative xs:h-40 xs:w-40 sm:h-64 sm:w-64">
               <img
                 className="h-full w-full object-cover object-center"
                 src={photoUrl}
                 alt="project"
               />
+              <div className="absolute rounded-lg top-0 flex w-full h-full bg-slate-600 bg-opacity-50">
+                <span className="m-auto inline-block text-xl text-white text-center">
+                    {name}
+                </span>
+            </div>
             </div>
           </div>
         );
