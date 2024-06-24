@@ -1,9 +1,17 @@
 import { useRef, useState } from "react";
-import { Button, Modal, Label, TextInput, FileInput, Textarea } from "flowbite-react";
+import {
+  Button,
+  Modal,
+  Label,
+  TextInput,
+  FileInput,
+  Textarea,
+} from "flowbite-react";
 import {
   GoogleMap,
   LoadScript,
   MarkerF as Marker,
+  useLoadScript,
 } from "@react-google-maps/api";
 
 import authFetch from "../../../utils/authFetch";
@@ -20,6 +28,12 @@ const mapContainerStyle = {
 const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
   const { token } = useAuthContext();
 
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    loading: "async",
+  });
+  
+  const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [lat, setLat] = useState(0);
@@ -56,7 +70,6 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
     setImages(newArr);
   };
 
-
   const handleImageDelete = (originalName) => {
     let files = filesRef.current?.files;
     const dt = new DataTransfer();
@@ -76,8 +89,8 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
   };
 
   const onSave = async () => {
+    setIsLoading(true);
     try {
-
       let formData = new FormData();
       let files = filesRef.current?.files;
 
@@ -96,7 +109,7 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
         "POST",
         token,
         formData,
-        "multipart/form-data"
+        "multipart/form-data",
       );
       if (status === 200) {
         successModal("El administrador ha sido creado");
@@ -110,6 +123,8 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
         },
       } = err;
       errorModal(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -117,6 +132,8 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
     setLat(e.latLng.lat());
     setLng(e.latLng.lng());
   };
+
+  const isBtnEnabled = !isLoading && title.length > 0;
 
   return (
     <>
@@ -201,9 +218,7 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
               ))}
             </div>
 
-            <LoadScript
-              googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-            >
+            {isLoaded && (
               <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={3}
@@ -215,11 +230,11 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
               >
                 <Marker position={{ lat, lng }} />
               </GoogleMap>
-            </LoadScript>
+            )}
           </form>
         </Modal.Body>
         <Modal.Footer className="justify-end">
-          <Button type="submit" onClick={onSave}>
+          <Button type="submit" onClick={onSave} disabled={!isBtnEnabled}>
             Guardar
           </Button>
         </Modal.Footer>
