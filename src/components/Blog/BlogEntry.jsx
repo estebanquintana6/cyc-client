@@ -110,7 +110,7 @@ const BlogEntry = ({
                   <h2 className="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
                     <Link to={`/blog/${id}`}>{title}</Link>
                   </h2>
-                  <p className="mb-4 text-gray-500 dark:text-gray-400">
+                  <p className="mb-4 text-gray-500 text-ellipsis line-clamp-3 dark:text-gray-400">
                     {text}
                   </p>
                   <Link
