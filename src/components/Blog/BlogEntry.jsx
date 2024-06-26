@@ -78,7 +78,7 @@ const BlogEntry = ({
                       <time pubdate title={blogEntry?.created_at}>
                         {new Date(blogEntry?.created_at).toLocaleDateString(
                           "es-MX",
-                          blogEntry?.dateOptions,
+                          dateOptions,
                         )}
                       </time>
                     </p>
