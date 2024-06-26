@@ -61,7 +61,7 @@ const BlogEntry = ({ title, subtitle, author, text, created_at, photo, photoDesc
       >
         <div className="px-4 mx-auto max-w-screen-xl">
           <h2 className="mb-8 text-2xl font-bold text-gray-900 dark:text-white">
-            Related articles
+            Artículos relacionados
           </h2>
           <div className="grid gap-12 justify-items-center sm:grid-cols-2 lg:grid-cols-4">
             <article className="max-w-xs">
