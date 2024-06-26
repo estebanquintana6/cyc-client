@@ -13,7 +13,7 @@ const Nav = () => {
         >
           <img src="/img/logo.png" className="w-12" alt="logo" />
           <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase mr-auto">
-            Connieyepiz
+            Connie Yepiz
           </span>
         </Link>        
       </div>
