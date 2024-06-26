@@ -17,6 +17,7 @@ const ProjectInfo = ({
 
   useEffect(() => {
     const fetchRecommendations = async () => {
+      if (!id) return;
       try {
         const { status, data } = await fetch(
           `${process.env.REACT_APP_SERVER_URL}/projects/recommendations/${id}`,
@@ -24,7 +25,6 @@ const ProjectInfo = ({
         );
 
         if (status === 200) {
-          console.log(data);
           setRecommendations(data);
         }
       } catch (error) {
