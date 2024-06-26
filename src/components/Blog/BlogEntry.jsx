@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { fetch } from "../../utils/authFetch";
 
@@ -9,16 +10,23 @@ const dateOptions = {
 };
 
 const BlogEntry = ({
-  _id: id,
-  title,
-  subtitle,
-  author,
-  text,
-  created_at,
-  photo,
-  photoDescription,
+  id
 }) => {
+  const navigate = useNavigate();
   const [recommendations, setRecommendations] = useState([]);
+  const [blogEntry, setBlogEntry] = useState({});
+
+  const fetchBlogEntry = async () => {
+    try {
+      const { status, data } = await fetch(`${process.env.REACT_APP_SERVER_URL}/blogs/get/${id}`, "GET");
+
+      if (status === 200) setBlogEntry(data);
+
+    } catch (err) {
+        console.log(err);
+      navigate("/");
+    }
+  }
 
   useEffect(() => {
     const fetchRecommendations = async () => {
@@ -37,8 +45,14 @@ const BlogEntry = ({
         console.error("Error al recuperar recomendaciones");
       }
     };
+    fetchBlogEntry();
     fetchRecommendations();
   }, [id]);
+
+  const handleRecommendationClick = (id) => {
+    window.scrollTo(0, 0);
+    navigate(`/blog/${id}`);
+  }
 
   return (
     <>
@@ -59,13 +73,13 @@ const BlogEntry = ({
                       rel="author"
                       className="text-xl font-bold text-gray-900 dark:text-white"
                     >
-                      {author}
+                      {blogEntry?.author}
                     </a>
                     <p className="text-base text-gray-500 dark:text-gray-400">
-                      <time pubdate title={created_at}>
-                        {new Date(created_at).toLocaleDateString(
+                      <time pubdate title={blogEntry?.created_at}>
+                        {new Date(blogEntry?.created_at).toLocaleDateString(
                           "es-MX",
-                          dateOptions,
+                          blogEntry?.dateOptions,
                         )}
                       </time>
                     </p>
@@ -75,16 +89,16 @@ const BlogEntry = ({
             </header>
             <figure>
               <img
-                src={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
+                src={`${process.env.REACT_APP_SERVER_URL}/${blogEntry?.photo}`}
                 alt=""
               />
-              <figcaption>{photoDescription || ""}</figcaption>
+              <figcaption>{blogEntry?.photoDescription || ""}</figcaption>
             </figure>
-            <h1>{title}</h1>
+            <h1>{blogEntry?.title}</h1>
             <blockquote>
-              <p>{subtitle}</p>
+              <p>{blogEntry?.subtitle}</p>
             </blockquote>
-            <p className="whitespace-pre text-wrap">{text}</p>
+            <p className="whitespace-pre text-wrap">{blogEntry?.text}</p>
           </article>
         </div>
       </main>
@@ -100,25 +114,26 @@ const BlogEntry = ({
             <div className="grid gap-12 justify-items-center sm:grid-cols-2 lg:grid-cols-4">
               {recommendations.map(({ _id: id, title, text, photo }) => (
                 <article className="max-w-xs">
-                  <Link to={`/blog/${id}`}>
+                  <a href="#" onClick={() => handleRecommendationClick(id)}>
                     <img
                       src={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
                       className="mb-5 rounded-lg"
                       alt="Header"
                     />
-                  </Link>
+                  </a>
                   <h2 className="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-                    <Link to={`/blog/${id}`}>{title}</Link>
+                    <a href="#" onClick={() => handleRecommendationClick(id)}>{title}</a>
                   </h2>
                   <p className="mb-4 text-gray-500 text-ellipsis line-clamp-3 dark:text-gray-400">
                     {text}
                   </p>
-                  <Link
-                    to={`/blog/${id}`}
+                  <a
+                    href="#"
+                    onClick={() => handleRecommendationClick(id)}
                     className="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline"
                   >
                     Leer
-                  </Link>
+                  </a>
                 </article>
               ))}
             </div>
