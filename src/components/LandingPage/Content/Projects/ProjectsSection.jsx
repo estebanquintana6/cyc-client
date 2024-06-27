@@ -16,7 +16,7 @@ const ProjectSection = ({ projects }) => {
     >
       <div
         ref={ref}
-        className={`mx-auto my-auto transition-opacity ease-in duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}
+        className={`mx-auto my-auto transition-opacity ease-in duration-400 ${isVisible ? "opacity-100" : "opacity-0"}`}
       >
         <div className="flex flex-col mb-6">
           <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-end md:mb-6">

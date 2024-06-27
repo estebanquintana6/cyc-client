@@ -43,7 +43,7 @@ const BlogSection = () => {
       className="flex w-full min-h-screen pb-16 xs:p-4 sm:p-8 md:p-16 lg:p-32"
       id="blog"
     >
-      <div ref={ref} className={`mx-auto my-auto transition-opacity ease-in duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+      <div ref={ref} className={`mx-auto my-auto transition-opacity ease-in duration-400 ${isVisible ? "opacity-100" : "opacity-0"}`}>
         <div className="flex flex-col mb-6">
           <h1 className="mb-4 text-4xl font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">
             Sumérgete en nuestro mundo de contenidos a través de nuestro Blog
