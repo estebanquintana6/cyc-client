@@ -10,7 +10,7 @@ const ProjectInfo = ({
   name,
   description,
   designer,
-  photos: photosMetadata,
+  photos,
   surface,
 }) => {
   const [recommendations, setRecommendations] = useState([]);
@@ -33,10 +33,6 @@ const ProjectInfo = ({
     };
     fetchRecommendations();
   }, [id]);
-
-  const photos = photosMetadata?.map(
-    ({ url }) => `${process.env.REACT_APP_SERVER_URL}/${url}`,
-  );
 
   return (
     <section
@@ -62,7 +58,7 @@ const ProjectInfo = ({
                   </span>
                 </span>
               </h2>
-              <p className="text-base text-gray-700 md:text-lg">
+              <p className="text-base text-gray-700 whitespace-pre text-wrap md:text-lg">
                 {description}
               </p>
             </div>

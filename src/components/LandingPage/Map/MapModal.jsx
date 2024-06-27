@@ -13,7 +13,7 @@ const MapModal = ({ onClose, pin }) => {
 
   const onSlideChange = (slide) => {
     setCurrentDescription(photos[slide]?.description || "");
-  }
+  };
 
   return (
     <Modal
@@ -26,26 +26,27 @@ const MapModal = ({ onClose, pin }) => {
       <Modal.Header>{title}</Modal.Header>
       <Modal.Body>
         <div className="flex flex-col h-[32rem] grid-cols-2 gap-4">
-              <Carousel
-                className="mx-auto"
-                onSlideChange={(slide) => onSlideChange(slide)}
-              >
-                {photos.map(({ url, description }) => (
-                  <div className="flex flex-col">
-                    <img
-                      src={`${process.env.REACT_APP_SERVER_URL}/${url}`}
-                      alt={description}
-                    />
-                  </div>
-                ))}
-              </Carousel>
-
-              <blockquote className="p-4 my-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800 text-center">
-                <p className="text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white">
-                  {currentDescription}
-                </p>
-              </blockquote>
-          </div>
+          <Carousel
+            className="mx-auto"
+            onSlideChange={(slide) => onSlideChange(slide)}
+          >
+            {photos.map(({ url, description }) => (
+              <div className="flex flex-col">
+                <img
+                  src={`${process.env.REACT_APP_SERVER_URL}/${url}`}
+                  alt={description}
+                />
+              </div>
+            ))}
+          </Carousel>
+          {currentDescription.length > 0 && (
+            <blockquote className="p-4 my-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800 text-center">
+              <p className="text-xl italic font-medium leading-relaxed text-gray-900 dark:text-white">
+                {currentDescription}
+              </p>
+            </blockquote>
+          )}
+        </div>
       </Modal.Body>
     </Modal>
   );
