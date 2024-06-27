@@ -15,9 +15,6 @@ const About = () => {
         className={`gap-16 items-center py-8 px-4 mx-auto lg:grid lg:grid-cols-2 lg:py-16 lg:px-6 transition-opacity ease-in duration-400 ${isVisible ? "opacity-100" : "opacity-0"}`}
       >
         <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-          <h1 className="mb-6 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-            ¿Qué es CYC?
-          </h1>
           <p className="mb-4">
             En
             <span className="relative inline-block px-2 mx-2">
