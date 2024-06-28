@@ -105,12 +105,11 @@ const EditBlogEntryModal = ({ id, onClose, fetchBlogEntries }) => {
     }
   };
 
-  const { title, subtitle, author, text, photo } = blogEntry;
+  const { title, author, text, photo } = blogEntry;
 
   const btnEnabled =
     !isLoading &&
     title.length > 0 &&
-    subtitle.length > 0 &&
     author.length > 0 &&
     text.length > 0;
 

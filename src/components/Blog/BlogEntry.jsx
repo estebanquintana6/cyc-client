@@ -94,7 +94,7 @@ const BlogEntry = ({ id }) => {
               <figcaption>{blogEntry?.photoDescription || ""}</figcaption>
             </figure>
             <h1>{blogEntry?.title}</h1>
-            {blogEntry?.subtitle.length > 0 && (
+            {blogEntry?.subtitle?.length > 0 && (
               <blockquote>
                 <p>{blogEntry?.subtitle}</p>
               </blockquote>
