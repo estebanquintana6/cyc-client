@@ -80,7 +80,7 @@ const EducationalMap = () => {
         {isLoaded && (
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
-            zoom={isMobile ? 2 : 3}
+            zoom={2}
             center={center}
             options={{
               mapTypeId: "satellite",

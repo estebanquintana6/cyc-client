@@ -8,24 +8,24 @@ const dateOptions = {
   day: "numeric",
 };
 
-const BlogEntry = ({
-  id
-}) => {
+const BlogEntry = ({ id }) => {
   const navigate = useNavigate();
   const [recommendations, setRecommendations] = useState([]);
   const [blogEntry, setBlogEntry] = useState({});
 
   const fetchBlogEntry = async () => {
     try {
-      const { status, data } = await fetch(`${process.env.REACT_APP_SERVER_URL}/blogs/get/${id}`, "GET");
+      const { status, data } = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/blogs/get/${id}`,
+        "GET",
+      );
 
       if (status === 200) setBlogEntry(data);
-
     } catch (err) {
-        console.log(err);
+      console.log(err);
       navigate("/");
     }
-  }
+  };
 
   useEffect(() => {
     const fetchRecommendations = async () => {
@@ -51,7 +51,7 @@ const BlogEntry = ({
   const handleRecommendationClick = (id) => {
     window.scrollTo(0, 0);
     navigate(`/blog/${id}`);
-  }
+  };
 
   return (
     <>
@@ -94,9 +94,11 @@ const BlogEntry = ({
               <figcaption>{blogEntry?.photoDescription || ""}</figcaption>
             </figure>
             <h1>{blogEntry?.title}</h1>
-            <blockquote>
-              <p>{blogEntry?.subtitle}</p>
-            </blockquote>
+            {blogEntry?.subtitle.length > 0 && (
+              <blockquote>
+                <p>{blogEntry?.subtitle}</p>
+              </blockquote>
+            )}
             <p className="whitespace-pre text-wrap">{blogEntry?.text}</p>
           </article>
         </div>
@@ -121,7 +123,9 @@ const BlogEntry = ({
                     />
                   </a>
                   <h2 className="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-                    <a href="#" onClick={() => handleRecommendationClick(id)}>{title}</a>
+                    <a href="#" onClick={() => handleRecommendationClick(id)}>
+                      {title}
+                    </a>
                   </h2>
                   <p className="mb-4 text-gray-500 text-ellipsis line-clamp-3 dark:text-gray-400">
                     {text}

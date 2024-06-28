@@ -52,7 +52,6 @@ const ProjectInfo = ({
               <h2 className="max-w-lg mb-6 font-sans text-xl font-bold tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
                 Diseñador de proyecto:
                 <span className="relative px-1 ml-2">
-                  <div className="absolute inset-x-0 bottom-0 h-3 transform -skew-x-12 bg-secondary" />
                   <span className="relative inline-block text-2xl text-primary-100 sm:text-3xl">
                     {designer}
                   </span>
