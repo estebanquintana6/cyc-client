@@ -6,6 +6,7 @@ import path from "path";
 
 
 import dotenv from "dotenv";
+import { rateLimit } from 'express-rate-limit'
 
 import { initDb } from "./utils/seed";
 
@@ -24,6 +25,18 @@ const { MONGO_URI } = process.env;
 const app = express();
 // we need to make ${MONGO_DB} change when running tests
 const mongoUri = MONGO_URI;
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+	// store: ... , // Redis, Memcached, etc. See below.
+})
+
+// Apply the rate limiting middleware to all requests.
+app.use(limiter);
+
 // Cors
 app.use(cors());
 app.options('*', cors());
