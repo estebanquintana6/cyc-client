@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Button } from "flowbite-react";
+
+import { fetch } from "../../../utils/authFetch";
+import successModal from "../../../utils/sucessModal";
+import { errorModal } from "../../../utils/errorModal";
 
 const ContactSection = () => {
+  const [email, setEmail] = useState();
+  const [isValid, setIsValid] = useState(true);
+
+  useEffect(() => {
+    setIsValid(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email))
+  }, [email]);
+
+  const handleSubmit = async () => {
+    try {
+      const { status } = await fetch(`${process.env.REACT_APP_SERVER_URL}/contact/create`, "POST", { email });
+
+      if (status === 200) {
+        successModal("Tu contacto ha sido guardado, te contactaremos pronto.")
+      }
+    } catch (err) {
+      errorModal("Hubo un error al guardar tus datos, por favor inténtalo más tarde.")
+    }
+  }
+
   return (
     <div className="relative bg-primary-100" id="contacto">
       <div className="absolute inset-x-0 bottom-0">
@@ -23,14 +47,17 @@ const ContactSection = () => {
               placeholder="Email"
               required
               type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="flex-grow w-full h-12 px-4 mb-3 text-white placeholder-white transition duration-200 border-2 border-transparent rounded appearance-none md:mr-2 md:mb-0 bg-primary-50 focus:border-primary-150 focus:outline-none focus:shadow-outline"
             />
-            <a
-              href="/"
+            <Button
+              disabled={!isValid}
+              onClick={handleSubmit}
               className="inline-flex items-center justify-center w-full h-12 px-6 font-semibold tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-primary-150 hover:bg-secondary focus:shadow-outline focus:outline-none"
             >
               Contáctanos
-            </a>
+            </Button>
           </form>
           <p className="max-w-md mb-10 text-xs tracking-wide text-white sm:text-sm sm:mx-auto md:mb-16">
             También puedes mandarnos un correo a <a href="mailto:info@connieyepiz.com">asistente.ceo@connieyepiz.com</a> o llamarnos al +52 (442) 223 1511
