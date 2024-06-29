@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
+import { Label, TextInput } from "flowbite-react";
 
 import { useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../contexts/AuthContext";
 
+import { fetch } from "../../utils/authFetch";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [errorMessage, setErrorMessage] = useState();
   const { token, setToken } = useAuthContext();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,27 +23,29 @@ const Login = () => {
 
   const onFormSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const { data, status } = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/users/login`, "POST", {
+          username,
+          password,
+      });
 
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    };
+      if (status === 200) {
+        const { encoded } = data;
+        setToken(encoded);
+        navigate("/admin");
+      }
+    } catch(err) {
+      const { response: { data: { error } } } = err;
+      setErrorMessage(error);
+    }
 
-    const request = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/users/login`,
-      requestOptions,
-    );
-
-    const { success, encoded } = await request.json();
+    /*const { success, encoded } = await request.json();
 
     if (success && encoded) {
         setToken(encoded);
         navigate("/admin");
-    }
+    }*/
   };
 
   const onUsernameChange = (event) => {
@@ -67,38 +73,39 @@ const Login = () => {
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={onFormSubmit}>
               <div>
-                <label
+                <Label
                   htmlFor="username"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Usuario
-                </label>
-                <input
+                </Label>
+                <TextInput
                   type="text"
                   name="username"
                   id="username"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="usuario"
                   value={username}
+                  color={errorMessage && "failure"}
                   onChange={onUsernameChange}
                   required
                 />
               </div>
               <div>
-                <label
+                <Label
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Contraseña
-                </label>
-                <input
+                </Label>
+                <TextInput
                   type="password"
                   name="password"
                   id="password"
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   value={password}
                   onChange={onPasswordChange}
+                  color={errorMessage && "failure"}
+                  helperText={errorMessage}
                   required
                 />
               </div>

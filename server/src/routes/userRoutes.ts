@@ -138,7 +138,7 @@ router.post("/login", async (req: Request, res: Response) => {
     );
     return;
   } else {
-    res.status(400).json({ error: "Datos incorrectos" });
+    res.status(400).json({ error: "Los datos de acceso son incorrectos" });
     return;
   }
 });
