@@ -28,11 +28,13 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
   const [surface, setSurface] = useState();
   const [description, setDescription] = useState();
   const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const filesRef = useRef();
 
   const onSave = async () => {
     let formData = new FormData();
+    setIsLoading(true);
 
     let files = filesRef.current?.files;
 
@@ -63,6 +65,8 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
     } catch (err) {
       const { response: { data: { error } } } = err;
       errorModal(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -113,6 +117,7 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
   };
 
   const isValidForm = 
+    !isLoading &&
     name?.length > 0 &&
     description?.length > 0 &&
     designer?.length > 0 &&
