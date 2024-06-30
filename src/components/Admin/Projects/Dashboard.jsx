@@ -47,6 +47,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchProjects();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -68,7 +69,7 @@ const Dashboard = () => {
       setFilteredProjects(filter);
       setDisplayFiltered(true);
     }
-  }, [filter]);
+  }, [filter, projects]);
 
   return (
     <section

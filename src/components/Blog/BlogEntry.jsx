@@ -46,6 +46,7 @@ const BlogEntry = ({ id }) => {
     };
     fetchBlogEntry();
     fetchRecommendations();
+    // eslint-disable-next-line
   }, [id]);
 
   const handleRecommendationClick = (id) => {
@@ -67,13 +68,9 @@ const BlogEntry = ({ id }) => {
                     alt="Jese Leos"
                   />
                   <div>
-                    <a
-                      href="#"
-                      rel="author"
-                      className="text-xl font-bold text-gray-900 dark:text-white"
-                    >
+                    <p className="text-xl font-bold text-gray-900 dark:text-white">
                       {blogEntry?.author}
-                    </a>
+                    </p>
                     <p className="text-base text-gray-500 dark:text-gray-400">
                       <time pubdate title={blogEntry?.created_at}>
                         {new Date(blogEntry?.created_at).toLocaleDateString(
@@ -115,28 +112,27 @@ const BlogEntry = ({ id }) => {
             <div className="grid gap-12 justify-items-center sm:grid-cols-2 lg:grid-cols-4">
               {recommendations.map(({ _id: id, title, text, photo }) => (
                 <article className="max-w-xs">
-                  <a href="#" onClick={() => handleRecommendationClick(id)}>
-                    <img
-                      src={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
-                      className="mb-5 rounded-lg"
-                      alt="Header"
-                    />
-                  </a>
-                  <h2 className="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-                    <a href="#" onClick={() => handleRecommendationClick(id)}>
-                      {title}
-                    </a>
+                  <img
+                    onClick={() => handleRecommendationClick(id)}
+                    src={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
+                    className="mb-5 rounded-lg cursor-pointer"
+                    alt="Header"
+                  />
+                  <h2
+                    onClick={() => handleRecommendationClick(id)}
+                    className="mb-2 text-xl font-bold cursor-pointer leading-tight text-gray-900 dark:text-white"
+                  >
+                    {title}
                   </h2>
                   <p className="mb-4 text-gray-500 text-ellipsis line-clamp-3 dark:text-gray-400">
                     {text}
                   </p>
-                  <a
-                    href="#"
+                  <p
                     onClick={() => handleRecommendationClick(id)}
-                    className="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline"
+                    className="inline-flex items-center font-medium cursor-pointer underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline"
                   >
                     Leer
-                  </a>
+                  </p>
                 </article>
               ))}
             </div>

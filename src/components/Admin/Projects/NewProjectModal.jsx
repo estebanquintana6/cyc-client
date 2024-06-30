@@ -206,7 +206,7 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
             <div className="mb-2 block">
               {images.map(({ url, originalName, description }, index) => (
                 <div className="grid grid-cols-2 gap-4 my-5 ">
-                  <img alt="preview image" className="w-full" src={url} />
+                  <img alt="preview to upload" className="w-full" src={url} />
                   <div className="w-full flex flex-col">
                     <Textarea
                       id={`desc-${originalName}`}

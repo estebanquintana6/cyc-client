@@ -33,7 +33,7 @@ const ProjectSection = ({ projects }) => {
           {projects.map(({ name, photos, _id}) => {
             const photoUrl = `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`;  
             return (
-                <ProjectItem title={name} imgUrl={photoUrl} href={`/proyectos/${_id}`} />
+                <ProjectItem key={_id} title={name} imgUrl={photoUrl} href={`/proyectos/${_id}`} />
               );
           })}
         </div>

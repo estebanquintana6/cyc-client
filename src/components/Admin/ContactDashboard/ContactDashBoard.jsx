@@ -84,6 +84,7 @@ const ContactDashboard = () => {
 
   useEffect(() => {
     fetchContacts();
+    // eslint-disable-next-line
   }, []);
 
   const handleDelete = (id) => {

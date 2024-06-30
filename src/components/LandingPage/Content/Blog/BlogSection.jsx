@@ -74,6 +74,7 @@ const BlogSection = () => {
         <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
           {blogEntries.map(({ _id, title, created_at, text, photo}) => (
             <BlogItem
+              key={_id}
               title={title}
               date={new Date(created_at).toLocaleDateString('es-MX', dateOptions)}
               description={text}

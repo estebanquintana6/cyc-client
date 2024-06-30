@@ -29,7 +29,7 @@ const Gallery = () => {
       const filter = projects.filter(({ projectType }) => projectType === "Desarrollo");
       setFilteredProjects(filter);
     }
-  }, [filter]);
+  }, [filter, projects]);
 
 
   useEffect(() => {
@@ -42,6 +42,7 @@ const Gallery = () => {
       }
     }
     fetchProjects();
+    // eslint-disable-next-line
   }, []);
 
   return (

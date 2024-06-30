@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import BlogEntry from "../components/Blog/BlogEntry";
 import ContactSection from "../components/LandingPage/Contact/ContactSection";

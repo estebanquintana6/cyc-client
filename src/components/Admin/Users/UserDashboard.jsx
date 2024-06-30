@@ -23,6 +23,7 @@ const UserDashboard = () => {
 
   useEffect(() => {
     fetchUsers();
+    // eslint-disable-next-line
   }, []);
 
   const dateOptions = {

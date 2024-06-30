@@ -27,7 +27,7 @@ const LandingPage = () => {
       }
     }
     fetchProjects();
-  }, []);
+  }, [token]);
 
   return (
     <>

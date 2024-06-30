@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
   GoogleMap,
-  LoadScript,
   useLoadScript,
   MarkerF as Marker,
 } from "@react-google-maps/api";
-
-import useIsMobile from "../../../hooks/useIsMobile";
+import Swal from "sweetalert2";
+import withReactContent from 'sweetalert2-react-content'
 
 import MapModal from "./MapModal";
 
@@ -22,11 +21,10 @@ const center = {
   lng: 0,
 };
 
+const PinModal = withReactContent(Swal)
+
 const EducationalMap = () => {
-  const isMobile = useIsMobile();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [pins, setPins] = useState([]);
-  const [selectedPin, setSelectedPin] = useState();
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -58,12 +56,7 @@ const EducationalMap = () => {
   }, []);
 
   const onPinClick = (pin) => {
-    setIsModalOpen(true);
-    setSelectedPin(pin);
-  };
-
-  const onModalClose = () => {
-    setIsModalOpen(false);
+    PinModal.fire(<MapModal pin={pin} />);
   };
 
   return (
@@ -91,6 +84,7 @@ const EducationalMap = () => {
             {pins.map((pin) => {
               return (
                 <Marker
+                  key={pin._id}
                   onClick={() => onPinClick(pin)}
                   position={{
                     lat: parseFloat(pin.lat),
@@ -103,7 +97,6 @@ const EducationalMap = () => {
           </GoogleMap>
         )}
       </div>
-      {isModalOpen && <MapModal onClose={onModalClose} pin={selectedPin} />}
     </section>
   );
 };

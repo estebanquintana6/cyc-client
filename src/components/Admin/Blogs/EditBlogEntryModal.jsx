@@ -49,7 +49,7 @@ const EditBlogEntryModal = ({ id, onClose, fetchBlogEntries }) => {
       }
     };
     fetchBlogEntry();
-  }, []);
+  }, [id]);
 
   const onImageChange = () => {
     let file = photoRef.current?.files[0];

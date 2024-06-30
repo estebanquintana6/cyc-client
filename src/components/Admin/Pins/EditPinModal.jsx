@@ -240,7 +240,7 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
                   return (
                     <div className="grid grid-cols-2 gap-4 my-5 ">
                       <img
-                        alt="preview image"
+                        alt="preview to upload"
                         className="w-full"
                         src={`${process.env.REACT_APP_SERVER_URL}/${url}`}
                       />
@@ -283,7 +283,7 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
                 })}
               {newImages.map(({ url, originalName, description }, index) => (
                 <div className="grid grid-cols-2 gap-4 my-5 ">
-                  <img alt="preview image" className="w-full" src={url} />
+                  <img alt="preview of new file" className="w-full" src={url} />
                   <div className="w-full flex flex-col">
                     <Textarea
                       id={`desc-${originalName}`}
