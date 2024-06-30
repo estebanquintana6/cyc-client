@@ -9,8 +9,8 @@ import {
 } from "flowbite-react";
 import {
   GoogleMap,
-  LoadScript,
   MarkerF as Marker,
+  StandaloneSearchBox,
   useLoadScript,
 } from "@react-google-maps/api";
 
@@ -31,14 +31,16 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     loading: "async",
+    libraries: ["places"],
   });
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [images, setImages] = useState([]);
+  const [searchBox, setSearchBox] = useState(null);
 
   const filesRef = useRef();
 
@@ -133,6 +135,20 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
     setLng(e.latLng.lng());
   };
 
+  const handlePlacesChange = () => {
+    const {
+      geometry: { location },
+    } = searchBox.getPlaces()[0];
+    const lat = location.lat();
+    const lng = location.lng();
+    setLat(lat);
+    setLng(lng);
+  };
+
+  const onPlacesLoad = (ref) => {
+    setSearchBox(ref);
+  };
+
   const isBtnEnabled = !isLoading && title.length > 0;
 
   return (
@@ -219,17 +235,28 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
             </div>
 
             {isLoaded && (
-              <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                zoom={3}
-                center={{ lat, lng }}
-                onClick={onMapClick}
-                options={{
-                  mapTypeId: "satellite",
-                }}
-              >
-                <Marker position={{ lat, lng }} />
-              </GoogleMap>
+              <>
+                <div className="block">
+                  <Label htmlFor="file" value="Ubicación" />
+                </div>
+                <StandaloneSearchBox
+                  onLoad={onPlacesLoad}
+                  onPlacesChanged={handlePlacesChange}
+                >
+                  <TextInput placeholder="Customized your placeholder" />
+                </StandaloneSearchBox>
+                <GoogleMap
+                  mapContainerStyle={mapContainerStyle}
+                  zoom={3}
+                  center={{ lat, lng }}
+                  onClick={onMapClick}
+                  options={{
+                    mapTypeId: "satellite",
+                  }}
+                >
+                  <Marker position={{ lat, lng }} />
+                </GoogleMap>
+              </>
             )}
           </form>
         </Modal.Body>
