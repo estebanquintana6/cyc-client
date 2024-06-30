@@ -44,7 +44,7 @@ router.get("/", async (req: Request, res: Response) => {
 // Fetch 4 recent entries
 router.get("/recent", async (req: Request, res: Response) => {
   try {
-    const blogEntries = await Blog.find({}).sort({ created_at: -1 }).limit(4);
+    const blogEntries = await Blog.find({}).sort({ created_at: -1 }).limit(3);
     res.json(blogEntries);
   } catch (error) {
     res.status(500).json({
