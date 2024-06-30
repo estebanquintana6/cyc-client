@@ -21,7 +21,7 @@ const PhotoCarousel = ({ photos = [] }) => {
           <img
             src={`${process.env.REACT_APP_SERVER_URL}/${url}`}
             alt="proyecto recomendado"
-            className="h-full object-contain"
+            className="h-full object-cover"
             key={url}
           />
         ))}
