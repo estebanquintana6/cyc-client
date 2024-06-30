@@ -36,6 +36,7 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   const [link, setLink] = useState("");
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
@@ -101,6 +102,7 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
       }
 
       formData.append("title", title);
+      formData.append("text", text);
       formData.append("link", link);
       formData.append("lat", lat);
       formData.append("lng", lng);
@@ -171,6 +173,18 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
                 required
               />
             </div>
+            <div className="mb-2 block">
+              <Label htmlFor="text" value="Descripción" />
+            </div>
+            <Textarea
+              rows={4}
+              value={text}
+              onChange={(e) =>
+                setText(e.target.value)
+              }
+              placeholder="Descripción del pin"
+              required={false}
+            />
             <div className="mb-2 block">
               <Label htmlFor="username" value="Link" />
             </div>
@@ -243,7 +257,7 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
                   onLoad={onPlacesLoad}
                   onPlacesChanged={handlePlacesChange}
                 >
-                  <TextInput placeholder="Customized your placeholder" />
+                  <TextInput placeholder="Busca un lugar" />
                 </StandaloneSearchBox>
                 <GoogleMap
                   mapContainerStyle={mapContainerStyle}

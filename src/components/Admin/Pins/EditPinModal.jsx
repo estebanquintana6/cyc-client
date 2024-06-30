@@ -10,7 +10,7 @@ import {
 import {
   GoogleMap,
   MarkerF as Marker,
-  useLoadScript
+  useLoadScript,
 } from "@react-google-maps/api";
 
 import authFetch, { fetch } from "../../../utils/authFetch";
@@ -24,7 +24,7 @@ const mapContainerStyle = {
   height: "300px",
 };
 
-const libraries = ["places"]; 
+const libraries = ["places"];
 
 const EditPinModal = ({ id, onClose, fetchPins }) => {
   const { token } = useAuthContext();
@@ -40,7 +40,7 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
   const [toDeletePhotos, setToDeletePhotos] = useState([]);
   const [newImages, setNewImages] = useState([]);
 
-  const { title, link, lat = 0, lng = 0, photos } = pin;
+  const { title, text = "", link, lat = 0, lng = 0, photos } = pin;
 
   useEffect(() => {
     const fetchPin = async () => {
@@ -73,6 +73,7 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
 
       formData.append("id", id);
       formData.append("title", title);
+      formData.append("text", text);
       formData.append("link", link);
       formData.append("lat", lat);
       formData.append("lng", lng);
@@ -197,7 +198,19 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
               />
             </div>
             <div className="mb-2 block">
-              <Label htmlFor="username" value="Link" />
+              <Label htmlFor="text" value="Descripción" />
+            </div>
+            <Textarea
+              rows={4}
+              value={text}
+              onChange={(event) =>
+                setPin({ ...pin, text: event.target.value })
+              }
+              placeholder="Descripción del pin"
+              required={false}
+            />
+            <div className="mb-2 block">
+              <Label htmlFor="link" value="Link" />
             </div>
             <TextInput
               className="w-full"

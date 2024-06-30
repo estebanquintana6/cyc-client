@@ -56,7 +56,7 @@ router.post(
   upload.array("photos", 5),
   isAuthMiddleware,
   async (req: Request, res: Response) => {
-    const { title, lat, lng, link, imageDescriptions } = req.body;
+    const { title, text, lat, lng, link, imageDescriptions } = req.body;
 
     const files = req.files as Express.Multer.File[];
 
@@ -80,6 +80,7 @@ router.post(
 
     const newPin = new Pin({
       title,
+      text,
       lat,
       lng,
       link,
@@ -107,7 +108,7 @@ router.delete(
 
       const { photos } = pin;
 
-      photos.map(({url}) => {
+      photos.map(({ url }) => {
         unlink(`./public/${url}`, () => {
           console.log("DELETED FILE: ", url);
         });
@@ -136,7 +137,17 @@ router.post(
   upload.array("newPhotos", 5),
   isAuthMiddleware,
   async (req: Request, res: Response) => {
-    const { id, title, lat, lng, link, imageDescriptions, toDeletePhotos, photos } = req.body;
+    const {
+      id,
+      title,
+      text,
+      lat,
+      lng,
+      link,
+      imageDescriptions,
+      toDeletePhotos,
+      photos,
+    } = req.body;
     try {
       const files = req.files as Express.Multer.File[];
 
@@ -145,9 +156,9 @@ router.post(
         originalName: string;
         description: string;
       }> = JSON.parse(imageDescriptions);
-  
+
       const newPhotos: Array<{ url: string; description: string }> = [];
-  
+
       for (const file of files) {
         const imageDesc = parsedDescriptions.find(
           ({ originalName }) => originalName === file.originalname,
@@ -160,10 +171,11 @@ router.post(
 
       const pin = await Pin.findByIdAndUpdate(id, {
         title,
+        text,
         lat,
         lng,
         link,
-        photos: [...JSON.parse(photos), ...newPhotos]
+        photos: [...JSON.parse(photos), ...newPhotos],
       });
 
       const photosToDelete = JSON.parse(toDeletePhotos);
@@ -196,7 +208,6 @@ router.post(
           return;
         }
       }
-
 
       if (!pin) {
         res.status(404).json({

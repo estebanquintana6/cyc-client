@@ -7,6 +7,10 @@ const PinSchema = new Schema({
     type: String,
     required: true,
   },
+  text: {
+    type: String,
+    required: false,
+  },
   lat: {
     type: Number,
     required: true,
