@@ -21,7 +21,7 @@ const PinSchema = new Schema({
   },
   link: {
     type: String,
-    required: true
+    required: false
   },
   photos: [
     new Schema({
