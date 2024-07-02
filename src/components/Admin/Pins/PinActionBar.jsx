@@ -27,7 +27,9 @@ const PinActionBar = ({ fetchPins }) => {
             />
           </svg>
         </button>
-        <NewPinModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} fetchPins={fetchPins}/>
+        { isModalOpen && (
+          <NewPinModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} fetchPins={fetchPins}/>
+        )}
       </div>
     </Fragment>
   );

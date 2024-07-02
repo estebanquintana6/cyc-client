@@ -25,7 +25,7 @@ const mapContainerStyle = {
   height: "300px",
 };
 
-const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
+const NewPinModal = ({ onClose, fetchPins }) => {
   const { token } = useAuthContext();
 
   const { isLoaded } = useLoadScript({
@@ -155,7 +155,7 @@ const NewPinModal = ({ isOpen, onClose, fetchPins }) => {
 
   return (
     <>
-      <Modal show={isOpen} onClose={onClose}>
+      <Modal show={true} onClose={onClose}>
         <Modal.Header>Crear nuevo pin</Modal.Header>
         <Modal.Body>
           <form className="flex flex-col gap-4" onSubmit={onSave}>
