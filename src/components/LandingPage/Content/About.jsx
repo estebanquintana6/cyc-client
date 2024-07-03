@@ -16,16 +16,9 @@ const About = () => {
       >
         <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
           <p className="mb-4">
-            En
-            <span className="relative inline-block px-2 mx-2">
-              <span className="absolute inset-0 transform -skew-x-12 bg-primary-100" />
-              <span className="relative text-white">
-                Connie Yepiz Consulting
-              </span>
-            </span>
-            nos dedicamos a transformar entornos y crear comunidades que
-            impulsan al ser humano a prosperar y a tener una mejor calidad de
-            vida.
+            En Connie Yepiz Consulting nos dedicamos a transformar entornos y 
+            crear comunidades que impulsan al ser humano a prosperar y a tener 
+            una mejor calidad de vida.
           </p>
           <p className="mb-4">
             Nuestro enfoque combina una amplia gama de herramientas, que van
