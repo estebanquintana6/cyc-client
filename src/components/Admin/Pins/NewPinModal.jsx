@@ -45,13 +45,18 @@ const NewPinModal = ({ onClose, fetchPins }) => {
 
   const filesRef = useRef();
 
-  const onImagesChange = () => {
+  const onImagesChange = (event) => {
     let files = filesRef.current?.files;
 
     if (files) {
       const urls = [];
 
       for (const f of files) {
+        if (f.size > 5000000) {
+          alert('Hay una foto que pesa más de 5mb, por favor comprimela antes de subirla');
+          event.target.value = ''; // clear the file input
+          continue;
+        }
         urls.push({
           url: URL.createObjectURL(f),
           originalName: f.name,
@@ -204,6 +209,7 @@ const NewPinModal = ({ onClose, fetchPins }) => {
               multiple={true}
               id="photos"
               ref={filesRef}
+              accept="image/*"
               onChange={onImagesChange}
               helperText="Puedes seleccionar varias fotos a la vez"
             />

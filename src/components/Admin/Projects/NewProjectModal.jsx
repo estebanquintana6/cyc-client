@@ -17,7 +17,7 @@ import { errorModal } from "../../../utils/errorModal";
 import { useAuthContext } from "../../contexts/AuthContext";
 import useClickOutside from "../../../hooks/useClickOutside";
 
-const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
+const NewProjectModal = ({ onClose, fetchProjects }) => {
   const { token } = useAuthContext();
   const modalRef = useRef();
   useClickOutside(modalRef, onClose);
@@ -70,13 +70,18 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
     }
   };
 
-  const onImagesChange = () => {
+  const onImagesChange = (event) => {
     let files = filesRef.current?.files;
 
     if (files) {
       const urls = [];
 
       for (const f of files) {
+        if (f.size > 5000000) {
+          alert('Hay una foto que pesa más de 5mb, por favor comprimela antes de subirla');
+          event.target.value = ''; // clear the file input
+          continue;
+        }
         urls.push({
           url: URL.createObjectURL(f),
           originalName: f.name,
@@ -127,7 +132,7 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
 
   return (
     <>
-      <Modal show={isOpen} onClose={onClose} ref={modalRef}>
+      <Modal show={true} onClose={onClose} ref={modalRef}>
         <Modal.Header>Crear nuevo proyecto</Modal.Header>
         <Modal.Body>
           <form className="flex flex-col gap-4">
@@ -202,6 +207,7 @@ const NewProjectModal = ({ isOpen, onClose, fetchProjects }) => {
             </div>
             <FileInput
               multiple={true}
+              accept="image/*"
               id="photos"
               ref={filesRef}
               onChange={onImagesChange}

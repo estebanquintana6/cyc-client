@@ -108,13 +108,18 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
     }
   };
 
-  const onImagesChange = () => {
+  const onImagesChange = (event) => {
     let files = filesRef.current?.files;
 
     if (files) {
       const urls = [];
 
       for (const f of files) {
+        if (f.size > 5000000) {
+          alert('Hay una foto que pesa más de 5mb, por favor comprimela antes de subirla');
+          event.target.value = ''; // clear the file input
+          continue;
+        }
         urls.push({
           url: URL.createObjectURL(f),
           originalName: f.name,
@@ -226,6 +231,7 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
             </div>
             <FileInput
               multiple={true}
+              accept="image/*"
               id="photos"
               ref={filesRef}
               onChange={onImagesChange}

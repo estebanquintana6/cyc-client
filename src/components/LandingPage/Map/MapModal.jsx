@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Carousel } from "flowbite-react";
 
 import useClickOutside from "../../../hooks/useClickOutside";

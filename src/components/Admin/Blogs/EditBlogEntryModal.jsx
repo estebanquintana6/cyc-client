@@ -123,6 +123,7 @@ const EditBlogEntryModal = ({ id, onClose, fetchBlogEntries }) => {
               <Label htmlFor="file" value="Foto" />
               <FileInput
                 multiple={false}
+                accept="image/*"
                 id="photo"
                 ref={photoRef}
                 onChange={onImageChange}
