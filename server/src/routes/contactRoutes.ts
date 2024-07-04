@@ -24,9 +24,9 @@ router.get("/", isAuthMiddleware, async (req: Request, res: Response) => {
  * @access Public
  */
 router.post("/create", async (req: Request, res: Response) => {
-  const { email } = req.body;
+  const { email, message } = req.body;
   try {
-    const contact = new Contact({ email });
+    const contact = new Contact({ email, message });
     const saved = contact.save();
 
     if (saved) {
@@ -64,11 +64,11 @@ router.post(
   "/attend",
   isAuthMiddleware,
   async (req: Request, res: Response) => {
-    const { id } = req.body;
+    const { id, attended } = req.body;
 
     try {
       await Contact.findByIdAndUpdate(id, {
-        attended: true,
+        attended: !attended,
       });
       res.status(200).send({ message: "Contacto actualizado" });
     } catch {

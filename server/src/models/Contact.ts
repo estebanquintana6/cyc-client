@@ -7,6 +7,10 @@ const ContactSchema = new Schema({
     type: String,
     required: true,
   },
+  message: {
+    type: String,
+    required: false,
+  },
   attended: {
     type: Boolean,
     default: false,

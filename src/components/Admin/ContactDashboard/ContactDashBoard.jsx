@@ -5,8 +5,8 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import authFetch from "../../../utils/authFetch";
 import { errorModal } from "../../../utils/errorModal";
 
-const CheckMark = () => (
-  <div>
+const CheckMark = ({ onClick }) => (
+  <div className="cursor-pointer" onClick={onClick}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -108,12 +108,12 @@ const ContactDashboard = () => {
     });
   };
 
-  const handleMarkAsDone = async (id) => {
+  const handleMarkAsDone = async (id, attended) => {
     await authFetch(
       `${process.env.REACT_APP_SERVER_URL}/contact/attend`,
       "POST",
       token,
-      { id },
+      { id, attended },
     );
     await fetchContacts();
   };
@@ -131,24 +131,32 @@ const ContactDashboard = () => {
         </p>
 
         <div id="tasks" className="my-5">
-          {contacts.map(({ _id, email, attended }) => (
-            <div
-              id={_id}
-              className="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent"
-            >
-              <div className="inline-flex items-center space-x-2">
-                {attended ? (
-                  <CheckMark />
-                ) : (
-                  <ToDoIcon onClick={() => handleMarkAsDone(_id)} />
-                )}
-                <div
-                  className={`text-slate-500 ${attended ? "line-through" : ""}`}
-                >
-                  {email}
+          {contacts.map(({ _id, email, attended, message }) => (
+            <div className="border-b border-slate-200 border-l-4 border-l-transparent">
+              <div
+                id={_id}
+                className="flex justify-between items-center py-3 px-2"
+              >
+                <div className="inline-flex items-center space-x-2">
+                  {attended ? (
+                    <CheckMark onClick={() => handleMarkAsDone(_id, attended)} />
+                  ) : (
+                    <ToDoIcon onClick={() => handleMarkAsDone(_id, attended)} />
+                  )}
+                  <div
+                    className={`text-slate-500 ${attended ? "line-through" : ""}`}
+                  >
+                    {email}
+                  </div>
                 </div>
+                <TrashIcon onClick={() => handleDelete(_id)} />
+                <div></div>
               </div>
-              <TrashIcon onClick={() => handleDelete(_id)} />
+              <div
+                className={`text-slate-500 pl-16 ${attended ? "line-through" : ""}`}
+              >
+                {message}
+              </div>
             </div>
           ))}
         </div>

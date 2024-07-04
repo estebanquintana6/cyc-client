@@ -7,6 +7,7 @@ import { errorModal } from "../../../utils/errorModal";
 
 const ContactSection = () => {
   const [email, setEmail] = useState();
+  const [message, setMessage] = useState();
   const [isValid, setIsValid] = useState(true);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const ContactSection = () => {
 
   const handleSubmit = async () => {
     try {
-      const { status } = await fetch(`${process.env.REACT_APP_SERVER_URL}/contact/create`, "POST", { email });
+      const { status } = await fetch(`${process.env.REACT_APP_SERVER_URL}/contact/create`, "POST", { email, message });
 
       if (status === 200) {
         successModal("Tu contacto ha sido guardado, te contactaremos pronto.")
@@ -42,15 +43,27 @@ const ContactSection = () => {
           <h2 className="mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none">
             Comunícate con nosotros
           </h2>
-          <form className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
-            <input
-              placeholder="Email"
-              required
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-grow w-full h-12 px-4 mb-3 text-white placeholder-white transition duration-200 border-2 border-transparent rounded appearance-none md:mr-2 md:mb-0 bg-primary-50 focus:border-primary-150 focus:outline-none focus:shadow-outline"
-            />
+          <form className="flex flex-col items-center w-full mb-4 md:px-16">
+            <div className="mb-2 w-full">
+              <textarea
+                placeholder="Mensaje"
+                required
+                rows={4}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="flex-grow w-full px-4 mb-3 text-white placeholder-white transition duration-200 border-2 border-transparent rounded appearance-none md:mr-2 md:mb-0 bg-primary-50 focus:border-primary-150 focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div className="w-full mb-2">
+              <input
+                placeholder="Tu email"
+                required
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-grow w-full h-12 px-4 mb-3 text-white placeholder-white transition duration-200 border-2 border-transparent rounded appearance-none md:mr-2 md:mb-0 bg-primary-50 focus:border-primary-150 focus:outline-none focus:shadow-outline"
+              />
+            </div>
             <Button
               disabled={!isValid}
               onClick={handleSubmit}
