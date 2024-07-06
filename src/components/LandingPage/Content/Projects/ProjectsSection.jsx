@@ -5,6 +5,8 @@ import { useIsVisible } from "../../../../hooks/useIsVisible";
 
 import ProjectItem from "./ProjectItem";
 
+import { getFirstPhoto } from "../../../../utils/photosUtils";
+
 const ProjectSection = ({ projects }) => {
   const ref = useRef();
   const isVisible = useIsVisible(ref);
@@ -31,7 +33,9 @@ const ProjectSection = ({ projects }) => {
         </div>
         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
           {projects.map(({ name, photos, _id}) => {
-            const photoUrl = `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`;  
+            const firstPhoto = getFirstPhoto(photos);
+            const photoUrl = `${process.env.REACT_APP_SERVER_URL}/${firstPhoto?.url}`;
+            
             return (
                 <ProjectItem key={_id} title={name} imgUrl={photoUrl} href={`/proyectos/${_id}`} />
               );
