@@ -63,7 +63,11 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
         await fetchProjects();
       }
     } catch (err) {
-      const { response: { data: { error } } } = err;
+      const {
+        response: {
+          data: { error },
+        },
+      } = err;
       errorModal(error);
     } finally {
       setIsLoading(false);
@@ -78,8 +82,10 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
 
       for (const f of files) {
         if (f.size > 5000000) {
-          alert('Hay una foto que pesa más de 5mb, por favor comprimela antes de subirla');
-          event.target.value = ''; // clear the file input
+          alert(
+            "Hay una foto que pesa más de 5mb, por favor comprimela antes de subirla",
+          );
+          event.target.value = ""; // clear the file input
           continue;
         }
         urls.push({
@@ -103,6 +109,16 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
     setImages(newArr);
   };
 
+  const onPositionChangeHandle = (index, position) => {
+    let newArr = [...images];
+    newArr[index] = {
+      ...newArr[index],
+      position,
+    };
+
+    setImages(newArr);
+  };
+
   const handleImageDelete = (originalName) => {
     let files = filesRef.current?.files;
     const dt = new DataTransfer();
@@ -121,7 +137,7 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
     setImages(newArr);
   };
 
-  const isValidForm = 
+  const isValidForm =
     !isLoading &&
     name?.length > 0 &&
     description?.length > 0 &&
@@ -215,48 +231,67 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
             />
 
             <div className="mb-2 block">
-              {images.map(({ url, originalName, description }, index) => (
-                <div className="grid grid-cols-2 gap-4 my-5 ">
-                  <img alt="preview to upload" className="w-full" src={url} />
-                  <div className="w-full flex flex-col">
-                    <Textarea
-                      id={`desc-${originalName}`}
-                      rows={4}
-                      value={description}
-                      onChange={(e) =>
-                        onImageDescriptionHandle(index, e.target.value)
-                      }
-                      placeholder="Descripción de foto"
-                      required={false}
-                    />
-                    <button
-                      type="button"
-                      className="w-9 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-2.5 mt-2 mx-auto"
-                      onClick={() => handleImageDelete(originalName)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="w-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                        />
-                      </svg>
-                    </button>
+              {images.map(
+                ({ url, originalName, description, position }, index) => (
+                  <div className="grid grid-cols-2 gap-4 my-5 ">
+                    <img alt="preview to upload" className="w-full" src={url} />
+                    <div className="w-full flex flex-col">
+                      <Textarea
+                        id={`desc-${originalName}`}
+                        rows={4}
+                        value={description}
+                        onChange={(e) =>
+                          onImageDescriptionHandle(index, e.target.value)
+                        }
+                        placeholder="Descripción de foto"
+                        required={false}
+                      />
+                      <div className="flex flex-row mt-2">
+                        <Select
+                          id="img-position"
+                          value={position}
+                          className="mr-auto"
+                          onChange={(e) =>
+                            onPositionChangeHandle(index, e.target.value)
+                          }
+                        >
+                          <option></option>
+                          {images.map((_, i) => (
+                            <option>{i + 1}</option>
+                          ))}
+                        </Select>
+                        <button
+                          type="button"
+                          className="w-9 ml-auto focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 py-2.5 mt-2"
+                          onClick={() => handleImageDelete(originalName)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="w-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ),
+              )}
             </div>
           </form>
         </Modal.Body>
         <Modal.Footer className="justify-end">
-          <Button disabled={!isValidForm} onClick={() => onSave()}>Guardar</Button>
+          <Button disabled={!isValidForm} onClick={() => onSave()}>
+            Guardar
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

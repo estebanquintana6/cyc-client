@@ -11,6 +11,7 @@ import authFetch from "../../../utils/authFetch";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 import { errorModal } from "../../../utils/errorModal";
+import { getFirstPhoto } from "../../../utils/photosUtils";
 
 import FILTERS from "../../ProjectPage/Gallery/filters";
 
@@ -86,9 +87,10 @@ const Dashboard = () => {
       <div className="grid grid-cols-2 xs:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-4">
         {(displayFiltered ? filteredProjects : projects).map(
           ({ _id, name, photos, favorite }) => {
+            const firstPhoto = getFirstPhoto(photos);            
             const imgUrl =
-              photos.length > 0
-                ? `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`
+              firstPhoto
+                ? `${process.env.REACT_APP_SERVER_URL}/${firstPhoto?.url}`
                 : "";
             return (
               <GalleryItem

@@ -33,6 +33,10 @@ const PinSchema = new Schema({
         type: String,
         required: false,
       },
+      position: {
+        type: Number,
+        required: false,
+      },
     }),
   ],
   created_at: {
