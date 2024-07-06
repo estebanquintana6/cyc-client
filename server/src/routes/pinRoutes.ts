@@ -64,9 +64,10 @@ router.post(
       url: string;
       originalName: string;
       description: string;
+      position?: number;
     }> = JSON.parse(imageDescriptions);
 
-    const photos: Array<{ url: string; description: string }> = [];
+    const photos: Array<{ url: string; description: string; position: number | undefined }> = [];
 
     for (const file of files) {
       const imageDesc = parsedDescriptions.find(
@@ -75,6 +76,7 @@ router.post(
       photos.push({
         url: file.filename,
         description: imageDesc?.description || "",
+        position: imageDesc.position,
       });
     }
 
@@ -155,9 +157,10 @@ router.post(
         url: string;
         originalName: string;
         description: string;
+        position?: number;
       }> = JSON.parse(imageDescriptions);
 
-      const newPhotos: Array<{ url: string; description: string }> = [];
+      const newPhotos: Array<{ url: string; description: string, position: number | undefined }> = [];
 
       for (const file of files) {
         const imageDesc = parsedDescriptions.find(
@@ -166,6 +169,7 @@ router.post(
         newPhotos.push({
           url: file.filename,
           description: imageDesc?.description || "",
+          position: imageDesc.position,
         });
       }
 
