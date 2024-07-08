@@ -25,8 +25,7 @@ interface IBlogEntry {
   subtitle: string;
   text: string;
   author: string;
-  photoDescription: string;
-  photo?: string;
+  photos?: any[];
 }
 
 // Fetch all blog entries
@@ -103,7 +102,11 @@ router.post(
       position?: number;
     }> = JSON.parse(imageDescriptions);
 
-    const photos: Array<{ url: string; description: string, position: number | undefined }> = [];
+    const photos: Array<{
+      url: string;
+      description: string;
+      position: number | undefined;
+    }> = [];
 
     for (const file of files) {
       const imageDesc = parsedDescriptions.find(
@@ -138,27 +141,84 @@ router.post(
 // update a blog entry
 router.post(
   "/update",
-  upload.single("newPhoto"),
+  upload.array("newPhotos", 5),
   isAuthMiddleware,
   async (req: Request, res: Response) => {
-    const { id, title, subtitle, text, author, photoDescription } = req.body;
-
-    const file = req.file;
-
-    const blogEntry = await Blog.findById(id);
-
-    let blogEntryProps: IBlogEntry = {
+    const {
+      id,
       title,
       subtitle,
       text,
       author,
-      photoDescription,
-    };
+      toDeletePhotos,
+      imageDescriptions,
+      photos,
+    } = req.body;
+
+    const files = req.files as Express.Multer.File[];
+
+    const parsedDescriptions: Array<{
+      url: string;
+      originalName: string;
+      description: string;
+      position?: number;
+    }> = JSON.parse(imageDescriptions);
+
+    const newPhotos: Array<{ url: string; description: string; position: number | undefined; }> = [];
+
+    for (const file of files) {
+      const imageDesc = parsedDescriptions.find(
+        ({ originalName }) => originalName === file.originalname,
+      );
+      newPhotos.push({
+        url: file.filename,
+        description: imageDesc?.description || "",
+        position: imageDesc?.position,
+      });
+    }
 
     try {
-      const updatedBlog = await blogEntry.update(blogEntryProps);
-      if (updatedBlog) { 
-        res.status(200).json(updatedBlog);
+      const blogEntry = await Blog.findByIdAndUpdate(id, {
+        title,
+        subtitle,
+        text,
+        author,
+        photos: [...JSON.parse(photos), ...newPhotos],
+      });
+
+      const photosToDelete = JSON.parse(toDeletePhotos);
+
+      if (photosToDelete.length > 0) {
+        const { photos } = blogEntry;
+  
+        const filesUrlsToDelete = photos.filter(({ _id }) =>
+          photosToDelete.includes(_id.toString()),
+        );
+  
+        filesUrlsToDelete.map(({ url }) => {
+          unlink(`./public/${url}`, () => {
+            console.log("DELETED FILE: ", url);
+          });
+        });
+  
+        const newPhotos = photos.filter(
+          ({ _id }) => !toDeletePhotos.includes(_id.toString()),
+        );
+  
+        try {
+          await blogEntry.updateOne({
+            photos: newPhotos,
+          });
+        } catch {
+          res.status(500).json({
+            error: "Error al actualizar las fotos",
+          });
+          return;
+        }
+      }  
+
+      if (blogEntry) {
+        res.status(200).json(blogEntry);
         return;
       } else {
         res.status(400).json({
@@ -180,6 +240,14 @@ router.delete(
   async (req: Request, res: Response) => {
     try {
       const blogEntry = await Blog.findByIdAndDelete(req.params.id);
+
+      const { photos } = blogEntry;
+
+      photos.map(({ url }) => {
+        unlink(`./public/${url}`, () => {
+          console.log("DELETED FILE: ", url);
+        });
+      });
 
       if (!blogEntry) {
         res.status(404).json({
