@@ -19,14 +19,22 @@ const BlogSchema = new Schema({
     type: String,
     required: true,
   },
-  photo: {
-    type: String,
-    required: false,
-  },
-  photoDescription: {
-    type: String,
-    required: false,
-  },
+  photos: [
+    new Schema({
+      url: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: false,
+      },
+      position: {
+        type: Number,
+        required: false,
+      },
+    }),
+  ],
   created_at: {
     type: Date,
     default: Date.now

@@ -1,19 +1,23 @@
 import { Link } from "react-router-dom";
 import { Card } from "flowbite-react";
 
+import { getFirstPhoto } from "../../../utils/photosUtils";
+
 const dateOptions = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 };
 
-const GalleryItem = ({ _id, title, created_at, text, photo }) => {
+const GalleryItem = ({ _id, title, created_at, text, photos }) => {
+  const { url = "" } = getFirstPhoto(photos);
+
   return (
     <Link to={`/blog/${_id}`}>
       <Card
         className="max-w-sm"
         imgAlt="Meaningful alt text for an image that is not purely decorative"
-        imgSrc={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
+        imgSrc={`${process.env.REACT_APP_SERVER_URL}/${url}`}
       >
         <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {title}

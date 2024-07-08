@@ -27,7 +27,9 @@ const BlogActionBar = ({ fetchBlogEntries }) => {
             />
           </svg>
         </button>
-        <NewBlogEntryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} fetchBlogEntries={fetchBlogEntries}/>
+        {isModalOpen && (
+          <NewBlogEntryModal onClose={() => setIsModalOpen(false)} fetchBlogEntries={fetchBlogEntries}/>
+        )}
       </div>
     </Fragment>
   );

@@ -5,13 +5,11 @@ const PhotoCarousel = ({ photos = [] }) => {
   const [currentDescription, setCurrentDescription] = useState("");
 
   const onSlideChange = (slide) => {
-    console.log(slide);
-    console.log(photos[slide]);
     setCurrentDescription(photos[slide]?.description || "");
   };
 
   return (
-    <div className="h-56 xs:h-96 sm:h-full w-full">
+    <div className="h-56 xs:h-96 w-full">
       <Carousel
         onSlideChange={(slide) => onSlideChange(slide)}
         slide={false}

@@ -87,20 +87,41 @@ router.get("/get/:id", async (req: Request, res: Response) => {
 // Create a new blog entry
 router.post(
   "/create",
-  upload.single("photo"),
+  upload.array("photos", 5),
   isAuthMiddleware,
   async (req: Request, res: Response) => {
-    const { title, subtitle, text, author, photoDescription } = req.body;
+    const { title, subtitle, text, author, imageDescriptions } = req.body;
 
-    const file = req.file;
+    console.log(imageDescriptions);
+
+    const files = req.files as Express.Multer.File[];
+
+    const parsedDescriptions: Array<{
+      url: string;
+      originalName: string;
+      description: string;
+      position?: number;
+    }> = JSON.parse(imageDescriptions);
+
+    const photos: Array<{ url: string; description: string, position: number | undefined }> = [];
+
+    for (const file of files) {
+      const imageDesc = parsedDescriptions.find(
+        ({ originalName }) => originalName === file.originalname,
+      );
+      photos.push({
+        url: file.filename,
+        description: imageDesc?.description || "",
+        position: imageDesc.position,
+      });
+    }
 
     const newBlogEntry = new Blog({
       title,
       subtitle,
       text,
       author,
-      photo: file.filename,
-      photoDescription,
+      photos,
     });
 
     try {
@@ -134,19 +155,6 @@ router.post(
       photoDescription,
     };
 
-    if (file) {
-      const { photo } = blogEntry;
-
-      blogEntryProps = {
-        ...blogEntryProps,
-        photo: file.filename,
-      };
-
-      unlink(`./public/${photo}`, () => {
-        console.log("DELETED FILE: ", photo);
-      });
-    }
-
     try {
       const updatedBlog = await blogEntry.update(blogEntryProps);
       if (updatedBlog) { 
@@ -172,12 +180,6 @@ router.delete(
   async (req: Request, res: Response) => {
     try {
       const blogEntry = await Blog.findByIdAndDelete(req.params.id);
-
-      const { photo } = blogEntry;
-
-      unlink(`./public/${photo}`, () => {
-        console.log("DELETED FILE: ", photo);
-      });
 
       if (!blogEntry) {
         res.status(404).json({

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { fetch } from "../../utils/authFetch";
+import PhotoCarousel from "./PhotoCarousel";
 
 const dateOptions = {
   year: "numeric",
@@ -83,19 +84,15 @@ const BlogEntry = ({ id }) => {
                 </div>
               </address>
             </header>
-            <figure>
-              <img
-                src={`${process.env.REACT_APP_SERVER_URL}/${blogEntry?.photo}`}
-                alt=""
-              />
-              <figcaption>{blogEntry?.photoDescription || ""}</figcaption>
-            </figure>
             <h1>{blogEntry?.title}</h1>
             {blogEntry?.subtitle?.length > 0 && (
               <blockquote>
                 <p>{blogEntry?.subtitle}</p>
               </blockquote>
             )}
+            <div className="flex flex-col">
+              <PhotoCarousel photos={blogEntry.photos} />
+            </div>
             <p className="whitespace-pre text-wrap">{blogEntry?.text}</p>
           </article>
         </div>
