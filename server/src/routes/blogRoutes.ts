@@ -115,7 +115,7 @@ router.post(
       photos.push({
         url: file.filename,
         description: imageDesc?.description || "",
-        position: imageDesc.position,
+        position: imageDesc?.position,
       });
     }
 
