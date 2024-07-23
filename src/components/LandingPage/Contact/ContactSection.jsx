@@ -73,7 +73,7 @@ const ContactSection = () => {
             </Button>
           </form>
           <p className="max-w-md mb-10 text-xs tracking-wide text-white sm:text-sm sm:mx-auto md:mb-16">
-            También puedes mandarnos un correo a <a href="mailto:info@connieyepiz.com">asistente.ceo@connieyepiz.com</a> o llamarnos al +52 (442) 223 1511
+            También puedes mandarnos un correo a <a href="mailto:info@connieyepiz.com">asistente.ceo@connieyepiz.com</a> o llamarnos al <br/> +52 (442) 223 1511
           </p>
         </div>
       </div>
