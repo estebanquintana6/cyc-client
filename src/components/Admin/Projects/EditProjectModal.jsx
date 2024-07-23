@@ -51,7 +51,8 @@ const EditProjectModal = ({ id, onClose, fetchProjects }) => {
     formData.append("imageDescriptions", JSON.stringify(newImages));
     formData.append("id", id);
     formData.append("name", project.name);
-    formData.append("designer", project.designer);
+    formData.append("lotes", project.lotes);
+    formData.append("greenAreas", project.greenAreas);
     formData.append("projectType", project.projectType);
     formData.append("description", project.description);
     formData.append("surface", project.surface);
@@ -207,18 +208,18 @@ const EditProjectModal = ({ id, onClose, fetchProjects }) => {
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="designer" value="Diseñador" />
+              <Label htmlFor="lotes" value="Lotes" />
             </div>
             <TextInput
               className="w-full"
-              id="designer"
+              id="lotes"
               type="text"
-              placeholder="Diseñador"
-              value={project?.designer}
+              placeholder="Número de lotes"
+              value={project?.lotes}
               onChange={(e) => {
                 setProject({
                   ...project,
-                  designer: e.target.value,
+                  lotes: e.target.value,
                 });
               }}
               required
@@ -257,6 +258,23 @@ const EditProjectModal = ({ id, onClose, fetchProjects }) => {
               setProject({
                 ...project,
                 surface: e.target.value,
+              });
+            }}
+            required
+          />
+          <div className="mb-2 block">
+            <Label htmlFor="greenAreas" value="Áreas verdes" />
+          </div>
+          <TextInput
+            className="w-full"
+            id="greenAreas"
+            type="text"
+            placeholder="Texto"
+            value={project?.greenAreas}
+            onChange={(e) => {
+              setProject({
+                ...project,
+                greenAreas: e.target.value,
               });
             }}
             required

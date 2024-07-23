@@ -12,9 +12,15 @@ const ProjectSchema = new Schema({
     enum: ["Ciudad", "Desarrollo"],
     required: true,
   },
-  designer: {
+  lotes: {
     type: String,
-    required: true,
+    required: false,
+    default: '',
+  },
+  greenAreas: {
+    type: String,
+    required: false,
+    default: '',
   },
   surface: {
     type: String,

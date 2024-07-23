@@ -89,12 +89,13 @@ router.post(
       name,
       imageDescriptions,
       description,
-      designer,
+      lotes,
+      greenAreas,
       projectType,
       surface,
     } = req.body;
 
-    if (!name || !description || !designer || !projectType || !surface) {
+    if (!name || !description || !projectType || !surface) {
       res.status(400).json({
         error: "Datos faltantes o incompletos",
       });
@@ -125,7 +126,8 @@ router.post(
 
     const newProject = new Project({
       name,
-      designer,
+      lotes,
+      greenAreas,
       projectType,
       surface,
       description,
@@ -262,7 +264,8 @@ router.post(
       id,
       name,
       description,
-      designer,
+      lotes,
+      greenAreas,
       projectType,
       surface,
       toDeletePhotos,
@@ -296,7 +299,8 @@ router.post(
       const project = await Project.findByIdAndUpdate(id, {
         name,
         description,
-        designer,
+        lotes,
+        greenAreas,
         projectType,
         surface,
         photos: [...JSON.parse(photos), ...newPhotos],

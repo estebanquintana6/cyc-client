@@ -9,9 +9,10 @@ const ProjectInfo = ({
   id,
   name,
   description,
-  designer,
   photos,
+  lotes,
   surface,
+  greenAreas,
 }) => {
   const [recommendations, setRecommendations] = useState([]);
 
@@ -49,31 +50,45 @@ const ProjectInfo = ({
         <div className="mt-8 mx-auto grid gap-6 row-gap-8 lg:grid-cols-2 sm:max-w-xl md:max-w-full lg:max-w-screen-xl">
           <div className="flex flex-col justify-center xs:order-2 sm:order-1">
             <div className="max-w-xl mb-6">
-              <h2 className="max-w-lg mb-6 font-sans text-xl font-bold tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
-                Diseñador de proyecto:
-                <span className="relative px-1 ml-2">
-                  <span className="relative inline-block text-2xl text-primary-100 sm:text-3xl">
-                    {designer}
-                  </span>
-                </span>
-              </h2>
               <p className="text-base text-gray-700 whitespace-pre text-wrap md:text-lg">
                 {description}
               </p>
             </div>
             <div className="grid gap-5 row-gap-8 sm:grid-cols-2">
-              <div className="bg-white border-l-4 shadow-sm border-primary-100">
-                <div className="h-full p-5 border border-l-0 rounded-r">
-                  <h6 className="mb-2 font-semibold leading-5">Superficie</h6>
-                  <p className="text-sm text-gray-900">{surface}</p>
+              {surface?.length > 0 && (
+                <div className="bg-white border-l-4 shadow-sm border-primary-100">
+                  <div className="h-full p-5 border border-l-0 rounded-r">
+                    <h6 className="mb-2 font-semibold leading-5">Superficie</h6>
+                    <p className="text-sm text-gray-900">{surface}</p>
+                  </div>
                 </div>
-              </div>
+              )}
+              {lotes?.length > 0 && (
+                <div className="bg-white border-l-4 shadow-sm border-primary-100">
+                  <div className="h-full p-5 border border-l-0 rounded-r">
+                    <h6 className="mb-2 font-semibold leading-5">
+                      Número de lotes
+                    </h6>
+                    <p className="text-sm text-gray-900">{lotes}</p>
+                  </div>
+                </div>
+              )}
+              {greenAreas?.length > 0 && (
+                <div className="bg-white border-l-4 shadow-sm border-primary-100">
+                  <div className="h-full p-5 border border-l-0 rounded-r">
+                    <h6 className="mb-2 font-semibold leading-5">
+                      Áreas verdes
+                    </h6>
+                    <p className="text-sm text-gray-900">{greenAreas}</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="xs:order-1 sm:order-2">
             <PhotoCarousel photos={photos} />
           </div>
-          <div className="order-3 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-2 mx-auto">
+          <div className="order-3 md:mt-12 xs:col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-2 mx-auto">
             <h2 className="max-w-lg mb-6 font-sans text-xl font-bold tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
               Otros proyectos que podrían interesarte
             </h2>

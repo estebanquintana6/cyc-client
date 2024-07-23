@@ -23,7 +23,8 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
   useClickOutside(modalRef, onClose);
 
   const [name, setName] = useState();
-  const [designer, setDesigner] = useState();
+  const [lotes, setLotes] = useState();
+  const [greenAreas, setGreenAreas] = useState();
   const [projectType, setProjectType] = useState();
   const [surface, setSurface] = useState();
   const [description, setDescription] = useState();
@@ -43,7 +44,8 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
     }
 
     formData.append("name", name);
-    formData.append("designer", designer);
+    formData.append("lotes", lotes);
+    formData.append("greenAreas", greenAreas);
     formData.append("projectType", projectType);
     formData.append("description", description);
     formData.append("surface", surface);
@@ -141,7 +143,6 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
     !isLoading &&
     name?.length > 0 &&
     description?.length > 0 &&
-    designer?.length > 0 &&
     surface?.length > 0 &&
     projectType?.length > 0 &&
     images?.length > 0;
@@ -168,15 +169,15 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
             </div>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="designer" value="Diseñador" />
+                <Label htmlFor="lotes" value="Lotes" />
               </div>
               <TextInput
                 className="w-full"
-                id="designer"
+                id="lotes"
                 type="text"
-                placeholder="Diseñador"
-                value={designer}
-                onChange={(e) => setDesigner(e.target.value)}
+                placeholder="Número de lotes"
+                value={lotes}
+                onChange={(e) => setLotes(e.target.value)}
                 required
               />
             </div>
@@ -205,6 +206,18 @@ const NewProjectModal = ({ onClose, fetchProjects }) => {
               placeholder="Ejemplo: 2 hectáreas"
               value={surface}
               onChange={(e) => setSurface(e.target.value)}
+              required
+            />
+            <div className="mb-2 block">
+              <Label htmlFor="greenAreas" value="Áreas verdes" />
+            </div>
+            <TextInput
+              className="w-full"
+              id="greenAreas"
+              type="text"
+              placeholder="Texto"
+              value={greenAreas}
+              onChange={(e) => setGreenAreas(e.target.value)}
               required
             />
             <div className="block">
