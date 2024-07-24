@@ -11,8 +11,6 @@ const MapModal = ({ onClose, pin: { title, text, photos, link } }) => {
     document.querySelector("button.swal2-confirm").innerHTML = "Cerrar";
   }, []);
 
-  console.log(photos);
-
   return (
     <div className="sm:p-4">
       <h1 className="mb-4 text-4xl font-extrabold text-center leading-none tracking-tight text-gray-900">
