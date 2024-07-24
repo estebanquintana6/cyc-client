@@ -89,8 +89,8 @@ router.post(
       name,
       imageDescriptions,
       description,
-      lotes,
-      greenAreas,
+      lotes = '',
+      greenAreas = '',
       projectType,
       surface,
     } = req.body;
