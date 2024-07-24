@@ -62,7 +62,7 @@ const EducationalMap = () => {
   return (
     <section
       className="flex w-full min-h-screen xs:py-14 lg:py-32"
-      id="proyectos"
+      id="international"
     >
       <div className="mx-auto">
         <div className="flex flex-col mb-6 xs:px-4 sm:px-8 md:px-16 lg:px-32">

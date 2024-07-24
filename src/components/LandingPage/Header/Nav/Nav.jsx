@@ -8,17 +8,7 @@ const Nav = () => {
     <div className="fixed w-full px-4 py-6 mx-auto lg:py-8 md:px-24 lg:px-8 z-10 bg-white">
       <div className="relative flex items-center justify-between lg:justify-center lg:space-x-16">
         <ul className="flex items-center hidden space-x-8 lg:flex">
-          <li>
-            <a
-              href="#about"
-              aria-label="Acerca de nosotros"
-              title="Acerca de nosotros"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              Acerca de nosotros
-            </a>
-          </li>
-          <li>
+        <li>
             <a
               href="#proyectos"
               aria-label="Product pricing"
@@ -26,6 +16,16 @@ const Nav = () => {
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               Nuestros proyectos
+            </a>
+          </li>
+          <li>
+            <a
+              href="#international"
+              aria-label="Experiencia internacional"
+              title="Experiencia internacional"
+              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              Experiencia internacional
             </a>
           </li>
         </ul>
@@ -121,12 +121,12 @@ const Nav = () => {
                   <ul className="space-y-4">
                     <li>
                       <a
-                        href="#about"
-                        aria-label="Our product"
-                        title="Our product"
+                        href="#international"
+                        aria-label="Experiencia internacional"
+                        title="Experiencia internacional"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Acerca de nosotros
+                        Experiencia internacional
                       </a>
                     </li>
                     <li>
