@@ -11,9 +11,11 @@ const ProjectPage = () => {
   const { id } = useParams();
 
   const [project, setProject] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchProject = async () => {
     try {
+      setIsLoading(true);
       const { status, data } = await fetch(`${process.env.REACT_APP_SERVER_URL}/projects/get/${id}`, "GET");
 
       if (status === 200) setProject(data);
@@ -21,6 +23,8 @@ const ProjectPage = () => {
     } catch (err) {
       const { response: { data: { error } } } = err;
       errorModal(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -33,7 +37,8 @@ const ProjectPage = () => {
   return (
     <>
       <Nav />
-      <ProjectInfo {...project} id={id}/>
+      { !isLoading && (<ProjectInfo {...project} id={id}/>)
+      }
     </>
   );
 };
