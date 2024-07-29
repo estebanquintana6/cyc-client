@@ -89,8 +89,8 @@ const Dashboard = () => {
           token,
           { positions }
         );  
-      } catch {
-        errorModal("Error al actualizar los proyectos");
+      } catch(e) {
+        console.error("Error", e);
       }
     }
   };
