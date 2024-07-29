@@ -265,7 +265,8 @@ router.post(
       positions.map(async ({ id, position }) => {
         await Project.findByIdAndUpdate(id, { position });
       });
-      res.status(200);
+      res.status(200).send("Posiciones actualizadas");
+      return;
     } catch {
       res.status(500).send({
         error: "Error al actualizar el orden de los proyectos",
