@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { GridContainer, BlockWrapper } from "@tackboon/react-grid-rearrange";
+
 import { useGalleryFilter } from "../../contexts/GalleryFilterContext";
 
 import GalleryItem from "./GalleryItem";
@@ -72,6 +74,24 @@ const Dashboard = () => {
     }
   }, [filter, projects]);
 
+  const callback = async ({ isDragging, order, lastMovingIndex, isClick }) => {
+    if (lastMovingIndex !== -1 && !isDragging && !isClick) {
+      const positions = order.map((o, index) => ({
+        id: projects[o]._id,
+        name: projects[o].name,
+        position: index
+      }));
+
+      const { status } = await authFetch(
+        `${process.env.REACT_APP_SERVER_URL}/projects/update-position`,
+        "POST",
+        token,
+        { positions }
+      );
+
+    }
+  };
+
   return (
     <section
       className="flex flex-col min-h-screen px-4 py-16 sm:max-w-full"
@@ -84,29 +104,40 @@ const Dashboard = () => {
       </div>
       <ActionBar fetchProjects={fetchProjects} />
       <GalleryFilters />
-      <div className="grid grid-cols-2 xs:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:mt-4">
-        {(displayFiltered ? filteredProjects : projects).map(
-          ({ _id, name, photos, favorite }) => {
-            const firstPhoto = getFirstPhoto(photos);            
-            const imgUrl =
-              firstPhoto
-                ? `${process.env.REACT_APP_SERVER_URL}/${firstPhoto?.url}`
-                : "";
+      <GridContainer
+        totalItem={projects.length}
+        itemHeight={200}
+        itemWidth={300}
+        colGap={30}
+        rowGap={30}
+        cb={callback}
+        disableInitialAnimation={true}
+      >
+        {(styles) =>
+          styles.map((style, i) => {
+            const { _id, name, photos, favorite } = projects[i];
+            const firstPhoto = getFirstPhoto(photos);
+            const imgUrl = firstPhoto
+              ? `${process.env.REACT_APP_SERVER_URL}/${firstPhoto?.url}`
+              : "";
+
             return (
-              <GalleryItem
-                id={_id}
-                title={name}
-                imgUrl={imgUrl}
-                key={_id}
-                fetchProjects={fetchProjects}
-                setSelectedProjectId={setSelectedProjectId}
-                favorite={favorite}
-                openEditModal={() => setEditModalOpen(true)}
-              />
+              <BlockWrapper index={i} animationStyle={style} key={_id}>
+                <GalleryItem
+                  id={_id}
+                  title={name}
+                  imgUrl={imgUrl}
+                  key={_id}
+                  fetchProjects={fetchProjects}
+                  setSelectedProjectId={setSelectedProjectId}
+                  favorite={favorite}
+                  openEditModal={() => setEditModalOpen(true)}
+                />
+              </BlockWrapper>
             );
-          },
-        )}
-      </div>
+          })
+        }
+      </GridContainer>
       {editModalOpen && (
         <EditProjectModal
           isOpen={editModalOpen}
