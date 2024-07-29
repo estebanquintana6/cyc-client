@@ -47,7 +47,7 @@ router.get("/fetch", async (req: Request, res: Response) => {
  */
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const projects = await Project.find({}).sort('position');
+    const projects = await Project.find({}).sort("position");
     res.status(200).send(projects);
   } catch {
     res.status(500).json({
@@ -261,9 +261,16 @@ router.post(
     const { positions }: { positions: { id: string; position: number }[] } =
       req.body;
 
-    positions.map(async ({ id, position }) => {
-      await Project.findByIdAndUpdate(id, { position })
-    });
+    try {
+      positions.map(async ({ id, position }) => {
+        await Project.findByIdAndUpdate(id, { position });
+      });
+      res.status(200);
+    } catch {
+      res.status(500).send({
+        error: "Error al actualizar el orden de los proyectos",
+      });
+    }
   },
 );
 

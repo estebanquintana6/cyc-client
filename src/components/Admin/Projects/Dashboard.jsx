@@ -82,13 +82,16 @@ const Dashboard = () => {
         position: index
       }));
 
-      const { status } = await authFetch(
-        `${process.env.REACT_APP_SERVER_URL}/projects/update-position`,
-        "POST",
-        token,
-        { positions }
-      );
-
+      try {
+        await authFetch(
+          `${process.env.REACT_APP_SERVER_URL}/projects/update-position`,
+          "POST",
+          token,
+          { positions }
+        );  
+      } catch {
+        errorModal("Error al actualizar los proyectos");
+      }
     }
   };
 
