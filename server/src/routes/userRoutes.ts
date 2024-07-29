@@ -119,7 +119,7 @@ router.post("/login", async (req: Request, res: Response) => {
       payload,
       secretKey,
       {
-        expiresIn: 86400,
+        expiresIn: "100d",
       },
       (error, encoded) => {
         if (error) {
