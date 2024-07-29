@@ -258,6 +258,7 @@ router.post(
  */
 router.post(
   "/update",
+  isAuthMiddleware,
   upload.array("newPhotos", 5),
   async (req: Request, res: Response) => {
     const {
