@@ -47,7 +47,7 @@ router.get("/fetch", async (req: Request, res: Response) => {
  */
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const projects = await Project.find({});
+    const projects = await Project.find({}).sort('position');
     res.status(200).send(projects);
   } catch {
     res.status(500).json({
@@ -89,8 +89,8 @@ router.post(
       name,
       imageDescriptions,
       description,
-      lotes = '',
-      greenAreas = '',
+      lotes = "",
+      greenAreas = "",
       projectType,
       surface,
     } = req.body;
@@ -111,7 +111,11 @@ router.post(
       position?: number;
     }> = JSON.parse(imageDescriptions);
 
-    const photos: Array<{ url: string; description: string, position: number | undefined }> = [];
+    const photos: Array<{
+      url: string;
+      description: string;
+      position: number | undefined;
+    }> = [];
 
     for (const file of files) {
       const imageDesc = parsedDescriptions.find(
@@ -250,6 +254,19 @@ router.post(
   },
 );
 
+router.post(
+  "/update-position",
+  isAuthMiddleware,
+  async (req: Request, res: Response) => {
+    const { positions }: { positions: { id: string; position: number }[] } =
+      req.body;
+
+    positions.map(async ({ id, position }) => {
+      await Project.findByIdAndUpdate(id, { position })
+    });
+  },
+);
+
 /**
  * @route POST /projects/update
  * @desc Update a project
@@ -260,6 +277,7 @@ router.post(
   "/update",
   isAuthMiddleware,
   upload.array("newPhotos", 5),
+  isAuthMiddleware,
   async (req: Request, res: Response) => {
     const {
       id,
@@ -283,7 +301,11 @@ router.post(
       position?: number;
     }> = JSON.parse(imageDescriptions);
 
-    const newPhotos: Array<{ url: string; description: string; position: number | undefined; }> = [];
+    const newPhotos: Array<{
+      url: string;
+      description: string;
+      position: number | undefined;
+    }> = [];
 
     for (const file of files) {
       const imageDesc = parsedDescriptions.find(

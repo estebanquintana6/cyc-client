@@ -55,6 +55,11 @@ const ProjectSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  position: {
+    type: Number,
+    required: false,
+    default: Number.MAX_SAFE_INTEGER,
+  }
 });
 
 const Project = mongoose.model("Projects", ProjectSchema);
