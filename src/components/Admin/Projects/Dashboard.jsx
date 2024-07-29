@@ -108,17 +108,19 @@ const Dashboard = () => {
       <ActionBar fetchProjects={fetchProjects} />
       <GalleryFilters />
       <GridContainer
-        totalItem={projects.length}
+        totalItem={(displayFiltered ? filteredProjects.length : projects.length)}
         itemHeight={200}
         itemWidth={300}
         colGap={30}
         rowGap={30}
         cb={callback}
         disableInitialAnimation={true}
+        disableDrag={displayFiltered}
       >
         {(styles) =>
           styles.map((style, i) => {
-            const { _id, name, photos, favorite } = projects[i];
+            const item = displayFiltered ? filteredProjects[i] : projects[i];
+            const { _id = '', name = '', photos = [], favorite = false } = item;
             const firstPhoto = getFirstPhoto(photos);
             const imgUrl = firstPhoto
               ? `${process.env.REACT_APP_SERVER_URL}/${firstPhoto?.url}`
