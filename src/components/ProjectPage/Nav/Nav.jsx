@@ -117,7 +117,7 @@ const Nav = () => {
                           title="Proyectos"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
-                          Nuestros proyectos
+                          Proyectos
                       </Link>
                     </li>
                   </ul>
