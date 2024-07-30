@@ -25,7 +25,7 @@ const PhotoCarousel = ({ photos = [] }) => {
       <div className="h-56 xs:h-96 w-full">
         <Carousel
           leftControl={
-            <a role="button" className="bg-primary-100 flex h-10 w-10 border rounded-full">
+            <a role="button" className="bg-primary-100 hover:bg-primary-150 flex h-10 w-10 border rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -37,7 +37,7 @@ const PhotoCarousel = ({ photos = [] }) => {
             </a>
           }
           rightControl={
-            <a role="button" className="bg-primary-100 flex h-10 w-10 border rounded-full">
+            <a role="button" className="bg-primary-100 hover:bg-primary-150 flex h-10 w-10 border rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
