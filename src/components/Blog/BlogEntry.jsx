@@ -107,11 +107,11 @@ const BlogEntry = ({ id }) => {
               Artículos relacionados
             </h2>
             <div className="grid gap-12 justify-items-center sm:grid-cols-2 lg:grid-cols-4">
-              {recommendations.map(({ _id: id, title, text, photo }) => (
+              {recommendations.map(({ _id: id, title, text, photos }) => (
                 <article className="max-w-xs">
                   <img
                     onClick={() => handleRecommendationClick(id)}
-                    src={`${process.env.REACT_APP_SERVER_URL}/${photo}`}
+                    src={`${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`}
                     className="mb-5 rounded-lg cursor-pointer"
                     alt="Header"
                   />
