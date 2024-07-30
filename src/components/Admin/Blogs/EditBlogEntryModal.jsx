@@ -217,7 +217,7 @@ const EditBlogEntryModal = ({ id, onClose, fetchBlogEntries }) => {
             <div className="mb-2 block">
               <Label htmlFor="file" value="Foto" />
               <FileInput
-                multiple={false}
+                multiple={true}
                 accept="image/*"
                 id="photo"
                 ref={photoRef}
