@@ -21,11 +21,11 @@ const Nav = () => {
           <li>
             <a
               href="#international"
-              aria-label="Experiencia internacional"
-              title="Experiencia internacional"
+              aria-label="Trayectoria"
+              title="Trayectoria"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              Experiencia internacional
+              Trayectoria
             </a>
           </li>
         </ul>
@@ -122,11 +122,11 @@ const Nav = () => {
                     <li>
                       <a
                         href="#international"
-                        aria-label="Experiencia internacional"
-                        title="Experiencia internacional"
+                        aria-label="Trayectoria"
+                        title="Trayectoria"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Experiencia internacional
+                        Trayectoria
                       </a>
                     </li>
                     <li>

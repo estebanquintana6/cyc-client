@@ -39,6 +39,11 @@ const PinSchema = new Schema({
       },
     }),
   ],
+  pin_color: {
+    type: String,
+    required: false,
+    default: "red",
+  },
   created_at: {
     type: Date,
     default: Date.now
