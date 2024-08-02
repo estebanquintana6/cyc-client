@@ -41,7 +41,7 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
   const [toDeletePhotos, setToDeletePhotos] = useState([]);
   const [newImages, setNewImages] = useState([]);
 
-  const { title, text = "", link, lat = 0, lng = 0, photos = [] } = pin;
+  const { title, text = "", link, lat = 0, lng = 0, photos = [], pin_color = "red" } = pin;
   const nonDeletedPhotos = photos.filter(
     ({ _id }) => !toDeletePhotos.includes(_id),
   );
@@ -81,6 +81,7 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
       formData.append("link", link);
       formData.append("lat", lat);
       formData.append("lng", lng);
+      formData.append("pinColor", pin_color);
       formData.append("imageDescriptions", JSON.stringify(newImages));
       formData.append(
         "photos",
@@ -207,6 +208,14 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
     });
   };
 
+  const handlePinColorChange = (e) => {
+    const checked = e.target.checked;
+    setPin({
+      ...pin,
+      pin_color: checked ? "blue" : "red"
+    });
+  };
+
   return (
     <>
       <Modal show={true} onClose={onClose}>
@@ -251,6 +260,17 @@ const EditPinModal = ({ id, onClose, fetchPins }) => {
               onChange={(event) => setPin({ ...pin, link: event.target.value })}
               required
             />
+            <div className="mb-2 flex justify-center items-center gap-2">
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value=""
+                checked={pin_color === "blue"}
+                onChange={handlePinColorChange}
+                className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <Label htmlFor="username" value="Pin azul" />
+            </div>
             <div className="mb-2 block">
               <Label htmlFor="file" value="Fotos" />
             </div>

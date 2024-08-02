@@ -56,7 +56,7 @@ router.post(
   upload.array("photos", 5),
   isAuthMiddleware,
   async (req: Request, res: Response) => {
-    const { title, text, lat, lng, link, imageDescriptions } = req.body;
+    const { title, text, lat, lng, link, imageDescriptions, pinColor } = req.body;
 
     const files = req.files as Express.Multer.File[];
 
@@ -87,6 +87,7 @@ router.post(
       lng,
       link,
       photos,
+      pin_color: pinColor,
     });
 
     try {
@@ -149,6 +150,7 @@ router.post(
       imageDescriptions,
       toDeletePhotos,
       photos,
+      pinColor,
     } = req.body;
     try {
       const files = req.files as Express.Multer.File[];
@@ -180,6 +182,7 @@ router.post(
         lng,
         link,
         photos: [...JSON.parse(photos), ...newPhotos],
+        pin_color: pinColor,
       });
 
       const photosToDelete = JSON.parse(toDeletePhotos);

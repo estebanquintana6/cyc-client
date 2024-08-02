@@ -41,6 +41,7 @@ const PinSchema = new Schema({
   ],
   pin_color: {
     type: String,
+    enum: ["red", "blue"],
     required: false,
     default: "red",
   },
