@@ -81,16 +81,20 @@ const EducationalMap = () => {
               draggingCursor: "arrow",
             }}
           >
-            {pins.map((pin) => {
+            {(pins || []).map((pin) => {
+              const { _id, lat, lng, pin_color } = pin;
+              console.log("color", pin_color);
               return (
                 <Marker
-                  key={pin._id}
+                  key={_id}
                   onClick={() => onPinClick(pin)}
                   position={{
-                    lat: parseFloat(pin.lat),
-                    lng: parseFloat(pin.lng),
+                    lat: parseFloat(lat),
+                    lng: parseFloat(lng),
                   }}
-                  icon={{ url: "/img/pin.png" }}
+                  icon={{ 
+                    url: pin_color === "blue" ? "/img/blue_pin.png" : "/img/pin.png",
+                  }}
                 />
               );
             })}
