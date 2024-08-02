@@ -61,11 +61,8 @@ const Gallery = () => {
           reflejo de compromiso con el conocimiento, innovación y excelencia.
         </p>
       </div>
-      <div className="flex flex-col mb-8">
-        <GalleryFilters />
-      </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      {(filter === FILTERS.ALL ? projects: filteredProjects).map(({ name, photos, _id}) => {
+      {projects.map(({ name, photos, _id}) => {
         const photoUrl = `${process.env.REACT_APP_SERVER_URL}/${photos[0]?.url}`;  
         return (<GalleryItem id={_id} title={name} imgUrl={photoUrl} key={_id} />)
       })}
