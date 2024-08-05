@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 
 import { GridContainer, BlockWrapper } from "@tackboon/react-grid-rearrange";
 
-import { useGalleryFilter } from "../../contexts/GalleryFilterContext";
-
 import GalleryItem from "./GalleryItem";
-import GalleryFilters from "../../ProjectPage/Gallery/GalleryFilters";
 import ActionBar from "./ActionBar";
 import EditProjectModal from "./EditProjectModal";
 
@@ -15,7 +12,6 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import { errorModal } from "../../../utils/errorModal";
 import { getFirstPhoto } from "../../../utils/photosUtils";
 
-import FILTERS from "../../ProjectPage/Gallery/filters";
 
 const Dashboard = () => {
   const { token } = useAuthContext();
@@ -23,10 +19,6 @@ const Dashboard = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState();
   const [projects, setProjects] = useState([]);
-  const [filteredProjects, setFilteredProjects] = useState([]);
-  const [displayFiltered, setDisplayFiltered] = useState(false);
-
-  const { filter } = useGalleryFilter();
 
   const fetchProjects = async () => {
     try {
@@ -52,27 +44,6 @@ const Dashboard = () => {
     fetchProjects();
     // eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    if (filter === FILTERS.ALL) {
-      setFilteredProjects([]);
-      setDisplayFiltered(false);
-    }
-    if (filter === FILTERS.CIUDADES) {
-      const filter = projects.filter(
-        ({ projectType }) => projectType === "Ciudad",
-      );
-      setFilteredProjects(filter);
-      setDisplayFiltered(true);
-    }
-    if (filter === FILTERS.DESARROLLOS) {
-      const filter = projects.filter(
-        ({ projectType }) => projectType === "Desarrollo",
-      );
-      setFilteredProjects(filter);
-      setDisplayFiltered(true);
-    }
-  }, [filter, projects]);
 
   const callback = async ({ isDragging, order, lastMovingIndex, isClick }) => {
     if (lastMovingIndex !== -1 && !isDragging && !isClick) {
@@ -106,20 +77,18 @@ const Dashboard = () => {
         </h1>
       </div>
       <ActionBar fetchProjects={fetchProjects} />
-      <GalleryFilters />
       <GridContainer
-        totalItem={(displayFiltered ? filteredProjects.length : projects.length)}
+        totalItem={(projects.length)}
         itemHeight={200}
         itemWidth={300}
         colGap={30}
         rowGap={30}
         cb={callback}
         disableInitialAnimation={true}
-        disableDrag={displayFiltered}
       >
         {(styles) =>
           styles.map((style, i) => {
-            const item = displayFiltered ? filteredProjects[i] : projects[i];
+            const item = projects[i];
             const { _id = '', name = '', photos = [], favorite = false } = item;
             const firstPhoto = getFirstPhoto(photos);
             const imgUrl = firstPhoto
