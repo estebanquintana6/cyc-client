@@ -1,9 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import BlogItem from "./BlogItem";
 
-import { useIsVisible } from "../../../../hooks/useIsVisible";
 import { fetch } from "../../../../utils/authFetch";
 import { getFirstPhoto } from "../../../../utils/photosUtils";
 
@@ -14,9 +13,6 @@ const dateOptions = {
 };
 
 const BlogSection = () => {
-  const ref = useRef();
-  const isVisible = useIsVisible(ref);
-
   const [blogEntries, setBlogEntries] = useState([]);
 
   useEffect(() => {
@@ -44,8 +40,7 @@ const BlogSection = () => {
       id="blog"
     >
       <div
-        ref={ref}
-        className={`mx-auto my-auto transition-opacity ease-in duration-400 ${isVisible ? "opacity-100" : "opacity-0"}`}
+        className={`mx-auto my-auto`}
       >
         <div className="flex flex-col mb-6">
           <h1 className="mb-4 text-4xl font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">

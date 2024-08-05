@@ -1,24 +1,18 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-
-import { useIsVisible } from "../../../../hooks/useIsVisible";
 
 import ProjectItem from "./ProjectItem";
 
 import { getFirstPhoto } from "../../../../utils/photosUtils";
 
 const ProjectSection = ({ projects }) => {
-  const ref = useRef();
-  const isVisible = useIsVisible(ref);
-
   return (
     <section
       className="flex w-full min-h-screen xs:p-4 sm:p-8 md:p-16 lg:p-32"
       id="proyectos"
     >
       <div
-        ref={ref}
-        className={`mx-auto my-auto transition-opacity ease-in duration-400 ${isVisible ? "opacity-100" : "opacity-0"}`}
+        className={`mx-auto my-auto`}
       >
         <div className="flex flex-col mb-6">
           <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-end md:mb-6">
