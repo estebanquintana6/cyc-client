@@ -15,6 +15,9 @@ const ProjectSection = ({ projects }) => {
         className={`mx-auto my-auto`}
       >
         <div className="flex flex-col mb-6">
+        <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-center">
+          Nuestra página web está en desarrollo, tenemos muchos proyectos por compartir y estamos enriqueciendo el contenido de cada uno. Pronto podrás explorar nuestros proyectos actuales y descubrir los nuevos que están por venir. ¡Gracias por tu paciencia y mientras seguimos construyendo algo increíble!
+        </p>
           <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-end md:mb-6">
             Proyectos
           </h1>
