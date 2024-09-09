@@ -12,9 +12,7 @@ const Main = () => {
                         <img src="/img/logo.png" className="xs:w-64 sm:w-96 animate-spin" alt="company logo" />
                     </div>
                     <div className="mb-auto md:mx-auto text-center sm:mt-5">
-                        <h2 className="mb-6 font-sans xs:text-5xl sm:text-6xl font-bold leading-none tracking-tight text-white uppercase md:mx-auto">
-                            Connie Yepiz Consulting
-                        </h2>
+                        <img src="/title.png" className="xs:h-7 sm:h-12" alt="company title" />
                     </div>
                 </div>
             </div>
