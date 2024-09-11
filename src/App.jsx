@@ -20,6 +20,7 @@ import ProjectDashboard from "./components/Admin/Projects/Main";
 import UserDashboard from "./components/Admin/Users/UserDashboard";
 import PinDashboard from "./components/Admin/Pins/PinDashboard";
 import BlogDashboard from "./components/Admin/Blogs/BlogDashboard";
+import TextDashboard from "./components/Admin/Text/TextDashboard";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,9 @@ const router = createBrowserRouter([
     }, {
       path: "blog",
       element: <BlogDashboard />
+    }, {
+      path: "textos",
+      element: <TextDashboard />
     }]
   }
 ]);

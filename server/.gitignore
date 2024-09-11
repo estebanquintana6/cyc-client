@@ -20,6 +20,7 @@ yarn.lock
 public/projects/*
 public/pins/*
 public/blogs/*
+public/text.json
 
 /dist
 node_modules
