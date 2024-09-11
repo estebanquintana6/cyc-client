@@ -5,7 +5,7 @@ import ProjectItem from "./ProjectItem";
 
 import { getFirstPhoto } from "../../../../utils/photosUtils";
 
-const ProjectSection = ({ projects }) => {
+const ProjectSection = ({ projects, texts: { landing_project_title, landing_project_section } }) => {
   return (
     <section
       className="flex w-full min-h-screen xs:p-4 sm:p-8 md:p-16 lg:p-32"
@@ -19,13 +19,10 @@ const ProjectSection = ({ projects }) => {
           Nuestra página web está en desarrollo, tenemos muchos proyectos por compartir y estamos enriqueciendo el contenido de cada uno. Pronto podrás explorar nuestros proyectos actuales y descubrir los nuevos que están por venir. ¡Gracias por tu paciencia y mientras seguimos construyendo algo increíble!
         </p>
           <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-end md:mb-6">
-            Proyectos
+            { landing_project_title }
           </h1>
           <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-end">
-            Nos especializamos en la planeación y desarrollo de macro proyectos,
-            desde la selección del terreno hasta su lanzamiento. Analizamos
-            características topográficas y energéticas para ubicar
-            estratégicamente áreas clave del proyecto.
+            { landing_project_section }
           </p>
         </div>
         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">

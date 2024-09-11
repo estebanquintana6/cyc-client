@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useIsVisible } from "../../../hooks/useIsVisible";
 
-const About = () => {
+const About = ({ texts }) => {
   const ref = useRef();
   const isVisible = useIsVisible(ref);
 

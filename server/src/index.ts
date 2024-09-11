@@ -16,6 +16,7 @@ import projects from "./routes/projectRoutes";
 import pins from "./routes/pinRoutes";
 import blogs from "./routes/blogRoutes";
 import contact from "./routes/contactRoutes";
+import texts from "./routes/textRoutes";
 
 dotenv.config()
 
@@ -74,6 +75,7 @@ app.use('/projects', projects);
 app.use('/pins', pins);
 app.use('/blogs', blogs);
 app.use('/contact', contact);
+app.use('/texts', texts);
 
 const port = process.env.PORT || 4000;
 

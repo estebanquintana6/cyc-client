@@ -10,12 +10,26 @@ import EducationalMap from "../components/LandingPage/Map/EducationalMap";
 import { useAuthContext } from "../components/contexts/AuthContext";
 
 import authFetch from "../utils/authFetch";
+import { getSiteTexts } from "../utils/fetchTexts";
 
 const LandingPage = () => {
 
   const { token } = useAuthContext();
 
   const [projects, setProjects] = useState([]);
+  const [texts, setTexts] = useState({
+    landing_project_title: "",
+    landing_map_title: "",
+    landing_blog_title: "",
+    landing_contact_title: "",
+    landing_about_section: "",
+    landing_project_section: "",
+    landing_map_section: "",
+    landing_blog_section: "",
+    landing_contact_section: "",
+    dashboard_projects: "",
+    dashboard_blog: "",
+  });
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -29,14 +43,26 @@ const LandingPage = () => {
     fetchProjects();
   }, [token]);
 
+  useEffect(() => {
+    const getTexts = async () => {
+      const data = await getSiteTexts();
+      setTexts(data);
+    };
+    try {
+      getTexts();
+    } catch {
+      console.error("Error al obtener el archivo de textos");
+    }
+  }, []);
+
   return (
     <>
       <MainHeader />
-      <About />
-      <ProjectSection projects={projects} />
-      <EducationalMap />
-      <BlogSection />
-      <ContactSection />
+      <About texts={texts} />
+      <ProjectSection projects={projects} texts={texts} />
+      <EducationalMap texts={texts} />
+      <BlogSection texts={texts} />
+      <ContactSection texts={texts} />
     </>
   );
 };

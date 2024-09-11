@@ -7,7 +7,7 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "tsc": "./node_modules/typescript/bin/tsc",
-    "dev-start": "nodemon --ignore sessions/ src/index.ts --ignore client",
+    "dev-start": "nodemon --ignore sessions/ src/index.ts --ignore client --ignore public/",
     "start": "node dist/index.js",
     "postinstall": "tsc",
     "watch-node": "nodemon dist/index.js",

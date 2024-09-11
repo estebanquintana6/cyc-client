@@ -23,7 +23,7 @@ const center = {
 
 const PinModal = withReactContent(Swal)
 
-const EducationalMap = () => {
+const EducationalMap = ({ texts: { landing_map_title, landing_map_section} }) => {
   const [pins, setPins] = useState([]);
 
   const { isLoaded } = useLoadScript({
@@ -67,10 +67,10 @@ const EducationalMap = () => {
       <div className="mx-auto">
         <div className="flex flex-col mb-6 xs:px-4 sm:px-8 md:px-16 lg:px-32">
           <h1 className="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
-            Trayectoria
+            { landing_map_title }
           </h1>
           <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-center">
-            Para conocer nuestra trayectoria, haz click en los puntos rojos marcados en el mapa, para conocer nuestros proyectos, haz click en los puntos blancos.
+            { landing_map_section }
           </p>
         </div>
         {isLoaded && (
