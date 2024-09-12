@@ -12,7 +12,7 @@ const dateOptions = {
   day: "numeric",
 };
 
-const BlogSection = () => {
+const BlogSection = ({ texts: { landing_blog_title, landing_blog_section} }) => {
   const [blogEntries, setBlogEntries] = useState([]);
 
   useEffect(() => {
@@ -44,13 +44,10 @@ const BlogSection = () => {
       >
         <div className="flex flex-col mb-6">
           <h1 className="mb-4 text-4xl font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">
-            Descubre con nosotros
+            { landing_blog_title }
           </h1>
           <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-            Nos enorgullece ser pioneros en Occidente en aplicar a gran escala
-            técnicas clásicas para el manejo, canalización y aprovechamiento de
-            las frecuencias de energía del entorno (Qi). <br /> Te compartimos
-            un poco de nuestro trabajo a través de nuestro blog.
+            { landing_blog_section }
           </p>
           <div className="flex justify-center">
             <Link

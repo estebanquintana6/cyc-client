@@ -5,7 +5,7 @@ import { fetch } from "../../../utils/authFetch";
 import successModal from "../../../utils/sucessModal";
 import { errorModal } from "../../../utils/errorModal";
 
-const ContactSection = () => {
+const ContactSection = ({ texts: { landing_contact_title, landing_contact_section }}) => {
   const [email, setEmail] = useState();
   const [message, setMessage] = useState();
   const [isValid, setIsValid] = useState(true);
@@ -41,7 +41,7 @@ const ContactSection = () => {
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="relative max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-2xl sm:text-center">
           <h2 className="mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none">
-            Comunícate con nosotros
+            { landing_contact_title }
           </h2>
           <form className="flex flex-col items-center w-full mb-4 md:px-16">
             <div className="mb-2 w-full">
@@ -73,7 +73,7 @@ const ContactSection = () => {
             </Button>
           </form>
           <p className="max-w-md mb-10 text-xs tracking-wide text-white sm:text-sm sm:mx-auto md:mb-16">
-            También puedes mandarnos un correo a <a href="mailto:info@connieyepiz.com">asistente.ceo@connieyepiz.com</a> o llamarnos al <br/> +52 (442) 223 1511
+            { landing_contact_section }
           </p>
         </div>
       </div>
