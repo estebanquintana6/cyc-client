@@ -15,7 +15,7 @@ const router = Router();
 router.post("/update", isAuthMiddleware, async (req: Request, res: Response) => {
     const { texts } = req.body;
     try {
-        fs.writeFileSync(__dirname + '/../../public/text.json', JSON.stringify(texts), {encoding:'utf8',flag:'w'});
+        fs.writeFileSync(__dirname + '/../public/text.json', JSON.stringify(texts), {encoding:'utf8',flag:'w'});
     } catch (e) {
         console.log(e);
     }
