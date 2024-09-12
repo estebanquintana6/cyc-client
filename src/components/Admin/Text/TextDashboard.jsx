@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { getSiteTexts } from "../../../utils/fetchTexts";
 import { useAuthContext } from "../../contexts/AuthContext";
 import authFetch from "../../../utils/authFetch";
+import successModal from "../../../utils/sucessModal";
+import { errorModal } from "../../../utils/errorModal";
 
 const TextDashboard = () => {
   const { token } = useAuthContext();
@@ -33,12 +35,20 @@ const TextDashboard = () => {
   }, []);
 
   const updateTexts = async () => {
-    const { status } = await authFetch(
-      `${process.env.REACT_APP_SERVER_URL}/texts/update`,
-      "POST",
-      token,
-      { texts },
-    );
+    try {
+      const { status } = await authFetch(
+        `${process.env.REACT_APP_SERVER_URL}/texts/update`,
+        "POST",
+        token,
+        { texts },
+      );
+
+      if (status === 200) {
+        successModal("Textos modificados");
+      }
+    } catch(e) {
+      errorModal("Error al actualizar textos");
+    }
   };
 
   return (
