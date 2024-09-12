@@ -19,7 +19,7 @@ router.post("/update", isAuthMiddleware, async (req: Request, res: Response) => 
     } catch (e) {
         console.log(e);
     }
-    res.status(200);
+    res.status(200).json(texts);
 });
 
 
