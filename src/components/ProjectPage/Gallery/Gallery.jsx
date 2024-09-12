@@ -9,7 +9,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import FILTERS from "./filters";
 import authFetch from "../../../utils/authFetch";
 
-const Gallery = () => {
+const Gallery = ({ texts: { dashboard_projects} }) => {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
 
@@ -54,11 +54,8 @@ const Gallery = () => {
         <h1 className="text-left text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
           Nuestro trabajo
         </h1>
-        <p className="mt-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-end">
-          Nos enorgullece ser pioneros en Occidente en aplicar a gran escala
-          técnicas clásicas para el manejo, canalización y aprovechamiento de
-          las frecuencias de energía del entorno (Qi). Nuestro currículum, es
-          reflejo de compromiso con el conocimiento, innovación y excelencia.
+        <p className="mt-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-end whitespace-pre text-wrap">
+          { dashboard_projects }
         </p>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
