@@ -72,7 +72,7 @@ const ContactSection = ({ texts: { landing_contact_title, landing_contact_sectio
               Contáctanos
             </Button>
           </form>
-          <p className="max-w-md mb-10 text-xs tracking-wide text-white sm:text-sm sm:mx-auto md:mb-16">
+          <p className="max-w-md mb-10 text-xs tracking-wide text-white sm:text-sm sm:mx-auto md:mb-16 whitespace-pre text-wrap">
             { landing_contact_section }
           </p>
         </div>

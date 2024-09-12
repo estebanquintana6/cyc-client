@@ -46,7 +46,7 @@ const BlogSection = ({ texts: { landing_blog_title, landing_blog_section} }) => 
           <h1 className="mb-4 text-4xl font-extrabold text-center leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">
             { landing_blog_title }
           </h1>
-          <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+          <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 whitespace-pre text-wrap">
             { landing_blog_section }
           </p>
           <div className="flex justify-center">

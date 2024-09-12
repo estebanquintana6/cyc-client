@@ -69,7 +69,7 @@ const EducationalMap = ({ texts: { landing_map_title, landing_map_section} }) =>
           <h1 className="mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
             { landing_map_title }
           </h1>
-          <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-center">
+          <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-center whitespace-pre text-wrap">
             { landing_map_section }
           </p>
         </div>
