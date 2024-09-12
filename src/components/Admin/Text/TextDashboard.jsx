@@ -34,13 +34,11 @@ const TextDashboard = () => {
 
   const updateTexts = async () => {
     const { status } = await authFetch(
-        `${process.env.REACT_APP_SERVER_URL}/texts/update`,
-        "POST",
-        token,
-        { texts }
-      );
-
-    console.log(status);
+      `${process.env.REACT_APP_SERVER_URL}/texts/update`,
+      "POST",
+      token,
+      { texts },
+    );
   };
 
   return (
@@ -51,7 +49,7 @@ const TextDashboard = () => {
         </h1>
       </div>
       <div>
-        <form className="w-full grid grid-cols-3">
+        <form className="w-full grid grid-cols-3 gap-8">
           <div className="col-span-1">
             <div className="my-8">
               <h2 className="text-4xl font-bold">Títulos</h2>
@@ -68,10 +66,10 @@ const TextDashboard = () => {
                 id="base-input"
                 value={texts.landing_project_title}
                 onChange={(e) => {
-                    setTexts({
-                        ...texts,
-                        landing_project_title: e.target.value,
-                    })
+                  setTexts({
+                    ...texts,
+                    landing_project_title: e.target.value,
+                  });
                 }}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               />
@@ -88,15 +86,15 @@ const TextDashboard = () => {
                 id="small-input"
                 value={texts.landing_map_title}
                 onChange={(e) => {
-                    setTexts({
-                        ...texts,
-                        landing_map_title: e.target.value,
-                    })
+                  setTexts({
+                    ...texts,
+                    landing_map_title: e.target.value,
+                  });
                 }}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               />
             </div>
-            <div>
+            <div className="mb-5">
               <label
                 htmlFor="small-input"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -108,15 +106,192 @@ const TextDashboard = () => {
                 id="small-input"
                 value={texts.landing_blog_title}
                 onChange={(e) => {
-                    setTexts({
-                        ...texts,
-                        landing_blog_title: e.target.value,
-                    })
+                  setTexts({
+                    ...texts,
+                    landing_blog_title: e.target.value,
+                  });
+                }}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="small-input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Contacto
+              </label>
+              <input
+                type="text"
+                id="small-input"
+                value={texts.landing_contact_title}
+                onChange={(e) => {
+                  setTexts({
+                    ...texts,
+                    landing_contact_title: e.target.value,
+                  });
                 }}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               />
             </div>
           </div>
+          <div className="col-span-1">
+            <div className="my-8">
+              <h2 className="text-4xl font-bold">Secciones</h2>
+            </div>
+            <div className="mb-5">
+              <label
+                htmlFor="base-input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Acerca
+              </label>
+              <textarea
+                type="text"
+                id="base-input"
+                rows={6}
+                value={texts.landing_about_section}
+                onChange={(e) => {
+                  setTexts({
+                    ...texts,
+                    landing_about_section: e.target.value,
+                  });
+                }}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              />
+            </div>
+            <div className="mb-5">
+              <label
+                htmlFor="base-input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Acerca
+              </label>
+              <textarea
+                type="text"
+                id="base-input"
+                rows={6}
+                value={texts.landing_project_section}
+                onChange={(e) => {
+                  setTexts({
+                    ...texts,
+                    landing_project_section: e.target.value,
+                  });
+                }}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              />
+            </div>
+            <div className="mb-5">
+              <label
+                htmlFor="base-input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Mapa
+              </label>
+              <textarea
+                type="text"
+                id="base-input"
+                rows={6}
+                value={texts.landing_map_section}
+                onChange={(e) => {
+                  setTexts({
+                    ...texts,
+                    landing_map_section: e.target.value,
+                  });
+                }}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              />
+            </div>
+            <div className="mb-5">
+              <label
+                htmlFor="base-input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Blog
+              </label>
+              <textarea
+                type="text"
+                id="base-input"
+                rows={6}
+                value={texts.landing_blog_section}
+                onChange={(e) => {
+                  setTexts({
+                    ...texts,
+                    landing_blog_section: e.target.value,
+                  });
+                }}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              />
+            </div>
+            <div className="mb-5">
+              <label
+                htmlFor="base-input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Contacto
+              </label>
+              <textarea
+                type="text"
+                id="base-input"
+                rows={6}
+                value={texts.landing_contact_section}
+                onChange={(e) => {
+                  setTexts({
+                    ...texts,
+                    landing_contact_section: e.target.value,
+                  });
+                }}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              />
+            </div>
+          </div>
+          <div className="col-span-1">
+        <div className="my-8">
+          <h2 className="text-4xl font-bold">Páginas</h2>
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="base-input"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Proyectos
+          </label>
+          <textarea
+            type="text"
+            id="base-input"
+            rows={6}
+            value={texts.dashboard_projects}
+            onChange={(e) => {
+              setTexts({
+                ...texts,
+                dashboard_projects: e.target.value,
+              });
+            }}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          />
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="base-input"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Blog
+          </label>
+          <textarea
+            type="text"
+            id="base-input"
+            rows={6}
+            value={texts.dashboard_blog}
+            onChange={(e) => {
+              setTexts({
+                ...texts,
+                dashboard_blog: e.target.value,
+              });
+            }}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          />
+        </div>
+      </div>
         </form>
         <div className="flex pt-6">
           <button
