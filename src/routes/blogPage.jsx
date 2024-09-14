@@ -5,6 +5,7 @@ import ContactSection from "../components/LandingPage/Contact/ContactSection";
 import Nav from "../components/ProjectPage/Nav/Nav";
 
 import { getSiteTexts } from "../utils/fetchTexts";
+import { defaultText } from "../utils/defaultTexts";
 
 const BlogPage = () => {
   const [texts, setTexts] = useState({
@@ -34,6 +35,7 @@ const BlogPage = () => {
       getTexts();
     } catch {
       console.error("Error al obtener el archivo de textos");
+      setTexts(defaultText);
     }
   }, []);
 

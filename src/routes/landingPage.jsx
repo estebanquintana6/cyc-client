@@ -39,7 +39,7 @@ const LandingPage = () => {
         setProjects(data);
       } else {
         setProjects(defaultText);
-          console.error("Error en el servidor al hacer fetch de los proyectos");
+        console.error("Error en el servidor al hacer fetch de los proyectos");
       }
     }
     fetchProjects();
@@ -53,6 +53,7 @@ const LandingPage = () => {
     try {
       getTexts();
     } catch {
+      setTexts(defaultText);
       console.error("Error al obtener el archivo de textos");
     }
   }, []);

@@ -5,6 +5,7 @@ import Nav from "../components/ProjectPage/Nav/Nav";
 import ContactSection from "../components/LandingPage/Contact/ContactSection";
 import { GalleryFilterProvider } from "../components/contexts/GalleryFilterContext";
 import { getSiteTexts } from "../utils/fetchTexts";
+import { defaultText } from "../utils/defaultTexts";
 
 const ProjectGalleryPage = () => {
   const [texts, setTexts] = useState({
@@ -33,6 +34,7 @@ const ProjectGalleryPage = () => {
     try {
       getTexts();
     } catch {
+      setTexts(defaultText);
       console.error("Error al obtener el archivo de textos");
     }
   }, []);
