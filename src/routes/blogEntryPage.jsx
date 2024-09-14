@@ -5,6 +5,7 @@ import BlogEntry from "../components/Blog/BlogEntry";
 import ContactSection from "../components/LandingPage/Contact/ContactSection";
 import Nav from "../components/ProjectPage/Nav/Nav";
 
+import { getSiteTexts } from "../utils/fetchTexts";
 import { defaultText } from "../utils/defaultTexts";
 
 const BlogEntryPage = () => {
