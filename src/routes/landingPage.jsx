@@ -11,6 +11,7 @@ import { useAuthContext } from "../components/contexts/AuthContext";
 
 import authFetch from "../utils/authFetch";
 import { getSiteTexts } from "../utils/fetchTexts";
+import { defaultText } from "../utils/defaultTexts";
 
 const LandingPage = () => {
 
@@ -37,6 +38,7 @@ const LandingPage = () => {
       if (status === 200) {
         setProjects(data);
       } else {
+        setProjects(defaultText);
           console.error("Error en el servidor al hacer fetch de los proyectos");
       }
     }
