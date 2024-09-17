@@ -86,7 +86,6 @@ const EducationalMap = ({ texts: { landing_map_title, landing_map_section} }) =>
           >
             {(pins || []).map((pin) => {
               const { _id, lat, lng, pin_color } = pin;
-              console.log("color", pin_color);
               return (
                 <Marker
                   key={_id}
