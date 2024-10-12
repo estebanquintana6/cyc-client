@@ -15,15 +15,15 @@ const ProjectSection = ({ projects, texts: { landing_project_title, landing_proj
         className={`mx-auto my-auto`}
       >
         <div className="flex flex-col mb-6">
-        <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-center">
-          Nuestra página web está en desarrollo, tenemos muchos proyectos por compartir y estamos enriqueciendo el contenido de cada uno. Pronto podrás explorar nuestros proyectos actuales y descubrir los nuevos que están por venir. ¡Gracias por tu paciencia y mientras seguimos construyendo algo increíble!
-        </p>
           <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-end md:mb-6">
             { landing_project_title }
           </h1>
           <p className="mb-6 text-lg font-normal whitespace-pre text-wrap text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-end">
             { landing_project_section }
           </p>
+          <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-center">
+          Nuestra página web está en desarrollo. Estamos trabajando en muchos proyectos, por lo que estamos enriqueciendo constantemente el contenido de esta página. Además, estamos enriqueciendo la información de cada uno de los proyectos para que puedas conocer más sobre ellos. ¡Así que síguenos para estar atento a las actualizaciones mientras seguimos construyendo algo increíble!
+        </p>
         </div>
         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
           {projects.map(({ name, photos, _id}) => {
