@@ -15,6 +15,7 @@ const TextDashboard = () => {
     landing_contact_title: "",
     landing_about_section: "",
     landing_project_section: "",
+    landing_development_section: "",
     landing_map_section: "",
     landing_blog_section: "",
     landing_contact_section: "",
@@ -186,6 +187,27 @@ const TextDashboard = () => {
                   setTexts({
                     ...texts,
                     landing_project_section: e.target.value,
+                  });
+                }}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              />
+            </div>
+            <div className="mb-5">
+              <label
+                htmlFor="base-input"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                En desarrollo
+              </label>
+              <textarea
+                type="text"
+                id="base-input"
+                rows={6}
+                value={texts.landing_development_section}
+                onChange={(e) => {
+                  setTexts({
+                    ...texts,
+                    landing_development_section: e.target.value,
                   });
                 }}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"

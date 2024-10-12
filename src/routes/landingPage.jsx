@@ -25,6 +25,7 @@ const LandingPage = () => {
     landing_contact_title: "",
     landing_about_section: "",
     landing_project_section: "",
+    landing_development_section: "",
     landing_map_section: "",
     landing_blog_section: "",
     landing_contact_section: "",
